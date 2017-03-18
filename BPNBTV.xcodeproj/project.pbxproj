@@ -709,6 +709,7 @@
 				067ADA291E7D13D70030C686 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		067ADA2A1E7D13D70030C686 /* Build configuration list for PBXNativeTarget "BPNBTVTests" */ = {
 			isa = XCConfigurationList;
@@ -717,6 +718,7 @@
 				067ADA2C1E7D13D70030C686 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		067ADA2D1E7D13D70030C686 /* Build configuration list for PBXNativeTarget "BPNBTVUITests" */ = {
 			isa = XCConfigurationList;
@@ -725,6 +727,7 @@
 				067ADA2F1E7D13D70030C686 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

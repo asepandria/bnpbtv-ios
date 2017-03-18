@@ -6,10 +6,11 @@ use_frameworks!
 target 'BPNBTV' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   # Pods for BPNBTV
-  pod 'SideMenu'
+  #pod 'SideMenu'
   pod 'Alamofire', '~> 4.4'
-  pod 'HanekeSwift'
-
+  #pod 'HanekeSwift'
+  pod 'Kingfisher', '~> 3.0'
+  pod 'SideMenuController', '~> 0.1.3'
   target 'BPNBTVTests' do
     inherit! :search_paths
     # Pods for testing

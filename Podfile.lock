@@ -1,18 +1,18 @@
 PODS:
   - Alamofire (4.4.0)
-  - HanekeSwift (0.10.1)
-  - SideMenu (2.3.0)
+  - Kingfisher (3.5.2)
+  - SideMenuController (0.1.6)
 
 DEPENDENCIES:
   - Alamofire (~> 4.4)
-  - HanekeSwift
-  - SideMenu
+  - Kingfisher (~> 3.0)
+  - SideMenuController (~> 0.1.3)
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
-  HanekeSwift: '08e47d3d0f2899ec58e5d257beba0de619aca9e8'
-  SideMenu: 43d092cf615cf472f105c5b9867a21beff9fc269
+  Kingfisher: 9950e382c500b6834ce004c7c4131c444e90c3a1
+  SideMenuController: 442d67af6d5892934065d42d5c1c3b7d5be4953e
 
-PODFILE CHECKSUM: e1656af940ec51b8e46108e8c1a4d1667ac14e4f
+PODFILE CHECKSUM: e566d34e30c52efb239a40750c58153ec14dc753
 
 COCOAPODS: 1.2.0
