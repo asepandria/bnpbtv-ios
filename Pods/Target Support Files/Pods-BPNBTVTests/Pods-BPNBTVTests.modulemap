@@ -1,0 +1,6 @@
+framework module Pods_BPNBTVTests {
+  umbrella header "Pods-BPNBTVTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
