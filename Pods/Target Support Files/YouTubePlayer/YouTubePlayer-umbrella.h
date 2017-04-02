@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double SideMenuControllerVersionNumber;
-FOUNDATION_EXPORT const unsigned char SideMenuControllerVersionString[];
+FOUNDATION_EXPORT double YouTubePlayerVersionNumber;
+FOUNDATION_EXPORT const unsigned char YouTubePlayerVersionString[];
 
