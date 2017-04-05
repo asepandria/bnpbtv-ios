@@ -16,7 +16,7 @@ struct MenuItems:ResponseObjectSerializable {
             guard let rep =  representation as? [String:Any] else{return nil}
             guard let jsonObject =  JSON(rep) as JSON? else{return nil}
             let _temp = jsonObject["items"].arrayValue
-            if(jsonObject["items"].arrayValue.count == 0){
+            if(_temp.count == 0){
                 return nil
             }
             for value in _temp {

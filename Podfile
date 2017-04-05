@@ -12,7 +12,8 @@ target 'BPNBTV' do
   #pod 'HanekeSwift'
   pod 'Kingfisher', '~> 3.0'
   #pod 'SideMenuController', '~> 0.1.3'
-  pod 'SideMenu'
+  #pod 'SideMenu'
+  pod 'SlideMenuControllerSwift'
   pod 'YouTubePlayer'
   pod 'ReachabilitySwift', '~> 3'
   target 'BPNBTVTests' do

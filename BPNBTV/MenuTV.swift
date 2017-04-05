@@ -7,9 +7,13 @@
 //
 
 import UIKit
-
+protocol MenuSelectedDelegate {
+    func menuDidSelected(menu:Menu)
+}
 class MenuTV: UITableViewController {
     var menuItems:[Menu] = [Menu]()
+    var menuSelectedDelegate:MenuSelectedDelegate?
+    var mainViewController: UIViewController!
     override func viewDidLoad() {
         super.viewDidLoad()
         let dictMenu = UserDefaults.standard.object(forKey: "MENU")as! [[String:String]]
@@ -23,7 +27,8 @@ class MenuTV: UITableViewController {
                 }
             }
         }
-        
+        self.tableView.showsVerticalScrollIndicator = false
+        self.tableView.showsHorizontalScrollIndicator = false
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -51,11 +56,19 @@ class MenuTV: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "menuTableCell", for: indexPath)
-        cell.textLabel?.text = menuItems[indexPath.row].menu
+        if(menuItems[indexPath.row].parent.caseInsensitiveCompare("main") == ComparisonResult.orderedSame){
+            cell.textLabel?.text = menuItems[indexPath.row].menu
+        }
         return cell
     }
  
-
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //debugPrint(menuItems[indexPath.row])
+        menuSelectedDelegate?.menuDidSelected(menu: menuItems[indexPath.row])
+        self.slideMenuController()?.closeLeft()
+        
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -101,4 +114,9 @@ class MenuTV: UITableViewController {
     }
     */
 
+    
+    
+    deinit {
+        debugPrint("MENU TV DESTROYED")
+    }
 }
