@@ -8,6 +8,7 @@ target 'BPNBTV' do
   # Pods for BPNBTV
   #pod 'SideMenu'
   pod 'Alamofire', '~> 4.4'
+  pod 'SwiftyJSON'
   #pod 'HanekeSwift'
   pod 'Kingfisher', '~> 3.0'
   #pod 'SideMenuController', '~> 0.1.3'
