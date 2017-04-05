@@ -16,7 +16,6 @@ class ViewController: UIViewController {
             do{
                 let menuItems = try response.result.unwrap() as MenuItems
                 let dictMenu = menuItems.items.map({[$0.parent ?? "":$0.menu ?? ""]})
-                
                 UserDefaults.standard.set(dictMenu, forKey: "MENU")
                 UserDefaults.standard.synchronize()
                 self.setupSideMenu(menuItems: menuItems.items)
