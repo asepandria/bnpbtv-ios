@@ -8,9 +8,11 @@
 
 import Foundation
 import UIKit
+import Alamofire
 class Constants{
     static let screenSize = UIScreen.main.bounds
     static let screenWidth = screenSize.width
     static let screenHeight = screenSize.height
     static let API_URL = "http://www.bnpbindonesia.tv/api/"
+    static let requestManager = Alamofire.SessionManager.default
 }
