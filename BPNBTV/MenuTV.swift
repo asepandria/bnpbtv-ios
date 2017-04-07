@@ -12,28 +12,45 @@ protocol MenuSelectedDelegate {
 }
 class MenuTV: UITableViewController {
     var menuItems:[Menu] = [Menu]()
+    var menuItemsChild:[String:[Menu]] = [String:[Menu]]()
     var menuSelectedDelegate:MenuSelectedDelegate?
     var mainViewController: UIViewController!
     override func viewDidLoad() {
         super.viewDidLoad()
-        let dictMenu = UserDefaults.standard.object(forKey: "MENU")as! [[String:String]]
-        for dm in dictMenu{
-            for(key,val) in dm{
-                if let _tempMenu = Menu(_parent: key, _menu: val){
-                    let su = menuItems.filter({$0.menu == val && $0.parent == key}) as [Menu]
-                    if su.count == 0{
-                        menuItems.append(_tempMenu)
-                    }
-                }
-            }
-        }
+        
+        self.tableView.register(UINib(nibName: "MenuTVCell", bundle: nil), forCellReuseIdentifier: "menuTVCell")
         self.tableView.showsVerticalScrollIndicator = false
         self.tableView.showsHorizontalScrollIndicator = false
+        self.tableView.contentInset = UIEdgeInsets.zero
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if let dictMenu = UserDefaults.standard.object(forKey: "MENU")as! [[String:String]]?{
+            for dm in dictMenu{
+                for(key,val) in dm{
+                    if let _tempMenu = Menu(_parent: key, _menu: val){
+                        let su = menuItems.filter({$0.menu == val && $0.parent == key}) as [Menu]
+                        if su.count == 0{
+                            menuItems.append(_tempMenu)
+                        }
+                        
+                    }
+                }
+                
+                for mi in menuItems{
+                    
+                }
+            }
+        }
+        tableView?.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,7 +72,7 @@ class MenuTV: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "menuTableCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "menuTVCell", for: indexPath) as! MenuTVCell
         if(menuItems[indexPath.row].parent.caseInsensitiveCompare("main") == ComparisonResult.orderedSame){
             cell.textLabel?.text = menuItems[indexPath.row].menu
         }
@@ -66,6 +83,13 @@ class MenuTV: UITableViewController {
         //debugPrint(menuItems[indexPath.row])
         menuSelectedDelegate?.menuDidSelected(menu: menuItems[indexPath.row])
         self.slideMenuController()?.closeLeft()
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.separatorInset = UIEdgeInsets.zero
+        cell.preservesSuperviewLayoutMargins = false
+        cell.layoutMargins = UIEdgeInsets.zero
         
     }
     
