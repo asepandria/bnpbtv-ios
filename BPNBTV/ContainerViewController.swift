@@ -47,21 +47,23 @@ class ContainerViewController:SlideMenuController  {
     override func track(_ trackAction: TrackAction) {
         switch trackAction {
         case .leftTapOpen:
-            debugPrint("TrackAction: left tap open.")
+            printLog(content: "TrackAction: left tap open.")
         case .leftTapClose:
-            debugPrint("TrackAction: left tap close.")
+            //printLog(content:"TrackAction: left tap close.")
+            self.view.resignFirstResponder()
+            self.view.endEditing(true)
         case .leftFlickOpen:
-            debugPrint("TrackAction: left flick open.")
+            printLog(content:"TrackAction: left flick open.")
         case .leftFlickClose:
-            debugPrint("TrackAction: left flick close.")
+            printLog(content:"TrackAction: left flick close.")
         case .rightTapOpen:
-            debugPrint("TrackAction: right tap open.")
+            printLog(content:"TrackAction: right tap open.")
         case .rightTapClose:
-            debugPrint("TrackAction: right tap close.")
+            printLog(content:"TrackAction: right tap close.")
         case .rightFlickOpen:
-            debugPrint("TrackAction: right flick open.")
+            printLog(content:"TrackAction: right flick open.")
         case .rightFlickClose:
-            debugPrint("TrackAction: right flick close.")
+            printLog(content:"TrackAction: right flick close.")
         }
     }
     

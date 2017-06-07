@@ -62,7 +62,7 @@ extension MainViewController{
         Constants.requestManager.request(BRouter.commonRequest(parameters:params)).responseObject{[unowned self](response:DataResponse<VideoItems>)  in
             do{
                 let videoItems = try response.result.unwrap()
-                debugPrint(videoItems)
+                self.printLog(content:videoItems)
             }catch{
                 //Catch Error content retrieval and display it to user
             }
@@ -74,35 +74,35 @@ extension MainViewController{
 extension MainViewController : SlideMenuControllerDelegate {
     
     func leftWillOpen() {
-        //debugPrint("SlideMenuControllerDelegate: leftWillOpen")
+        //printLog(content:"SlideMenuControllerDelegate: leftWillOpen")
     }
     
     func leftDidOpen() {
-        //debugPrint("SlideMenuControllerDelegate: leftDidOpen")
+        //printLog(content:"SlideMenuControllerDelegate: leftDidOpen")
     }
     
     func leftWillClose() {
-        //debugPrint("SlideMenuControllerDelegate: leftWillClose")
+        //printLog(content:"SlideMenuControllerDelegate: leftWillClose")
     }
     
     func leftDidClose() {
-        //debugPrint("SlideMenuControllerDelegate: leftDidClose")
+        //printLog(content:"SlideMenuControllerDelegate: leftDidClose")
     }
     
     func rightWillOpen() {
-        //debugPrint("SlideMenuControllerDelegate: rightWillOpen")
+        //printLog(content:"SlideMenuControllerDelegate: rightWillOpen")
     }
     
     func rightDidOpen() {
-        //debugPrint("SlideMenuControllerDelegate: rightDidOpen")
+        //printLog(content:"SlideMenuControllerDelegate: rightDidOpen")
     }
     
     func rightWillClose() {
-        //debugPrint("SlideMenuControllerDelegate: rightWillClose")
+        //printLog(content:"SlideMenuControllerDelegate: rightWillClose")
     }
     
     func rightDidClose() {
-        //debugPrint("SlideMenuControllerDelegate: rightDidClose")
+        //printLog(content:"SlideMenuControllerDelegate: rightDidClose")
     }
 }
 

@@ -17,10 +17,12 @@
 		067ADA181E7D13D60030C686 /* BPNBTVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067ADA171E7D13D60030C686 /* BPNBTVTests.swift */; };
 		067ADA231E7D13D70030C686 /* BPNBTVUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067ADA221E7D13D70030C686 /* BPNBTVUITests.swift */; };
 		182046A81E93241B0094D91C /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182046A71E93241B0094D91C /* Serializer.swift */; };
+		182707DB1E9D5FA8000530E5 /* CollapsibleTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182707DA1E9D5FA8000530E5 /* CollapsibleTableViewHeader.swift */; };
 		185EB87C1E957DEC00D7841F /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185EB87B1E957DEC00D7841F /* ContainerViewController.swift */; };
 		185EB87E1E95847E00D7841F /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185EB87D1E95847E00D7841F /* UIApplication.swift */; };
 		185EB8801E95871200D7841F /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185EB87F1E95871200D7841F /* UIViewController.swift */; };
 		185EB8831E958A7800D7841F /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185EB8821E958A7800D7841F /* UIColor.swift */; };
+		186116F81EE84B9A0007871D /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186116F71EE84B9A0007871D /* NSObject.swift */; };
 		186604CE1E95282B002C2016 /* MenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186604CD1E95282B002C2016 /* MenuModel.swift */; };
 		186604D21E9535D7002C2016 /* BRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186604D11E9535D7002C2016 /* BRouter.swift */; };
 		186604D41E954823002C2016 /* MenuTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186604D31E954823002C2016 /* MenuTV.swift */; };
@@ -66,10 +68,12 @@
 		067ADA221E7D13D70030C686 /* BPNBTVUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BPNBTVUITests.swift; sourceTree = "<group>"; };
 		067ADA241E7D13D70030C686 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		182046A71E93241B0094D91C /* Serializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializer.swift; sourceTree = "<group>"; };
+		182707DA1E9D5FA8000530E5 /* CollapsibleTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewHeader.swift; sourceTree = "<group>"; };
 		185EB87B1E957DEC00D7841F /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		185EB87D1E95847E00D7841F /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		185EB87F1E95871200D7841F /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		185EB8821E958A7800D7841F /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		186116F71EE84B9A0007871D /* NSObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObject.swift; sourceTree = "<group>"; };
 		186604CD1E95282B002C2016 /* MenuModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuModel.swift; sourceTree = "<group>"; };
 		186604D11E9535D7002C2016 /* BRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BRouter.swift; sourceTree = "<group>"; };
 		186604D31E954823002C2016 /* MenuTV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTV.swift; sourceTree = "<group>"; };
@@ -136,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				189765D51E975D6900D05B48 /* MenuTVCell.swift */,
+				182707DA1E9D5FA8000530E5 /* CollapsibleTableViewHeader.swift */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -241,6 +246,7 @@
 				185EB87D1E95847E00D7841F /* UIApplication.swift */,
 				185EB87F1E95871200D7841F /* UIViewController.swift */,
 				185EB8821E958A7800D7841F /* UIColor.swift */,
+				186116F71EE84B9A0007871D /* NSObject.swift */,
 			);
 			name = ext;
 			sourceTree = "<group>";
@@ -554,6 +560,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				067ADA021E7D13CA0030C686 /* MainViewController.swift in Sources */,
+				186116F81EE84B9A0007871D /* NSObject.swift in Sources */,
 				186604D21E9535D7002C2016 /* BRouter.swift in Sources */,
 				185EB8801E95871200D7841F /* UIViewController.swift in Sources */,
 				185EB87C1E957DEC00D7841F /* ContainerViewController.swift in Sources */,
@@ -563,6 +570,7 @@
 				186604D61E9564E1002C2016 /* VideoModel.swift in Sources */,
 				189765D61E975D6900D05B48 /* MenuTVCell.swift in Sources */,
 				067ADA081E7D13CB0030C686 /* BPNBTV.xcdatamodeld in Sources */,
+				182707DB1E9D5FA8000530E5 /* CollapsibleTableViewHeader.swift in Sources */,
 				185EB8831E958A7800D7841F /* UIColor.swift in Sources */,
 				062AA3B41E90B4A400B26F44 /* Constants.swift in Sources */,
 				186604D41E954823002C2016 /* MenuTV.swift in Sources */,

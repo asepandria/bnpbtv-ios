@@ -31,7 +31,7 @@ struct MenuItems:ResponseObjectSerializable {
 struct Menu:ResponseObjectSerializable {
     let parent:String!
     let menu:String!
-    
+    let hasChild:Bool!
     init?(response: HTTPURLResponse, representation: Any) {
         if(response.statusCode != 200){ return nil}
         guard let rep = representation as? [String:Any]
@@ -40,11 +40,13 @@ struct Menu:ResponseObjectSerializable {
         let _menu = rep["menu"] as? String
         self.menu = _menu
         self.parent = _parent
+        self.hasChild = false
     }
     
-    init?(_parent:String="main",_menu:String=""){
+    init?(_parent:String="main",_menu:String="",_hasChild:Bool=false){
         self.menu = _menu
         self.parent = _parent
+        self.hasChild = _hasChild
     }
 }
 

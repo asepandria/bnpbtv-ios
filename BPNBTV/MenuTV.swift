@@ -15,39 +15,69 @@ class MenuTV: UITableViewController {
     var menuItemsChild:[String:[Menu]] = [String:[Menu]]()
     var menuSelectedDelegate:MenuSelectedDelegate?
     var mainViewController: UIViewController!
+    
+    @IBOutlet weak var searchTF: UITextField!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupViews()
+    }
+    
+    func setupViews(){
         self.tableView.register(UINib(nibName: "MenuTVCell", bundle: nil), forCellReuseIdentifier: "menuTVCell")
         self.tableView.showsVerticalScrollIndicator = false
         self.tableView.showsHorizontalScrollIndicator = false
         self.tableView.contentInset = UIEdgeInsets.zero
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        let imageSearch = UIImageView(frame: CGRect(x: 0, y: 0, width: searchTF.frame.height, height: searchTF.frame.height))
+        imageSearch.image = UIImage(named: "icon_search_blue")
+        imageSearch.isUserInteractionEnabled = true
+        let searchImageTap = UITapGestureRecognizer(target: self, action: #selector(MenuTV.searchTapped(gesture:)))
+        searchImageTap.numberOfTapsRequired = 1
+        imageSearch.addGestureRecognizer(searchImageTap)
+        searchTF.rightView = imageSearch
+        searchTF.rightViewMode = UITextFieldViewMode.always
     }
     
+    func searchTapped(gesture:UITapGestureRecognizer){
+        printLog(content: "Search Tapped")
+        view.endEditing(true)
+        self.slideMenuController()?.closeLeft()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        searchTF?.text = ""
+    }
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         if let dictMenu = UserDefaults.standard.object(forKey: "MENU")as! [[String:String]]?{
             for dm in dictMenu{
                 for(key,val) in dm{
-                    if let _tempMenu = Menu(_parent: key, _menu: val){
+                    /*if let _tempMenu = Menu(_parent: key, _menu: val){
                         let su = menuItems.filter({$0.menu == val && $0.parent == key}) as [Menu]
                         if su.count == 0{
                             menuItems.append(_tempMenu)
                         }
-                        
+                    }*/
+                    if let child = Menu(_parent:key,_menu:val){
+                        if menuItemsChild.keys.contains(key){
+                            var temp = menuItemsChild[key]
+                            if let su = temp?.filter({$0.menu == val && $0.parent == key}){
+                                if(su.count == 0){
+                                    temp?.append(child)
+                                    menuItemsChild[key] = temp
+                                }
+                            }
+                        }else{
+                            menuItemsChild[key] = [child]
+                        }
                     }
+                
                 }
                 
-                for mi in menuItems{
-                    
-                }
             }
         }
         tableView?.reloadData()
@@ -67,22 +97,42 @@ class MenuTV: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return menuItems.count
+        //return menuItems.count
+        return (menuItemsChild["main"]?.count) ?? 0
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "menuTVCell", for: indexPath) as! MenuTVCell
-        if(menuItems[indexPath.row].parent.caseInsensitiveCompare("main") == ComparisonResult.orderedSame){
-            cell.textLabel?.text = menuItems[indexPath.row].menu
-        }
+        /*(if(menuItems[indexPath.row].parent.caseInsensitiveCompare("main") == ComparisonResult.orderedSame){
+            let keys = Array(menuItemsChild.keys)
+            cell.textLabel?.text = keys[indexPath.row]//menuItems[indexPath.row].menu
+        }*/
+        let  mainMenu = menuItemsChild["main"]
+        cell.textLabel?.text = mainMenu?[indexPath.row].menu
         return cell
     }
  
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //debugPrint(menuItems[indexPath.row])
-        menuSelectedDelegate?.menuDidSelected(menu: menuItems[indexPath.row])
-        self.slideMenuController()?.closeLeft()
+        //menuSelectedDelegate?.menuDidSelected(menu: menuItems[indexPath.row])
+        if let  mainMenu = menuItemsChild["main"]{
+            if (mainMenu[indexPath.row].parent ?? "") != "main"{
+                printLog(content:menuItemsChild[(mainMenu[indexPath.row].parent) ?? ""]!)
+                self.slideMenuController()?.closeLeft()
+            }else{
+                if let tempMenuComp = mainMenu[indexPath.row].menu{
+                    if let childArr = menuItemsChild[tempMenuComp.lowercased()]{
+                        if childArr.count > 0 {
+                            printLog(content:"EXPAND THE MENU --> TOGGLE")
+                        }
+                    }else{
+                        printLog(content:"MAIN MENU TAPPED")
+                        self.slideMenuController()?.closeLeft()
+                    }
+                }
+            }
+        }
+        
     }
     
     
@@ -141,6 +191,6 @@ class MenuTV: UITableViewController {
     
     
     deinit {
-        debugPrint("MENU TV DESTROYED")
+        printLog(content:"MENU TV DESTROYED")
     }
 }
