@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 extension UIViewController{
-    func setNavigationBarItem() {
+    /*func setNavigationBarItem() {
         self.addLeftBarButtonWithImage(UIImage(named: "ic_menu")!)
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.bnpbDarkerGrayColor()
         self.slideMenuController()?.removeLeftGestures()
@@ -23,5 +23,22 @@ extension UIViewController{
         self.navigationItem.rightBarButtonItem = nil
         self.slideMenuController()?.removeLeftGestures()
         self.slideMenuController()?.removeRightGestures()
+    }*/
+    
+    func removeBottomBorderNavigationBar(){
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        if let _ = navigationController{
+            for parent in navigationController!.view.subviews {
+                for child in parent.subviews {
+                    for view in child.subviews {
+                        if view is UIImageView && view.frame.height == 0.5 {
+                            view.alpha = 0
+                        }
+                    }
+                }
+            }
+        }
     }
 }

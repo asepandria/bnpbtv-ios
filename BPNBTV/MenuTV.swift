@@ -7,9 +7,7 @@
 //
 
 import UIKit
-protocol MenuSelectedDelegate {
-    func menuDidSelected(menu:Menu)
-}
+
 class MenuTV: UITableViewController {
     var menuItems:[Menu] = [Menu]()
     var menuItemsChild:[String:[Menu]] = [String:[Menu]]()
@@ -44,7 +42,7 @@ class MenuTV: UITableViewController {
     func searchTapped(gesture:UITapGestureRecognizer){
         printLog(content: "Search Tapped")
         view.endEditing(true)
-        self.slideMenuController()?.closeLeft()
+        //self.slideMenuController()?.closeLeft()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,7 +116,7 @@ class MenuTV: UITableViewController {
         if let  mainMenu = menuItemsChild["main"]{
             if (mainMenu[indexPath.row].parent ?? "") != "main"{
                 printLog(content:menuItemsChild[(mainMenu[indexPath.row].parent) ?? ""]!)
-                self.slideMenuController()?.closeLeft()
+                //self.slideMenuController()?.closeLeft()
             }else{
                 if let tempMenuComp = mainMenu[indexPath.row].menu{
                     if let childArr = menuItemsChild[tempMenuComp.lowercased()]{
@@ -127,7 +125,7 @@ class MenuTV: UITableViewController {
                         }
                     }else{
                         printLog(content:"MAIN MENU TAPPED")
-                        self.slideMenuController()?.closeLeft()
+                        //self.slideMenuController()?.closeLeft()
                     }
                 }
             }

@@ -7,18 +7,22 @@
 //
 
 import UIKit
-import SlideMenuControllerSwift
 import Alamofire
 class MainViewController: UIViewController,MenuSelectedDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigationBarItem()
-        if let leftMenu = self.slideMenuController()?.leftViewController{
+        //setNavigationBarItem()
+        /*if let leftMenu = self.slideMenuController()?.leftViewController{
             if leftMenu.isKind(of: MenuTV.classForCoder()){
                 (leftMenu as! MenuTV).menuSelectedDelegate = self
             }
-        }
+        }*/
+        /*if let leftMenu = self.slideMenuController()?.leftViewController{
+            if leftMenu.isKind(of: NewMenuVC.classForCoder()){
+                (leftMenu as! NewMenuVC).menuSelectedDelegate = self
+            }
+        }*/
         
     }
 
@@ -71,7 +75,7 @@ extension MainViewController{
    
 }
 
-extension MainViewController : SlideMenuControllerDelegate {
+/*extension MainViewController : SlideMenuControllerDelegate {
     
     func leftWillOpen() {
         //printLog(content:"SlideMenuControllerDelegate: leftWillOpen")
@@ -104,7 +108,7 @@ extension MainViewController : SlideMenuControllerDelegate {
     func rightDidClose() {
         //printLog(content:"SlideMenuControllerDelegate: rightDidClose")
     }
-}
+}*/
 
 
 

@@ -7,67 +7,29 @@
 //
 
 import UIKit
-import SlideMenuControllerSwift
 import Alamofire
-class ContainerViewController:SlideMenuController  {
-    
-    /*override func awakeFromNib() {
-        if let controller = self.storyboard?.instantiateViewController(withIdentifier: "Main") {
-            self.mainViewController = controller
-        }
-        if let controller = self.storyboard?.instantiateViewController(withIdentifier: "MenuTV") {
-            self.leftViewController = controller
-        }
-        super.awakeFromNib()
-    }*/
+import SideMenu
+class ContainerViewController:UIViewController  {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        requestAndUpdateMainMenu()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        requestAndUpdateMainMenu()
-        // Do any additional setup after loading the view.
+        let menuLeftNavigationController = storyboard!.instantiateViewController(withIdentifier: "NewMenuVCNav") as! UISideMenuNavigationController
+        SideMenuManager.menuLeftNavigationController = menuLeftNavigationController
+        SideMenuManager.menuRightNavigationController = nil
+        SideMenuManager.menuAddPanGestureToPresent(toView: self.navigationController!.navigationBar)
+        SideMenuManager.menuAddScreenEdgePanGesturesToPresent(toView: (self.navigationController?.navigationBar)!, forMenu: UIRectEdge.left)
+        SideMenuManager.menuFadeStatusBar = false
+        SideMenuManager.menuPresentMode = SideMenuManager.MenuPresentMode.menuSlideIn
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    override func isTagetViewController() -> Bool {
-        if let vc = UIApplication.topViewController() {
-            if vc is MainViewController {
-                return true
-            }
-        }
-        return false
-    }
-    
-    override func track(_ trackAction: TrackAction) {
-        switch trackAction {
-        case .leftTapOpen:
-            printLog(content: "TrackAction: left tap open.")
-        case .leftTapClose:
-            //printLog(content:"TrackAction: left tap close.")
-            self.view.resignFirstResponder()
-            self.view.endEditing(true)
-        case .leftFlickOpen:
-            printLog(content:"TrackAction: left flick open.")
-        case .leftFlickClose:
-            printLog(content:"TrackAction: left flick close.")
-        case .rightTapOpen:
-            printLog(content:"TrackAction: right tap open.")
-        case .rightTapClose:
-            printLog(content:"TrackAction: right tap close.")
-        case .rightFlickOpen:
-            printLog(content:"TrackAction: right flick open.")
-        case .rightFlickClose:
-            printLog(content:"TrackAction: right flick close.")
-        }
-    }
-    
-    
     
     func requestAndUpdateMainMenu(){
         Constants.requestManager.request(BRouter.commonRequest(parameters: ["function":"menu"])).responseObject(queue: DispatchQueue.global()){[unowned self](response:DataResponse<MenuItems>) in
