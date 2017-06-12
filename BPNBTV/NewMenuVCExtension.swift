@@ -59,7 +59,7 @@ extension NewMenuVC:UITableViewDelegate,UITableViewDataSource{
         cell.separatorInset = UIEdgeInsets.zero
         cell.preservesSuperviewLayoutMargins = false
         cell.layoutMargins = UIEdgeInsets.zero
-        
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -81,7 +81,7 @@ extension NewMenuVC:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.1
+        return 1
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -103,9 +103,12 @@ extension NewMenuVC:CollapsibleTableViewHeaderDelegate{
         
         
         let numberOfRows = menuTable.numberOfRows(inSection: section)
-        
-        if let indexPath = IndexPath(row: numberOfRows - 1, section: section) as IndexPath?{
-            menuTable.scrollToRow(at: indexPath,at: UITableViewScrollPosition.none, animated: true)
+        if numberOfRows > 0{
+            if let indexPath = IndexPath(row: numberOfRows - 1, section: section) as IndexPath?{
+                menuTable.scrollToRow(at: indexPath,at: UITableViewScrollPosition.none, animated: true)
+            }
+        }else{
+            //THIS Main Menu Then, do something about it
         }
     }
 }
