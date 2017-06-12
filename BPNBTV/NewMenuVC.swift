@@ -15,6 +15,8 @@ class NewMenuVC: UIViewController {
     var menuItems:[Menu] = [Menu]()
     var menuItemsChild:[String:[Menu]] = [String:[Menu]]()
     var menuSelectedDelegate:MenuSelectedDelegate?
+    var headerTB:CollapsibleTableViewHeader?
+    var sections = [MenuSection]()
     var mainViewController: UIViewController!
     @IBOutlet weak var menuTable: UITableView!
     @IBOutlet weak var searchTF: UITextField!
@@ -49,6 +51,30 @@ class NewMenuVC: UIViewController {
                 
             }
         }
+        for (key,val) in menuItemsChild{
+            printLog(content: "KEY : \(key)")
+            if key.lowercased() == "main"{
+                for child in val{
+                    if !(sections.contains(where: {
+                       return  $0.name.lowercased() == child.menu.lowercased()
+                    })){
+                        sections.append(MenuSection(name: child.menu, items: []))
+                    }
+                    
+                }
+            }else{
+                if let index = sections.index(where: { (item) -> Bool in
+                    item.name.lowercased() == key.lowercased()
+                }){
+                    sections[index].items = val
+                }else{
+                   sections.append(MenuSection(name: key, items: val ))
+                }
+                
+            }
+        }
+        
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {

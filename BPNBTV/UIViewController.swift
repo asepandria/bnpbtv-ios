@@ -26,9 +26,9 @@ extension UIViewController{
     }*/
     
     func removeBottomBorderNavigationBar(){
-        UINavigationBar.appearance().shadowImage = UIImage()
-        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        //UINavigationBar.appearance().shadowImage = UIImage()
+        //UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        //navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         if let _ = navigationController{
             for parent in navigationController!.view.subviews {
                 for child in parent.subviews {

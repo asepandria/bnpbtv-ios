@@ -44,13 +44,8 @@ class CollapsibleTableViewHeader: UITableViewHeaderFooterView {
         /*titleLabel.translatesAutoresizingMaskIntoConstraints = false
          arrowImage.translatesAutoresizingMaskIntoConstraints = false
          separatorView.translatesAutoresizingMaskIntoConstraints = false*/
-        
-        
-        
-        
-        //titleLabel.font = UIFont.init(name: "Bliss2-Regular", size: 13.5)
         arrowImage.image = UIImage(named: "icon_expand_caret")
-        separatorView.frame = CGRect(x: 0, y: 43.5, width: getScreenWidth() - 16, height: 0.5)
+        separatorView.frame = CGRect(x: 0, y: 43.5, width: getScreenWidth() - 16, height: 1)
         setContentFrame()
         
         contentView.addSubview(titleLabel)
@@ -65,7 +60,7 @@ class CollapsibleTableViewHeader: UITableViewHeaderFooterView {
     
     func setContentFrame(){
         titleLabel.frame = CGRect(x: 8, y: (44 - 20)/2, width: 200, height: 20)
-        arrowImage.frame = CGRect(x:getScreenWidth() - 40,y: (44 - 5)/2, width:10,height: 5)
+        arrowImage.frame = CGRect(x:((getScreenWidth()/4) * 3) - 30,y: (44 - 5)/2, width:10,height: 5)
         layoutIfNeeded()
     }
     
@@ -76,11 +71,8 @@ class CollapsibleTableViewHeader: UITableViewHeaderFooterView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        contentView.backgroundColor = UIColor.white//UIColor.colorFromCode(0x2E3944)
-        
-        titleLabel.textColor = UIColor.gray//UIColor.whiteColor()
-        //arrowLabel.textColor = UIColor.trimegahGray()//UIColor.whiteColor()
-        //arrowImage.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
+        contentView.backgroundColor = UIColor.white
+        titleLabel.textColor = UIColor.gray
         separatorView.backgroundColor = UIColor.white
     }
     
@@ -96,12 +88,6 @@ class CollapsibleTableViewHeader: UITableViewHeaderFooterView {
     }
     
     func setCollapsed(collapsed: Bool) {
-        //
-        // Animate the arrow rotation (see Extensions.swf)
-        //
-        //arrowLabel.rotate(collapsed ? 0.0 : CGFloat(M_PI_2))
-        //arrowLabel.setRotationX(collapsed ? 0.0 : CGFloat(M_PI_2))
-        
         arrowImage.transform = CGAffineTransform(rotationAngle: collapsed ? 0.0 : CGFloat(Double.pi))
     }
     
