@@ -23,7 +23,8 @@ class CollapsibleTableViewHeader: UITableViewHeaderFooterView {
     //let arrowLabel = UILabel()
     let arrowImage = UIImageView()
     let separatorView = UIView()
-    
+    var circleView = UIView()
+    var verticalView = UIView()
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         
@@ -48,6 +49,11 @@ class CollapsibleTableViewHeader: UITableViewHeaderFooterView {
         separatorView.frame = CGRect(x: 0, y: 43.5, width: getScreenWidth() - 16, height: 1)
         setContentFrame()
         
+        
+        
+        
+        contentView.addSubview(verticalView)
+        contentView.addSubview(circleView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(arrowImage)
         contentView.addSubview(separatorView)
@@ -59,8 +65,15 @@ class CollapsibleTableViewHeader: UITableViewHeaderFooterView {
     }
     
     func setContentFrame(){
-        titleLabel.frame = CGRect(x: 8, y: (44 - 20)/2, width: 200, height: 20)
+        titleLabel.frame = CGRect(x: 16, y: (44 - 20)/2, width: 200, height: 20)
         arrowImage.frame = CGRect(x:((getScreenWidth()/4) * 3) - 30,y: (44 - 5)/2, width:10,height: 5)
+        
+        verticalView.frame = CGRect(x:8,y:0,width:0.4,height:44)
+        verticalView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
+        
+        circleView.frame = CGRect(x: 4, y: 18, width: 8, height: 8)
+        circleView.backgroundColor = UIColor.gray.withAlphaComponent(0.8)
+        circleView.layer.cornerRadius = 4
         layoutIfNeeded()
     }
     
