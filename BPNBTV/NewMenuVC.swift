@@ -13,7 +13,8 @@ protocol MenuSelectedDelegate {
 }
 class NewMenuVC: UIViewController {
     var menuItems:[Menu] = [Menu]()
-    var menuItemsChild:[String:[Menu]] = [String:[Menu]]()
+    //var menuItemsChild:[String:[Menu]] = [String:[Menu]]()
+    var menuItemsChild = OrderedDict<String,[Menu]>()
     var menuSelectedDelegate:MenuSelectedDelegate?
     var headerTB:CollapsibleTableViewHeader?
     var sections = [MenuSection]()
@@ -27,62 +28,16 @@ class NewMenuVC: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
     }
-    func setMenuData(){
-        if let dictMenu = UserDefaults.standard.object(forKey: "MENU")as! [[String:String]]?{
-            for dm in dictMenu{
-                for(key,val) in dm{
-                    if let child = Menu(_parent:key,_menu:val){
-                        if menuItemsChild.keys.contains(key){
-                            var temp = menuItemsChild[key]
-                            if let su = temp?.filter({$0.menu == val && $0.parent == key}){
-                                if(su.count == 0){
-                                    temp?.append(child)
-                                    menuItemsChild[key] = temp
-                                }
-                            }
-                        }else{
-                            menuItemsChild[key] = [child]
-                        }
-                    }
-                    
-                }
-                
-            }
-        }
-        for (key,val) in menuItemsChild{
-            printLog(content: "KEY : \(key)")
-            if key.lowercased() == "main"{
-                for child in val{
-                    if !(sections.contains(where: {
-                       return  $0.name.lowercased() == child.menu.lowercased()
-                    })){
-                        sections.append(MenuSection(name: child.menu, items: []))
-                    }
-                    
-                }
-            }else{
-                if let index = sections.index(where: { (item) -> Bool in
-                    item.name.lowercased() == key.lowercased()
-                }){
-                    sections[index].items = val
-                }else{
-                   sections.append(MenuSection(name: key, items: val ))
-                }
-                
-            }
-        }
-        
-       
-    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         searchTF?.text = ""
     }
     func setupViews(){
-        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.navigationBarColor()
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         removeBottomBorderNavigationBar()
         
@@ -90,7 +45,8 @@ class NewMenuVC: UIViewController {
         menuTable.showsVerticalScrollIndicator = false
         menuTable.showsHorizontalScrollIndicator = false
         menuTable.contentInset = UIEdgeInsets.zero
-        menuTable.separatorStyle = UITableViewCellSeparatorStyle.none
+        menuTable.separatorStyle = UITableViewCellSeparatorStyle.singleLine
+        menuTable.tableFooterView = UIView(frame:CGRect.zero)
         menuTable.delegate = self
         menuTable.dataSource = self
         menuTable.reloadData()
@@ -115,6 +71,76 @@ class NewMenuVC: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    func setMenuData(){
+        if let dictMenu = UserDefaults.standard.object(forKey: "MENU")as! [[String:String]]?{
+            for dm in dictMenu{
+                for(key,val) in dm{
+                    if let child = Menu(_parent:key,_menu:val){
+                        if menuItemsChild.keys.contains(key){
+                            var temp = menuItemsChild[key]
+                            if let su = temp?.filter({$0.menu == val && $0.parent == key}){
+                                if(su.count == 0){
+                                    temp?.append(child)
+                                    menuItemsChild[key] = temp
+                                }
+                            }
+                        }else{
+                            if !menuItemsChild.keys.contains(key){
+                                menuItemsChild[key] = [child]
+                            }
+                            
+                        }
+                    }
+                }
+                
+            }
+            //parse the menu again
+            for key in menuItemsChild.keys{
+                if key.lowercased() == "main"{
+                    for child in menuItemsChild[key]!{
+                        if !(sections.contains(where: {
+                            return  $0.name.lowercased() == child.menu.lowercased()
+                        })){
+                            
+                            if child.hasChild{
+                                sections.append(MenuSection(name: key, items: menuItemsChild[key]! ))
+                            }else{
+                                sections.append(MenuSection(name: child.menu, items: []))
+                            }
+                        }
+                    }
+                }else{
+                    if let index = sections.index(where: { (item) -> Bool in
+                        item.name.lowercased() == key.lowercased()
+                    }){
+                        printLog(content: "INDEX : \(index)......item name : \(key)")
+                        sections[index].items = menuItemsChild[key]!
+                    }else{
+                        sections.append(MenuSection(name: key, items: menuItemsChild[key]! ))
+                    }
+                }
+            }
+            menuTable.reloadData()
+        }else{
+            printLog(content: "Empty Menu")
+            requestMenu()
+        }
+        
+        
+        
+    }
+    
+    func requestMenu(){
+        Constants.requestAndUpdateMainMenu(callback: {[weak self] (isSuccess,reason) in
+            if isSuccess{
+                self?.setMenuData()
+            }else{
+                Constants.showErrorAlert(message: reason ?? "")
+            }
+        })
+    }
+    
     deinit {
         printLog(content:"NEW MENU TV DESTROYED")
     }

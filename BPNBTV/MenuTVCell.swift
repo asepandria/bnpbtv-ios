@@ -9,16 +9,21 @@
 import UIKit
 
 class MenuTVCell: UITableViewCell {
-
+    static let CIRCLE_VIEW_RADIUS:CGFloat = 4
+    @IBOutlet weak var circleView: UIView!
+    @IBOutlet weak var menuLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        setupViews()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    }
+    
+    func setupViews(){
+        circleView.layer.cornerRadius = circleView.frame.width/2
     }
 
 }

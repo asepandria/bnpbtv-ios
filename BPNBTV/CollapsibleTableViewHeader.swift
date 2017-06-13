@@ -46,7 +46,7 @@ class CollapsibleTableViewHeader: UITableViewHeaderFooterView {
          arrowImage.translatesAutoresizingMaskIntoConstraints = false
          separatorView.translatesAutoresizingMaskIntoConstraints = false*/
         arrowImage.image = UIImage(named: "icon_expand_caret")
-        separatorView.frame = CGRect(x: 0, y: 43.5, width: getScreenWidth() - 16, height: 1)
+        separatorView.frame = CGRect(x: 0, y: 43.5, width: getScreenWidth() - 16, height: 0.4)
         setContentFrame()
         
         
@@ -83,10 +83,13 @@ class CollapsibleTableViewHeader: UITableViewHeaderFooterView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        contentView.backgroundColor = UIColor.white
+        if section % 2 == 0{
+            contentView.backgroundColor = UIColor.navigationBarColor()
+        }else{
+            contentView.backgroundColor = UIColor.white
+        }
         titleLabel.textColor = UIColor.gray
-        separatorView.backgroundColor = UIColor.white
+        separatorView.backgroundColor = UIColor.lightGray
     }
     
     //

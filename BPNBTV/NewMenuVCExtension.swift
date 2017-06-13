@@ -14,16 +14,14 @@ extension NewMenuVC:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       // return (menuItemsChild["main"]?.count) ?? 0
         return sections[section].items.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "menuTVCell", for: indexPath) as! MenuTVCell
-        //let  mainMenu = menuItemsChild["main"]
-        //cell.textLabel?.text = mainMenu?[indexPath.row].menu
-        cell.textLabel?.text  = sections[indexPath.section].items[indexPath.row].menu
+        //cell.textLabel?.text  = sections[indexPath.section].items[indexPath.row].menu
+        cell.menuLabel?.text = sections[indexPath.section].items[indexPath.row].menu
         return cell
     }
     
@@ -31,7 +29,6 @@ extension NewMenuVC:UITableViewDelegate,UITableViewDataSource{
         if let  mainMenu = menuItemsChild["main"]{
             if (mainMenu[indexPath.row].parent ?? "") != "main"{
                 printLog(content:menuItemsChild[(mainMenu[indexPath.row].parent) ?? ""]!)
-                //self.slideMenuController()?.closeLeft()
             }else{
                 if let tempMenuComp = mainMenu[indexPath.row].menu{
                     if let childArr = menuItemsChild[tempMenuComp.lowercased()]{
@@ -40,7 +37,6 @@ extension NewMenuVC:UITableViewDelegate,UITableViewDataSource{
                         }
                     }else{
                         printLog(content:"MAIN MENU TAPPED")
-                        //self.slideMenuController()?.closeLeft()
                     }
                 }
             }
@@ -60,6 +56,12 @@ extension NewMenuVC:UITableViewDelegate,UITableViewDataSource{
         cell.preservesSuperviewLayoutMargins = false
         cell.layoutMargins = UIEdgeInsets.zero
         cell.selectionStyle = UITableViewCellSelectionStyle.none
+        if indexPath.section % 2 == 0{
+            cell.contentView.backgroundColor = UIColor.navigationBarColor()
+        }else{
+            cell.contentView.backgroundColor = UIColor.white
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -70,7 +72,7 @@ extension NewMenuVC:UITableViewDelegate,UITableViewDataSource{
             headerTB?.arrowImage.isHidden = false
         }
         headerTB?.titleLabel.text = sections[section].name.firstCharToUpper()
-        headerTB?.backgroundColor = UIColor.white
+        
         headerTB?.setCollapsed(collapsed: sections[section].collapsed)
         headerTB?.section = section
         headerTB?.delegate = self
@@ -85,7 +87,7 @@ extension NewMenuVC:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        printLog(content: "HEADER ASU")
+        //printLog(content: "HEADER ASU")
     }
 }
 extension NewMenuVC:CollapsibleTableViewHeaderDelegate{

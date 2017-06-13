@@ -31,6 +31,7 @@
 		186604D61E9564E1002C2016 /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186604D51E9564E1002C2016 /* VideoModel.swift */; };
 		189765D41E975CFE00D05B48 /* MenuTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189765D31E975CFE00D05B48 /* MenuTVCell.xib */; };
 		189765D61E975D6900D05B48 /* MenuTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189765D51E975D6900D05B48 /* MenuTVCell.swift */; };
+		18F15EEA1EF051A900B82694 /* OrderedDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F15EE91EF051A900B82694 /* OrderedDict.swift */; };
 		18F742FE1EEEF5DB00CD6B40 /* MenuSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F742FD1EEEF5DB00CD6B40 /* MenuSection.swift */; };
 		18F743001EEF04FF00CD6B40 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F742FF1EEF04FF00CD6B40 /* StringExtension.swift */; };
 		C33FD525DF27B3541A82C729 /* Pods_BPNBTVUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C67F85601B29257AA22EC884 /* Pods_BPNBTVUITests.framework */; };
@@ -86,6 +87,7 @@
 		186604D51E9564E1002C2016 /* VideoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
 		189765D31E975CFE00D05B48 /* MenuTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuTVCell.xib; sourceTree = "<group>"; };
 		189765D51E975D6900D05B48 /* MenuTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTVCell.swift; sourceTree = "<group>"; };
+		18F15EE91EF051A900B82694 /* OrderedDict.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderedDict.swift; sourceTree = "<group>"; };
 		18F742FD1EEEF5DB00CD6B40 /* MenuSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSection.swift; sourceTree = "<group>"; };
 		18F742FF1EEF04FF00CD6B40 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		69FDB2967FA54A5165787423 /* Pods-BPNBTVTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BPNBTVTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BPNBTVTests/Pods-BPNBTVTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 			children = (
 				062AA3B31E90B4A400B26F44 /* Constants.swift */,
 				182046A71E93241B0094D91C /* Serializer.swift */,
+				18F15EE91EF051A900B82694 /* OrderedDict.swift */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -593,6 +596,7 @@
 				185EB8801E95871200D7841F /* UIViewController.swift in Sources */,
 				180865D91EE9857200930FB5 /* NewMenuVC.swift in Sources */,
 				185EB87C1E957DEC00D7841F /* ContainerViewController.swift in Sources */,
+				18F15EEA1EF051A900B82694 /* OrderedDict.swift in Sources */,
 				185EB87E1E95847E00D7841F /* UIApplication.swift in Sources */,
 				067ADA001E7D13C90030C686 /* AppDelegate.swift in Sources */,
 				186604CE1E95282B002C2016 /* MenuModel.swift in Sources */,
