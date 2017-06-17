@@ -68,31 +68,43 @@ class ContainerViewController:UIViewController{
 extension ContainerViewController:SideMenuToContainerDelegate{
     func selectedMenu(menuName: String) {
         
-        Constants.requestListBasedOnCategory(params: ["function":"video","category":menuName.lowercased()], callback: {[weak self](isSuccess,reason,videoItems) in
-            //self?.printLog(content: "\(String(describing: videoItems))")
-        })
+        
         removeChildViewControllers()
         let contentStoryBoard = UIStoryboard(name: "Content", bundle: nil)
         if(menuName.lowercased() == MENU_CLASS.HOME.rawValue){
-            let homeVC = contentStoryBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-            self.addChildViewController(homeVC)
-            homeVC.view.frame = CGRect(x:0, y:0, width:self.view.frame.size.width, height:self.view.frame.size.height);
-            self.view.addSubview(homeVC.view)
-            homeVC.didMove(toParentViewController: self)
+            Constants.requestListBasedOnCategory(params: ["function":"video"], callback: {[weak self](isSuccess,reason,videoItems) in
+                if let _self = self{
+                    let homeVC = contentStoryBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+                    _self.addChildViewController(homeVC)
+                    homeVC.view.frame = CGRect(x:0, y:0, width:_self.view.frame.size.width, height:_self.view.frame.size.height);
+                    _self.view.addSubview(homeVC.view)
+                    homeVC.didMove(toParentViewController: _self)
+                }
+            })
+            
         }else if(menuName.lowercased() == MENU_CLASS.PROFILE.rawValue ||
             menuName.lowercased() == MENU_CLASS.PROFIL.rawValue){
-            let profileVC = contentStoryBoard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
-            self.addChildViewController(profileVC)
-            profileVC.view.frame = CGRect(x:0, y:0, width:self.view.frame.size.width, height:self.view.frame.size.height);
-            self.view.addSubview(profileVC.view)
-            profileVC.didMove(toParentViewController: self)
+            Constants.requestListBasedOnCategory(params: ["function":"profil"], callback: {[weak self](isSuccess,reason,videoItems) in
+                if let _self = self{
+                    let profileVC = contentStoryBoard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+                    _self.addChildViewController(profileVC)
+                    profileVC.view.frame = CGRect(x:0, y:0, width:_self.view.frame.size.width, height:_self.view.frame.size.height);
+                    _self.view.addSubview(profileVC.view)
+                    profileVC.didMove(toParentViewController: _self)
+                }
+            })
+            
         }else{
             //this is collection
-            let collectionVC = contentStoryBoard.instantiateViewController(withIdentifier: "CollectionViewController") as! CollectionViewController
-            self.addChildViewController(collectionVC)
-            collectionVC.view.frame = CGRect(x:0, y:0, width:self.view.frame.size.width, height:self.view.frame.size.height);
-            self.view.addSubview(collectionVC.view)
-            collectionVC.didMove(toParentViewController: self)
+            Constants.requestListBasedOnCategory(params: ["function":"profil"], callback: {[weak self](isSuccess,reason,videoItems) in
+                if let _self = self{
+                    let collectionVC = contentStoryBoard.instantiateViewController(withIdentifier: "CollectionViewController") as! CollectionViewController
+                    _self.addChildViewController(collectionVC)
+                    collectionVC.view.frame = CGRect(x:0, y:0, width:_self.view.frame.size.width, height:_self.view.frame.size.height);
+                    _self.view.addSubview(collectionVC.view)
+                    collectionVC.didMove(toParentViewController: _self)
+                }
+            })
         }
         
     }
