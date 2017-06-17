@@ -41,4 +41,11 @@ extension UIViewController{
             }
         }
     }
+    
+    func getNavigationBarHeight() -> CGFloat{
+        if let bar = navigationController?.navigationBar{
+            return bar.frame.height
+        }
+        return 0
+    }
 }
