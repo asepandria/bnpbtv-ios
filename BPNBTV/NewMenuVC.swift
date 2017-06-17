@@ -8,19 +8,21 @@
 
 import UIKit
 import SideMenu
-protocol MenuSelectedDelegate {
-    func menuDidSelected(menu:Menu)
+protocol MenuSelectedDelegate:class {
+    //func menuSelected()
+    func menuTapped(menu:Menu)
 }
 class NewMenuVC: UIViewController {
     var menuItems:[Menu] = [Menu]()
     //var menuItemsChild:[String:[Menu]] = [String:[Menu]]()
     var menuItemsChild = OrderedDict<String,[Menu]>()
-    var menuSelectedDelegate:MenuSelectedDelegate?
+    weak var menuSelectedDelegate:SideMenuToContainerDelegate?
     var headerTB:CollapsibleTableViewHeader?
     var sections = [MenuSection]()
-    var mainViewController: UIViewController!
+    //var mainViewController: UIViewController!
     @IBOutlet weak var menuTable: UITableView!
     @IBOutlet weak var searchTF: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setMenuData()
@@ -72,7 +74,14 @@ class NewMenuVC: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        headerTB?.delegate = nil
+        headerTB = nil
+    }
     func setMenuData(){
+        if sections.count > 0{return}
         if let dictMenu = UserDefaults.standard.object(forKey: "MENU")as! [[String:String]]?{
             for dm in dictMenu{
                 for(key,val) in dm{
@@ -114,7 +123,7 @@ class NewMenuVC: UIViewController {
                     if let index = sections.index(where: { (item) -> Bool in
                         item.name.lowercased() == key.lowercased()
                     }){
-                        printLog(content: "INDEX : \(index)......item name : \(key)")
+                        //printLog(content: "INDEX : \(index)......item name : \(key)")
                         sections[index].items = menuItemsChild[key]!
                     }else{
                         sections.append(MenuSection(name: key, items: menuItemsChild[key]! ))

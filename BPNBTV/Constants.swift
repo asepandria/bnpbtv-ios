@@ -17,7 +17,7 @@ class Constants{
     static let requestManager = Alamofire.SessionManager.default
     
     class func requestAndUpdateMainMenu(callback:((Bool,String?) -> Void)? ){
-        Constants.requestManager.request(BRouter.commonRequest(parameters: ["function":"menu"])).responseObject(queue: DispatchQueue.global()){(response:DataResponse<MenuItems>) in
+        _ = Constants.requestManager.request(BRouter.commonRequest(parameters: ["function":"menu"])).responseObject(queue: DispatchQueue.global()){(response:DataResponse<MenuItems>) in
             do{
                 
                 let menuItems = try response.result.unwrap() as MenuItems
@@ -28,6 +28,20 @@ class Constants{
                 //Catch Error Menu And Display it to user
                 //debugPrint("Error Retrieving Menu Data : Response -> \(response.error.debugDescription)")
                 callback?(false,response.error?.localizedDescription)
+            }
+        }
+    }
+    
+    class func requestListBasedOnCategory(params:[String:String],callback:((Bool,String?,VideoItems?) -> Void)?){
+        _ = Constants.requestManager.request(BRouter.commonRequest(parameters: params)).responseObject(queue: DispatchQueue.global()){(response:DataResponse<VideoItems>) in
+            do{
+                
+                let videoItems = try response.result.unwrap() as VideoItems
+                callback?(true,nil,videoItems)
+            }catch{
+                //Catch Error Menu And Display it to user
+                //debugPrint("Error Retrieving Menu Video Items : Response -> \(response.error.debugDescription)")
+                callback?(false,response.error?.localizedDescription,nil)
             }
         }
     }

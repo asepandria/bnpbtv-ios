@@ -45,7 +45,7 @@
                         <barButtonItem key="leftBarButtonItem" image="ic_menu" id="0zc-Au-lWS">
                             <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="XFv-rc-vJa" kind="presentation" id="ykU-v8-8t3"/>
+                                <action selector="sideMenuAction:" destination="3Ld-MG-YBa" id="8fM-Ij-A4F"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="dCv-bE-qfN">
@@ -208,6 +208,7 @@
         <!--Side Menu Navigation Controller-->
         <scene sceneID="Arh-PL-swx">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F3A-46-0zy" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="NewMenuVCNav" automaticallyAdjustsScrollViewInsets="NO" id="XFv-rc-vJa" customClass="UISideMenuNavigationController" customModule="SideMenu" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="THA-uW-Fyg">
@@ -222,7 +223,6 @@
                         <segue destination="Gmv-0N-68T" kind="relationship" relationship="rootViewController" id="jBX-0u-EZb"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="F3A-46-0zy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2598" y="206"/>
         </scene>

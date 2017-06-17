@@ -26,7 +26,7 @@ extension NewMenuVC:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let  mainMenu = menuItemsChild["main"]{
+        /*if let  mainMenu = menuItemsChild["main"]{
             if (mainMenu[indexPath.row].parent ?? "") != "main"{
                 printLog(content:menuItemsChild[(mainMenu[indexPath.row].parent) ?? ""]!)
             }else{
@@ -40,9 +40,14 @@ extension NewMenuVC:UITableViewDelegate,UITableViewDataSource{
                     }
                 }
             }
+        }*/
+        DispatchQueue.main.async {[weak self] _ in
+            if let menuSelected = self?.sections[indexPath.section].items[indexPath.row]{
+                self?.menuSelectedDelegate?.selectedMenu(menuName: menuSelected.menu)
+            }
+            self?.dismiss(animated: true, completion: nil)
         }
         
-        dismiss(animated: true, completion: nil)
         
     }
     
@@ -72,7 +77,6 @@ extension NewMenuVC:UITableViewDelegate,UITableViewDataSource{
             headerTB?.arrowImage.isHidden = false
         }
         headerTB?.titleLabel.text = sections[section].name.firstCharToUpper()
-        
         headerTB?.setCollapsed(collapsed: sections[section].collapsed)
         headerTB?.section = section
         headerTB?.delegate = self
@@ -111,6 +115,14 @@ extension NewMenuVC:CollapsibleTableViewHeaderDelegate{
             }
         }else{
             //THIS Main Menu Then, do something about it
+            DispatchQueue.main.async {[weak self] _ in
+                self?.menuSelectedDelegate?.selectedMenu(menuName:(self?.sections[section].name)!)
+                self?.dismiss(animated: true, completion: nil)
+            }
+            
+            
         }
+        
+        
     }
 }

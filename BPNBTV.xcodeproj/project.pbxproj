@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		062AA3B41E90B4A400B26F44 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062AA3B31E90B4A400B26F44 /* Constants.swift */; };
 		067ADA001E7D13C90030C686 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067AD9FF1E7D13C90030C686 /* AppDelegate.swift */; };
-		067ADA021E7D13CA0030C686 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067ADA011E7D13CA0030C686 /* MainViewController.swift */; };
 		067ADA051E7D13CA0030C686 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 067ADA031E7D13CA0030C686 /* Main.storyboard */; };
 		067ADA081E7D13CB0030C686 /* BPNBTV.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 067ADA061E7D13CB0030C686 /* BPNBTV.xcdatamodeld */; };
 		067ADA0A1E7D13CB0030C686 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 067ADA091E7D13CB0030C686 /* Assets.xcassets */; };
@@ -27,7 +26,6 @@
 		186116F81EE84B9A0007871D /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186116F71EE84B9A0007871D /* NSObject.swift */; };
 		186604CE1E95282B002C2016 /* MenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186604CD1E95282B002C2016 /* MenuModel.swift */; };
 		186604D21E9535D7002C2016 /* BRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186604D11E9535D7002C2016 /* BRouter.swift */; };
-		186604D41E954823002C2016 /* MenuTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186604D31E954823002C2016 /* MenuTV.swift */; };
 		186604D61E9564E1002C2016 /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186604D51E9564E1002C2016 /* VideoModel.swift */; };
 		189765D41E975CFE00D05B48 /* MenuTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189765D31E975CFE00D05B48 /* MenuTVCell.xib */; };
 		189765D61E975D6900D05B48 /* MenuTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189765D51E975D6900D05B48 /* MenuTVCell.swift */; };
@@ -60,7 +58,6 @@
 		062AA3B31E90B4A400B26F44 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		067AD9FC1E7D13C90030C686 /* BPNBTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BPNBTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		067AD9FF1E7D13C90030C686 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		067ADA011E7D13CA0030C686 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		067ADA041E7D13CA0030C686 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		067ADA071E7D13CB0030C686 /* BPNBTV.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BPNBTV.xcdatamodel; sourceTree = "<group>"; };
 		067ADA091E7D13CB0030C686 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -83,7 +80,6 @@
 		186116F71EE84B9A0007871D /* NSObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObject.swift; sourceTree = "<group>"; };
 		186604CD1E95282B002C2016 /* MenuModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuModel.swift; sourceTree = "<group>"; };
 		186604D11E9535D7002C2016 /* BRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BRouter.swift; sourceTree = "<group>"; };
-		186604D31E954823002C2016 /* MenuTV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTV.swift; sourceTree = "<group>"; };
 		186604D51E9564E1002C2016 /* VideoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
 		189765D31E975CFE00D05B48 /* MenuTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuTVCell.xib; sourceTree = "<group>"; };
 		189765D51E975D6900D05B48 /* MenuTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTVCell.swift; sourceTree = "<group>"; };
@@ -264,8 +260,6 @@
 		1843A9061EE999B60040AB3F /* garb */ = {
 			isa = PBXGroup;
 			children = (
-				067ADA011E7D13CA0030C686 /* MainViewController.swift */,
-				186604D31E954823002C2016 /* MenuTV.swift */,
 			);
 			name = garb;
 			sourceTree = "<group>";
@@ -590,7 +584,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				067ADA021E7D13CA0030C686 /* MainViewController.swift in Sources */,
 				186116F81EE84B9A0007871D /* NSObject.swift in Sources */,
 				186604D21E9535D7002C2016 /* BRouter.swift in Sources */,
 				185EB8801E95871200D7841F /* UIViewController.swift in Sources */,
@@ -609,7 +602,6 @@
 				185EB8831E958A7800D7841F /* UIColor.swift in Sources */,
 				062AA3B41E90B4A400B26F44 /* Constants.swift in Sources */,
 				18F742FE1EEEF5DB00CD6B40 /* MenuSection.swift in Sources */,
-				186604D41E954823002C2016 /* MenuTV.swift in Sources */,
 				182046A81E93241B0094D91C /* Serializer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
