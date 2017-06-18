@@ -93,6 +93,7 @@
 		186604D51E9564E1002C2016 /* VideoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
 		189765D31E975CFE00D05B48 /* MenuTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuTVCell.xib; sourceTree = "<group>"; };
 		189765D51E975D6900D05B48 /* MenuTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTVCell.swift; sourceTree = "<group>"; };
+		18CB59D91EF6A8BC00AD6D9D /* BPNBTV-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BPNBTV-Bridging-Header.h"; sourceTree = "<group>"; };
 		18F15EE91EF051A900B82694 /* OrderedDict.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderedDict.swift; sourceTree = "<group>"; };
 		18F742FD1EEEF5DB00CD6B40 /* MenuSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSection.swift; sourceTree = "<group>"; };
 		18F742FF1EEF04FF00CD6B40 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
@@ -290,6 +291,7 @@
 		185EB8811E958A6400D7841F /* ext */ = {
 			isa = PBXGroup;
 			children = (
+				18CB59D91EF6A8BC00AD6D9D /* BPNBTV-Bridging-Header.h */,
 				185EB87D1E95847E00D7841F /* UIApplication.swift */,
 				185EB87F1E95871200D7841F /* UIViewController.swift */,
 				185EB8821E958A7800D7841F /* UIColor.swift */,

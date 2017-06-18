@@ -5,7 +5,7 @@ PODS:
   - ReachabilitySwift (3)
   - SideMenu (2.3.2)
   - SwiftyJSON (3.1.4)
-  - YouTubePlayer (0.4.0)
+  - youtube-ios-player-helper (0.1.6)
 
 DEPENDENCIES:
   - Alamofire (~> 4.4)
@@ -14,7 +14,7 @@ DEPENDENCIES:
   - ReachabilitySwift (~> 3)
   - SideMenu
   - SwiftyJSON
-  - YouTubePlayer
+  - youtube-ios-player-helper (~> 0.1.4)
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
@@ -23,8 +23,8 @@ SPEC CHECKSUMS:
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   SideMenu: 3fa07dd05d4bade2b6f9889fb1877e312e1ba319
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
-  YouTubePlayer: 028451f6772f372d4759866db99824c676ac1473
+  youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: 985d289b46dcbc6ec74ca6b87adda35b5db41529
+PODFILE CHECKSUM: ba3c1dff67828dfe317ce132a2e8a9f0c650b2d1
 
 COCOAPODS: 1.2.0
