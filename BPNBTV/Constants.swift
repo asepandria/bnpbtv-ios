@@ -46,6 +46,17 @@ class Constants{
         }
     }
     
+    class func requestProfile(callback:((Bool,String?,ProfileModel?) -> Void)?){
+        _ = Constants.requestManager.request(BRouter.commonRequest(parameters: ["function":"profil"])).responseObject(queue: DispatchQueue.global()){(response:DataResponse<ProfileModel>) in
+            do{
+                let profile = try response.result.unwrap() as ProfileModel
+                callback?(true,nil,profile)
+            }catch{
+                callback?(false,response.error?.localizedDescription,nil)
+            }
+        }
+    }
+    
     class func showErrorAlert(message:String){
         let alert = UIAlertController(title: "ERROR", message:message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: nil))

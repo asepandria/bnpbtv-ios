@@ -7,18 +7,27 @@
 //
 
 import UIKit
-
+import YouTubePlayer
 class ProfileViewController: UIViewController {
-
+    var profileModel:ProfileModel!
+    var youtubePlayerView: YouTubePlayerView!
+    
+    @IBOutlet weak var playerContainer: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        youtubePlayerView = YouTubePlayerView(frame: playerContainer.frame)
+        playerContainer.addSubview(youtubePlayerView)
+        if let _ = profileModel{
+            if let videoId = profileModel.youtube{
+                youtubePlayerView.loadVideoID(videoId)
+            }
+        }
+        
 
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 

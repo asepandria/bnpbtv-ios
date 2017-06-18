@@ -15,7 +15,8 @@ target 'BPNBTV' do
   #pod 'SideMenu'
   #pod 'SlideMenuControllerSwift'
   pod 'SideMenu'
-  pod 'YouTubePlayer'
+  #pod 'YouTubePlayer'
+  pod 'youtube-ios-player-helper", "~> 0.1.4'
   pod 'ReachabilitySwift', '~> 3'
   pod 'PKHUD', '~> 4.0'
   target 'BPNBTVTests' do

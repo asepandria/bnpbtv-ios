@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -77,17 +78,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PROFILE " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aZm-wf-kr3">
-                                <rect key="frame" x="16" y="75" width="168" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tab-fK-dSz">
+                                <rect key="frame" x="0.0" y="64" width="375" height="145"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="tab-fK-dSz" secondAttribute="height" multiplier="75:29" id="xPv-ub-zJr"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="tab-fK-dSz" firstAttribute="top" secondItem="t3v-XN-sjs" secondAttribute="bottom" id="GZi-vm-aJS"/>
+                            <constraint firstAttribute="trailing" secondItem="tab-fK-dSz" secondAttribute="trailing" id="TNH-eb-uQU"/>
+                            <constraint firstItem="tab-fK-dSz" firstAttribute="leading" secondItem="tuW-5P-9fs" secondAttribute="leading" id="yQ5-Tc-rEP"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="TvA-83-BxX"/>
+                    <connections>
+                        <outlet property="playerContainer" destination="tab-fK-dSz" id="gv0-Vr-SBU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kUG-OY-E8V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

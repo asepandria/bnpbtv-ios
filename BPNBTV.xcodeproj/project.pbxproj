@@ -28,6 +28,7 @@
 		185EB8801E95871200D7841F /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185EB87F1E95871200D7841F /* UIViewController.swift */; };
 		185EB8831E958A7800D7841F /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185EB8821E958A7800D7841F /* UIColor.swift */; };
 		186116F81EE84B9A0007871D /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186116F71EE84B9A0007871D /* NSObject.swift */; };
+		186320F61EF6984700ED4ED2 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186320F51EF6984700ED4ED2 /* ProfileModel.swift */; };
 		186604CE1E95282B002C2016 /* MenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186604CD1E95282B002C2016 /* MenuModel.swift */; };
 		186604D21E9535D7002C2016 /* BRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186604D11E9535D7002C2016 /* BRouter.swift */; };
 		186604D61E9564E1002C2016 /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186604D51E9564E1002C2016 /* VideoModel.swift */; };
@@ -86,6 +87,7 @@
 		185EB87F1E95871200D7841F /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		185EB8821E958A7800D7841F /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		186116F71EE84B9A0007871D /* NSObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObject.swift; sourceTree = "<group>"; };
+		186320F51EF6984700ED4ED2 /* ProfileModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		186604CD1E95282B002C2016 /* MenuModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuModel.swift; sourceTree = "<group>"; };
 		186604D11E9535D7002C2016 /* BRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BRouter.swift; sourceTree = "<group>"; };
 		186604D51E9564E1002C2016 /* VideoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				186604CD1E95282B002C2016 /* MenuModel.swift */,
 				186604D51E9564E1002C2016 /* VideoModel.swift */,
 				18F742FD1EEEF5DB00CD6B40 /* MenuSection.swift */,
+				186320F51EF6984700ED4ED2 /* ProfileModel.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -624,6 +627,7 @@
 				1813F27B1EF5BA30004B2422 /* HomeViewController.swift in Sources */,
 				185EB8831E958A7800D7841F /* UIColor.swift in Sources */,
 				062AA3B41E90B4A400B26F44 /* Constants.swift in Sources */,
+				186320F61EF6984700ED4ED2 /* ProfileModel.swift in Sources */,
 				1813F27F1EF5BB76004B2422 /* CollectionViewController.swift in Sources */,
 				18F742FE1EEEF5DB00CD6B40 /* MenuSection.swift in Sources */,
 				182046A81E93241B0094D91C /* Serializer.swift in Sources */,

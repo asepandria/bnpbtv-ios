@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SideMenu
+import PKHUD
 protocol SideMenuToContainerDelegate:class {
     func selectedMenu(menuName:String)
 }
@@ -64,46 +65,82 @@ class ContainerViewController:UIViewController{
     }
     */
 }
+extension ContainerViewController{
+    func removeChildViewControllers(){
+        if childViewControllers.count > 0{
+            for cvc in childViewControllers{
+                cvc.willMove(toParentViewController: nil)
+                cvc.view.removeFromSuperview()
+                cvc.removeFromParentViewController()
+            }
+        }
+    }
+}
 
 extension ContainerViewController:SideMenuToContainerDelegate{
     func selectedMenu(menuName: String) {
-        
-        
+        HUD.show(HUDContentType.progress)
         removeChildViewControllers()
-        
         let contentStoryBoard = UIStoryboard(name: "Content", bundle: nil)
         if(menuName.lowercased() == MENU_CLASS.HOME.rawValue){
             Constants.requestListBasedOnCategory(params: ["function":"video"], callback: {[weak self](isSuccess,reason,videoItems) in
-                if let _self = self{
-                    let homeVC = contentStoryBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-                    _self.addChildViewController(homeVC)
-                    homeVC.view.frame = CGRect(x:0, y:0, width:_self.view.frame.size.width, height:_self.view.frame.size.height);
-                    _self.view.addSubview(homeVC.view)
-                    homeVC.didMove(toParentViewController: _self)
+                DispatchQueue.main.async {
+                    HUD.hide()
+                    if isSuccess{
+                        if let _self = self{
+                            let homeVC = contentStoryBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+                            _self.addChildViewController(homeVC)
+                            homeVC.view.frame = CGRect(x:0, y:0, width:_self.view.frame.size.width, height:_self.view.frame.size.height);
+                            _self.view.addSubview(homeVC.view)
+                            homeVC.didMove(toParentViewController: _self)
+                        }
+                    }else{
+                        Constants.showErrorAlert(message: reason ?? "")
+                    }
+                    
                 }
+                
             })
             
         }else if(menuName.lowercased() == MENU_CLASS.PROFILE.rawValue ||
             menuName.lowercased() == MENU_CLASS.PROFIL.rawValue){
-            Constants.requestListBasedOnCategory(params: ["function":"profil"], callback: {[weak self](isSuccess,reason,videoItems) in
-                if let _self = self{
-                    let profileVC = contentStoryBoard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
-                    _self.addChildViewController(profileVC)
-                    profileVC.view.frame = CGRect(x:0, y:0, width:_self.view.frame.size.width, height:_self.view.frame.size.height);
-                    _self.view.addSubview(profileVC.view)
-                    profileVC.didMove(toParentViewController: _self)
+            Constants.requestProfile(callback: {[weak self](isSuccess,reason,profile) in
+                DispatchQueue.main.async {
+                    HUD.hide()
+                    if isSuccess{
+                        if let _self = self{
+                            let profileVC = contentStoryBoard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+                            profileVC.profileModel = profile
+                            _self.addChildViewController(profileVC)
+                            profileVC.view.frame = CGRect(x:0, y:0, width:_self.view.frame.size.width, height:_self.view.frame.size.height);
+                            _self.view.addSubview(profileVC.view)
+                            profileVC.didMove(toParentViewController: _self)
+                            
+                        }
+                    }else{
+                        Constants.showErrorAlert(message: reason ?? "")
+                    }
+                    
                 }
             })
             
         }else{
             //this is collection
             Constants.requestListBasedOnCategory(params: ["function":"video"], callback: {[weak self](isSuccess,reason,videoItems) in
-                if let _self = self{
-                    let collectionVC = contentStoryBoard.instantiateViewController(withIdentifier: "CollectionViewController") as! CollectionViewController
-                    _self.addChildViewController(collectionVC)
-                    collectionVC.view.frame = CGRect(x:0, y:0, width:_self.view.frame.size.width, height:_self.view.frame.size.height);
-                    _self.view.addSubview(collectionVC.view)
-                    collectionVC.didMove(toParentViewController: _self)
+                DispatchQueue.main.async {
+                    HUD.hide()
+                    if isSuccess{
+                        if let _self = self{
+                            let collectionVC = contentStoryBoard.instantiateViewController(withIdentifier: "CollectionViewController") as! CollectionViewController
+                            _self.addChildViewController(collectionVC)
+                            collectionVC.view.frame = CGRect(x:0, y:0, width:_self.view.frame.size.width, height:_self.view.frame.size.height);
+                            _self.view.addSubview(collectionVC.view)
+                            collectionVC.didMove(toParentViewController: _self)
+                        }
+                    }else{
+                        Constants.showErrorAlert(message: reason ?? "")
+                    }
+                    
                 }
             })
         }
@@ -114,17 +151,4 @@ extension ContainerViewController:SideMenuToContainerDelegate{
         
     }
     
-    func removeChildViewControllers(){
-        if childViewControllers.count > 0{
-            for cvc in childViewControllers{
-                cvc.willMove(toParentViewController: nil)
-                cvc.view.removeFromSuperview()
-                cvc.removeFromParentViewController()
-            }
-        }
-    }
-    
-    func showLoadingIndicator(){
-        
-    }
 }
