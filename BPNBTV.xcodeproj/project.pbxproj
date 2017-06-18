@@ -291,9 +291,9 @@
 		185EB8811E958A6400D7841F /* ext */ = {
 			isa = PBXGroup;
 			children = (
-				18CB59D91EF6A8BC00AD6D9D /* BPNBTV-Bridging-Header.h */,
 				185EB87D1E95847E00D7841F /* UIApplication.swift */,
 				185EB87F1E95871200D7841F /* UIViewController.swift */,
+				18CB59D91EF6A8BC00AD6D9D /* BPNBTV-Bridging-Header.h */,
 				185EB8821E958A7800D7841F /* UIColor.swift */,
 				186116F71EE84B9A0007871D /* NSObject.swift */,
 				18F742FF1EEF04FF00CD6B40 /* StringExtension.swift */,
