@@ -70,6 +70,7 @@ extension ContainerViewController:SideMenuToContainerDelegate{
         
         
         removeChildViewControllers()
+        
         let contentStoryBoard = UIStoryboard(name: "Content", bundle: nil)
         if(menuName.lowercased() == MENU_CLASS.HOME.rawValue){
             Constants.requestListBasedOnCategory(params: ["function":"video"], callback: {[weak self](isSuccess,reason,videoItems) in
@@ -96,7 +97,7 @@ extension ContainerViewController:SideMenuToContainerDelegate{
             
         }else{
             //this is collection
-            Constants.requestListBasedOnCategory(params: ["function":"profil"], callback: {[weak self](isSuccess,reason,videoItems) in
+            Constants.requestListBasedOnCategory(params: ["function":"video"], callback: {[weak self](isSuccess,reason,videoItems) in
                 if let _self = self{
                     let collectionVC = contentStoryBoard.instantiateViewController(withIdentifier: "CollectionViewController") as! CollectionViewController
                     _self.addChildViewController(collectionVC)
@@ -121,5 +122,9 @@ extension ContainerViewController:SideMenuToContainerDelegate{
                 cvc.removeFromParentViewController()
             }
         }
+    }
+    
+    func showLoadingIndicator(){
+        
     }
 }

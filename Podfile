@@ -17,6 +17,7 @@ target 'BPNBTV' do
   pod 'SideMenu'
   pod 'YouTubePlayer'
   pod 'ReachabilitySwift', '~> 3'
+  pod 'PKHUD', '~> 4.0'
   target 'BPNBTVTests' do
     inherit! :search_paths
     # Pods for testing
