@@ -26,6 +26,7 @@ class NewMenuVC: UIViewController {
     
     var headers = [CollapsibleTableViewHeader]()
     var selectedMenuCell:(Int,Int)!
+    var isFirstLoad = true
     override func viewDidLoad() {
         super.viewDidLoad()
         setMenuData()

@@ -23,28 +23,52 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qtk-l6-m64">
-                                <rect key="frame" x="0.0" y="64" width="375" height="200"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="225"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T2J-xt-ytw" customClass="YTPlayerView">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="qtk-l6-m64" secondAttribute="height" multiplier="15:8" id="2hY-J2-F3J"/>
+                                    <constraint firstAttribute="width" secondItem="qtk-l6-m64" secondAttribute="height" multiplier="15:8" constant="-46.875" id="2hY-J2-F3J"/>
                                     <constraint firstAttribute="trailing" secondItem="T2J-xt-ytw" secondAttribute="trailing" id="hGs-06-Osh"/>
                                     <constraint firstAttribute="bottom" secondItem="T2J-xt-ytw" secondAttribute="bottom" id="tOY-Dd-Wg1"/>
                                     <constraint firstItem="T2J-xt-ytw" firstAttribute="leading" secondItem="qtk-l6-m64" secondAttribute="leading" id="xag-VG-4J8"/>
                                     <constraint firstItem="T2J-xt-ytw" firstAttribute="top" secondItem="qtk-l6-m64" secondAttribute="top" id="zBG-zl-raU"/>
                                 </constraints>
                             </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4ru-dS-q7R">
+                                <rect key="frame" x="0.0" y="289" width="375" height="378"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="spS-zs-xpX">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="TR1-q1-e9z">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="qtk-l6-m64" secondAttribute="trailing" id="0DS-9Y-P2J"/>
                             <constraint firstItem="qtk-l6-m64" firstAttribute="leading" secondItem="xb9-dO-s5a" secondAttribute="leading" id="SHy-KL-E2u"/>
                             <constraint firstItem="qtk-l6-m64" firstAttribute="top" secondItem="Nje-ce-gXb" secondAttribute="bottom" id="c2G-sp-wZw"/>
+                            <constraint firstItem="UYM-cO-DJK" firstAttribute="top" secondItem="4ru-dS-q7R" secondAttribute="bottom" id="qPB-FJ-w0P"/>
+                            <constraint firstAttribute="trailing" secondItem="4ru-dS-q7R" secondAttribute="trailing" id="suT-2e-2Ij"/>
+                            <constraint firstItem="4ru-dS-q7R" firstAttribute="leading" secondItem="xb9-dO-s5a" secondAttribute="leading" id="uJn-Z4-mjS"/>
+                            <constraint firstItem="4ru-dS-q7R" firstAttribute="top" secondItem="qtk-l6-m64" secondAttribute="bottom" id="v3x-Gy-Jwz"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="iEX-q0-6tW"/>
@@ -98,10 +122,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bhx-SU-3V7">
-                                <rect key="frame" x="0.0" y="64" width="375" height="200"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="225"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tab-fK-dSz" customClass="YTPlayerView">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
@@ -111,11 +135,11 @@
                                     <constraint firstItem="tab-fK-dSz" firstAttribute="top" secondItem="Bhx-SU-3V7" secondAttribute="top" id="E51-vo-g5S"/>
                                     <constraint firstAttribute="bottom" secondItem="tab-fK-dSz" secondAttribute="bottom" id="SLu-ll-tch"/>
                                     <constraint firstItem="tab-fK-dSz" firstAttribute="leading" secondItem="Bhx-SU-3V7" secondAttribute="leading" id="cgr-a2-KCn"/>
-                                    <constraint firstAttribute="width" secondItem="Bhx-SU-3V7" secondAttribute="height" multiplier="15:8" id="pmw-7i-LXq"/>
+                                    <constraint firstAttribute="width" secondItem="Bhx-SU-3V7" secondAttribute="height" multiplier="15:8" constant="-46.875" id="pmw-7i-LXq"/>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y6P-hy-2oj">
-                                <rect key="frame" x="0.0" y="264" width="375" height="403"/>
+                                <rect key="frame" x="0.0" y="289" width="375" height="378"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lR7-hc-UVL">
                                         <rect key="frame" x="12" y="6" width="355" height="20"/>
@@ -138,7 +162,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="EvI-T8-6G4" secondAttribute="bottom" id="23G-5j-L4u"/>
+                                    <constraint firstAttribute="bottom" secondItem="EvI-T8-6G4" secondAttribute="bottom" constant="-25" id="23G-5j-L4u"/>
                                     <constraint firstItem="lR7-hc-UVL" firstAttribute="top" secondItem="y6P-hy-2oj" secondAttribute="top" constant="6" id="36N-M4-VXm"/>
                                     <constraint firstAttribute="trailing" secondItem="lR7-hc-UVL" secondAttribute="trailing" constant="8" id="clc-Zj-C6m"/>
                                     <constraint firstAttribute="trailing" secondItem="EvI-T8-6G4" secondAttribute="trailing" constant="8" id="cp1-9y-vCf"/>
