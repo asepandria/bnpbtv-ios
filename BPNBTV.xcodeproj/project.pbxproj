@@ -37,6 +37,9 @@
 		18F15EEA1EF051A900B82694 /* OrderedDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F15EE91EF051A900B82694 /* OrderedDict.swift */; };
 		18F742FE1EEEF5DB00CD6B40 /* MenuSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F742FD1EEEF5DB00CD6B40 /* MenuSection.swift */; };
 		18F743001EEF04FF00CD6B40 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F742FF1EEF04FF00CD6B40 /* StringExtension.swift */; };
+		18FC04D41EF81E500092A17E /* HeadlineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FC04D31EF81E500092A17E /* HeadlineModel.swift */; };
+		18FC04D61EF821A50092A17E /* RequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FC04D51EF821A50092A17E /* RequestHelper.swift */; };
+		18FC04D81EF822270092A17E /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FC04D71EF822270092A17E /* AlertHelper.swift */; };
 		C33FD525DF27B3541A82C729 /* Pods_BPNBTVUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C67F85601B29257AA22EC884 /* Pods_BPNBTVUITests.framework */; };
 		D86BAB7FB5E1D4FF752CC46F /* Pods_BPNBTV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B7CBB83C5D0561C30D05A27 /* Pods_BPNBTV.framework */; };
 		F4714396D4937D91A313B89F /* Pods_BPNBTVTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA45AA90FD08F107321FF848 /* Pods_BPNBTVTests.framework */; };
@@ -97,6 +100,9 @@
 		18F15EE91EF051A900B82694 /* OrderedDict.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderedDict.swift; sourceTree = "<group>"; };
 		18F742FD1EEEF5DB00CD6B40 /* MenuSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSection.swift; sourceTree = "<group>"; };
 		18F742FF1EEF04FF00CD6B40 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		18FC04D31EF81E500092A17E /* HeadlineModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadlineModel.swift; sourceTree = "<group>"; };
+		18FC04D51EF821A50092A17E /* RequestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestHelper.swift; sourceTree = "<group>"; };
+		18FC04D71EF822270092A17E /* AlertHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; };
 		69FDB2967FA54A5165787423 /* Pods-BPNBTVTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BPNBTVTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BPNBTVTests/Pods-BPNBTVTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6B7CBB83C5D0561C30D05A27 /* Pods_BPNBTV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BPNBTV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FB4287D56D72B6E150A5566 /* Pods-BPNBTVUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BPNBTVUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BPNBTVUITests/Pods-BPNBTVUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -142,6 +148,8 @@
 				062AA3B31E90B4A400B26F44 /* Constants.swift */,
 				182046A71E93241B0094D91C /* Serializer.swift */,
 				18F15EE91EF051A900B82694 /* OrderedDict.swift */,
+				18FC04D51EF821A50092A17E /* RequestHelper.swift */,
+				18FC04D71EF822270092A17E /* AlertHelper.swift */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -170,6 +178,7 @@
 				186604D51E9564E1002C2016 /* VideoModel.swift */,
 				18F742FD1EEEF5DB00CD6B40 /* MenuSection.swift */,
 				186320F51EF6984700ED4ED2 /* ProfileModel.swift */,
+				18FC04D31EF81E500092A17E /* HeadlineModel.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -610,6 +619,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18FC04D81EF822270092A17E /* AlertHelper.swift in Sources */,
 				186116F81EE84B9A0007871D /* NSObject.swift in Sources */,
 				186604D21E9535D7002C2016 /* BRouter.swift in Sources */,
 				185EB8801E95871200D7841F /* UIViewController.swift in Sources */,
@@ -620,6 +630,7 @@
 				185EB87E1E95847E00D7841F /* UIApplication.swift in Sources */,
 				067ADA001E7D13C90030C686 /* AppDelegate.swift in Sources */,
 				186604CE1E95282B002C2016 /* MenuModel.swift in Sources */,
+				18FC04D61EF821A50092A17E /* RequestHelper.swift in Sources */,
 				186604D61E9564E1002C2016 /* VideoModel.swift in Sources */,
 				189765D61E975D6900D05B48 /* MenuTVCell.swift in Sources */,
 				067ADA081E7D13CB0030C686 /* BPNBTV.xcdatamodeld in Sources */,
@@ -627,6 +638,7 @@
 				180865DE1EE9876900930FB5 /* NewMenuVCExtension.swift in Sources */,
 				182707DB1E9D5FA8000530E5 /* CollapsibleTableViewHeader.swift in Sources */,
 				1813F27B1EF5BA30004B2422 /* HomeViewController.swift in Sources */,
+				18FC04D41EF81E500092A17E /* HeadlineModel.swift in Sources */,
 				185EB8831E958A7800D7841F /* UIColor.swift in Sources */,
 				062AA3B41E90B4A400B26F44 /* Constants.swift in Sources */,
 				186320F61EF6984700ED4ED2 /* ProfileModel.swift in Sources */,

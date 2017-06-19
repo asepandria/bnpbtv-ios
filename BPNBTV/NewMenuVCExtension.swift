@@ -20,37 +20,28 @@ extension NewMenuVC:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "menuTVCell", for: indexPath) as! MenuTVCell
-        //cell.textLabel?.text  = sections[indexPath.section].items[indexPath.row].menu
         cell.menuLabel?.text = sections[indexPath.section].items[indexPath.row].menu
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        /*if let  mainMenu = menuItemsChild["main"]{
-            if (mainMenu[indexPath.row].parent ?? "") != "main"{
-                printLog(content:menuItemsChild[(mainMenu[indexPath.row].parent) ?? ""]!)
-            }else{
-                if let tempMenuComp = mainMenu[indexPath.row].menu{
-                    if let childArr = menuItemsChild[tempMenuComp.lowercased()]{
-                        if childArr.count > 0 {
-                            printLog(content:"EXPAND THE MENU --> TOGGLE")
-                        }
-                    }else{
-                        printLog(content:"MAIN MENU TAPPED")
-                    }
-                }
-            }
-        }*/
         DispatchQueue.main.async {[weak self] _ in
+            self?.resetHeaderFont()
+            let cell = tableView.cellForRow(at: indexPath) as! MenuTVCell
+            cell.menuLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 15.0)
+            self?.selectedMenuCell = (indexPath.section,indexPath.row)
+            //self?.printLog(content: "\(self?.selectedMenuCell)")
             if let menuSelected = self?.sections[indexPath.section].items[indexPath.row]{
                 self?.menuSelectedDelegate?.selectedMenu(menuName: menuSelected.menu)
             }
             self?.dismiss(animated: true, completion: nil)
         }
-        
-        
     }
     
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! MenuTVCell
+        cell.menuLabel.font = UIFont(name:"HelveticaNeue", size: 16.0)
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return sections[indexPath.section].collapsed! ? 0 : 44
@@ -61,6 +52,7 @@ extension NewMenuVC:UITableViewDelegate,UITableViewDataSource{
         cell.preservesSuperviewLayoutMargins = false
         cell.layoutMargins = UIEdgeInsets.zero
         cell.selectionStyle = UITableViewCellSelectionStyle.none
+        (cell as! MenuTVCell).menuLabel.font = UIFont(name:"HelveticaNeue", size: 16.0)
         if indexPath.section % 2 == 0{
             cell.contentView.backgroundColor = UIColor.navigationBarColor()
         }else{
@@ -77,9 +69,13 @@ extension NewMenuVC:UITableViewDelegate,UITableViewDataSource{
             headerTB?.arrowImage.isHidden = false
         }
         headerTB?.titleLabel.text = sections[section].name.firstCharToUpper()
+        headerTB?.titleLabel.font = UIFont(name:"HelveticaNeue", size: 17.0)
         headerTB?.setCollapsed(collapsed: sections[section].collapsed)
         headerTB?.section = section
         headerTB?.delegate = self
+        if !headers.contains(where: {$0.titleLabel.text == sections[section].name.firstCharToUpper()}){
+            headers.append(headerTB!)
+        }
         return headerTB!
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -107,7 +103,6 @@ extension NewMenuVC:CollapsibleTableViewHeaderDelegate{
             menuTable.reloadRows(at: [IndexPath(row: i, section: section)], with: UITableViewRowAnimation.automatic)
         }
         
-        
         let numberOfRows = menuTable.numberOfRows(inSection: section)
         if numberOfRows > 0{
             if let indexPath = IndexPath(row: numberOfRows - 1, section: section) as IndexPath?{
@@ -116,13 +111,31 @@ extension NewMenuVC:CollapsibleTableViewHeaderDelegate{
         }else{
             //THIS Main Menu Then, do something about it
             DispatchQueue.main.async {[weak self] _ in
+                self?.resetHeaderFont()
+                header.titleLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 17.0)
                 self?.menuSelectedDelegate?.selectedMenu(menuName:(self?.sections[section].name)!)
                 self?.dismiss(animated: true, completion: nil)
+                guard let _self = self else{return}
+                guard let _selectedMenuCell = _self.selectedMenuCell else{return}
+                if let indexPath = IndexPath(row: _selectedMenuCell.1, section: _selectedMenuCell.0) as IndexPath?{
+                    //self?.printLog(content: _selectedMenuCell)
+                    //self?.printLog(content: "INdexpath : \(indexPath)")
+                    if let cell = _self.menuTable.cellForRow(at: indexPath) as! MenuTVCell?{
+                        cell.menuLabel.font = UIFont(name:"HelveticaNeue", size: 16.0)
+                    }
+                }
+                
             }
             
             
         }
-        
-        
+    }
+    
+    func resetHeaderFont(){
+        if headers.count <= 0 {return}
+        for header in headers{
+            header.titleLabel.font = UIFont(name:"HelveticaNeue", size: 17.0)
+            header.setNeedsLayout()
+        }
     }
 }

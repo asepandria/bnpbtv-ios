@@ -22,17 +22,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="HOME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qdv-UK-knE">
-                                <rect key="frame" x="8" y="75" width="151" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qtk-l6-m64">
+                                <rect key="frame" x="0.0" y="64" width="375" height="200"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T2J-xt-ytw" customClass="YTPlayerView">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="qtk-l6-m64" secondAttribute="height" multiplier="15:8" id="2hY-J2-F3J"/>
+                                    <constraint firstAttribute="trailing" secondItem="T2J-xt-ytw" secondAttribute="trailing" id="hGs-06-Osh"/>
+                                    <constraint firstAttribute="bottom" secondItem="T2J-xt-ytw" secondAttribute="bottom" id="tOY-Dd-Wg1"/>
+                                    <constraint firstItem="T2J-xt-ytw" firstAttribute="leading" secondItem="qtk-l6-m64" secondAttribute="leading" id="xag-VG-4J8"/>
+                                    <constraint firstItem="T2J-xt-ytw" firstAttribute="top" secondItem="qtk-l6-m64" secondAttribute="top" id="zBG-zl-raU"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="qtk-l6-m64" secondAttribute="trailing" id="0DS-9Y-P2J"/>
+                            <constraint firstItem="qtk-l6-m64" firstAttribute="leading" secondItem="xb9-dO-s5a" secondAttribute="leading" id="SHy-KL-E2u"/>
+                            <constraint firstItem="qtk-l6-m64" firstAttribute="top" secondItem="Nje-ce-gXb" secondAttribute="bottom" id="c2G-sp-wZw"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="iEX-q0-6tW"/>
+                    <connections>
+                        <outlet property="playerView" destination="T2J-xt-ytw" id="Svc-CX-0v7"/>
+                        <outlet property="videoContainer" destination="qtk-l6-m64" id="dUJ-fj-7w1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eSw-Ys-Y7G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

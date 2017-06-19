@@ -23,6 +23,9 @@ class NewMenuVC: UIViewController {
     @IBOutlet weak var menuTable: UITableView!
     @IBOutlet weak var searchTF: UITextField!
     
+    
+    var headers = [CollapsibleTableViewHeader]()
+    var selectedMenuCell:(Int,Int)!
     override func viewDidLoad() {
         super.viewDidLoad()
         setMenuData()
@@ -141,11 +144,11 @@ class NewMenuVC: UIViewController {
     }
     
     func requestMenu(){
-        Constants.requestAndUpdateMainMenu(callback: {[weak self] (isSuccess,reason) in
+        RequestHelper.requestAndUpdateMainMenu(callback: {[weak self] (isSuccess,reason) in
             if isSuccess{
                 self?.setMenuData()
             }else{
-                Constants.showErrorAlert(message: reason ?? "")
+                AlertHelper.showErrorAlert(message: reason ?? "")
             }
         })
     }

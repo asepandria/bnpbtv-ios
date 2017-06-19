@@ -14,15 +14,8 @@ class ProfileViewController: UIViewController,YTPlayerViewDelegate {
     @IBOutlet weak var videoContainer: UIView!
     @IBOutlet weak var youtubePlayer: YTPlayerView!
     
-    //let playerVars = ["playsinline":1]
-    let playerVars = ["enablejsapi":1,
-                      "autoplay":1,
-                      "controls":1,
-                      "playsinline":1,
-                      "showinfo"       : 0,
-                      "rel"            : 0,
-                      //@"origin"         : @"https://www.example.com", // this is critical
-                    "modestbranding" : 1]
+
+
     
     
     
@@ -36,7 +29,7 @@ class ProfileViewController: UIViewController,YTPlayerViewDelegate {
         super.viewDidLoad()
         if let _ = profileModel{
             if let videoId = profileModel.youtube{
-                youtubePlayer.load(withVideoId: videoId, playerVars: playerVars)
+                youtubePlayer.load(withVideoId: videoId, playerVars: Constants.playerVars)
                 //youtubePlayer.webView?.frame = videoContainer.frame
                 youtubePlayer.webView?.bounds = videoContainer.bounds
                 youtubePlayer.webView?.scrollView.contentInset = UIEdgeInsets.zero

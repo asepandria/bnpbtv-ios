@@ -7,12 +7,15 @@
 //
 
 import UIKit
-
+import youtube_ios_player_helper
 class HomeViewController: UIViewController {
 
+    @IBOutlet weak var videoContainer: UIView!
+    @IBOutlet weak var playerView: YTPlayerView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        requestHeadline()
         // Do any additional setup after loading the view.
     }
 
@@ -21,15 +24,34 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func requestHeadline(){
+        RequestHelper.requestHeadlines(callback: {[weak self] (isSuccess,errorReason,headlineModels) in
+            DispatchQueue.main.async {
+                if isSuccess{
+                    if let _headlines = headlineModels?.headlines{
+                        if _headlines.count > 0{
+                            self?.playerView.load(withVideoId: _headlines.first?.youtube ?? "", playerVars: Constants.playerVars)
+                            self?.playerView.webView?.bounds = (self?.videoContainer.bounds)!
+                            self?.playerView.webView?.scrollView.contentInset = UIEdgeInsets.zero
+                            self?.playerView.playVideo()
+                        }
+                        
+                    }
+                }else{
+                    AlertHelper.showErrorAlert(message: errorReason ?? "")
+                }
+            }
+        })
     }
-    */
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        playerView?.webView?.scrollView.contentInset = UIEdgeInsets.zero
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        playerView?.stopVideo()
+    }
 
 }

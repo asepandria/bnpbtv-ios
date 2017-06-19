@@ -42,7 +42,7 @@ class ContainerViewController:UIViewController{
         SideMenuManager.menuFadeStatusBar = false
         SideMenuManager.menuPresentMode = SideMenuManager.MenuPresentMode.menuSlideIn
         
-        printLog(content: "test")
+        selectedMenu(menuName: "HOME")
     }
 
     override func didReceiveMemoryWarning() {
@@ -83,7 +83,7 @@ extension ContainerViewController:SideMenuToContainerDelegate{
         removeChildViewControllers()
         let contentStoryBoard = UIStoryboard(name: "Content", bundle: nil)
         if(menuName.lowercased() == MENU_CLASS.HOME.rawValue){
-            Constants.requestListBasedOnCategory(params: ["function":"video"], callback: {[weak self](isSuccess,reason,videoItems) in
+            RequestHelper.requestListBasedOnCategory(params: ["function":"video"], callback: {[weak self](isSuccess,reason,videoItems) in
                 DispatchQueue.main.async {
                     HUD.hide()
                     if isSuccess{
@@ -95,7 +95,7 @@ extension ContainerViewController:SideMenuToContainerDelegate{
                             homeVC.didMove(toParentViewController: _self)
                         }
                     }else{
-                        Constants.showErrorAlert(message: reason ?? "")
+                        AlertHelper.showErrorAlert(message: reason ?? "")
                     }
                     
                 }
@@ -104,7 +104,7 @@ extension ContainerViewController:SideMenuToContainerDelegate{
             
         }else if(menuName.lowercased() == MENU_CLASS.PROFILE.rawValue ||
             menuName.lowercased() == MENU_CLASS.PROFIL.rawValue){
-            Constants.requestProfile(callback: {[weak self](isSuccess,reason,profile) in
+            RequestHelper.requestProfile(callback: {[weak self](isSuccess,reason,profile) in
                 DispatchQueue.main.async {
                     HUD.hide()
                     if isSuccess{
@@ -118,7 +118,7 @@ extension ContainerViewController:SideMenuToContainerDelegate{
                             
                         }
                     }else{
-                        Constants.showErrorAlert(message: reason ?? "")
+                        AlertHelper.showErrorAlert(message: reason ?? "")
                     }
                     
                 }
@@ -126,7 +126,7 @@ extension ContainerViewController:SideMenuToContainerDelegate{
             
         }else{
             //this is collection
-            Constants.requestListBasedOnCategory(params: ["function":"video"], callback: {[weak self](isSuccess,reason,videoItems) in
+            RequestHelper.requestListBasedOnCategory(params: ["function":"video"], callback: {[weak self](isSuccess,reason,videoItems) in
                 DispatchQueue.main.async {
                     HUD.hide()
                     if isSuccess{
@@ -138,7 +138,7 @@ extension ContainerViewController:SideMenuToContainerDelegate{
                             collectionVC.didMove(toParentViewController: _self)
                         }
                     }else{
-                        Constants.showErrorAlert(message: reason ?? "")
+                        AlertHelper.showErrorAlert(message: reason ?? "")
                     }
                     
                 }
