@@ -19,7 +19,7 @@ extension NSObject{
         return mainScreen.bounds.width
     }
     
-    open func getScreenWHeight()->CGFloat{
+    open func getScreenHeight()->CGFloat{
         let mainScreen = UIScreen.main
         return mainScreen.bounds.height
     }

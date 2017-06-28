@@ -25,16 +25,16 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TItle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.65000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="HfZ-s3-eil">
-                        <rect key="frame" x="4" y="94" width="232" height="30"/>
+                        <rect key="frame" x="4" y="92" width="232" height="28"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="Q5m-h8-LXB"/>
+                            <constraint firstAttribute="height" constant="28" id="Q5m-h8-LXB"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12.5"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="UjJ-hy-NDQ">
-                        <rect key="frame" x="4" y="126" width="232" height="24"/>
+                        <rect key="frame" x="4" y="124" width="232" height="24"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -42,12 +42,12 @@
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="UjJ-hy-NDQ" firstAttribute="top" secondItem="HfZ-s3-eil" secondAttribute="bottom" constant="2" id="3Gz-44-tih"/>
-                <constraint firstAttribute="bottom" secondItem="UjJ-hy-NDQ" secondAttribute="bottom" id="MQL-sZ-Qv9"/>
+                <constraint firstItem="UjJ-hy-NDQ" firstAttribute="top" secondItem="HfZ-s3-eil" secondAttribute="bottom" constant="4" id="3Gz-44-tih"/>
+                <constraint firstAttribute="bottom" secondItem="UjJ-hy-NDQ" secondAttribute="bottom" constant="2" id="MQL-sZ-Qv9"/>
                 <constraint firstAttribute="trailing" secondItem="HfZ-s3-eil" secondAttribute="trailing" constant="4" id="ZUD-xz-bLj"/>
                 <constraint firstItem="NzB-4v-rqc" firstAttribute="leading" secondItem="2DA-0I-FZf" secondAttribute="leading" id="bs8-yA-327"/>
                 <constraint firstAttribute="trailing" secondItem="NzB-4v-rqc" secondAttribute="trailing" id="cK7-9e-m60"/>
-                <constraint firstItem="HfZ-s3-eil" firstAttribute="top" secondItem="NzB-4v-rqc" secondAttribute="bottom" constant="4" id="d7q-XF-5ew"/>
+                <constraint firstItem="HfZ-s3-eil" firstAttribute="top" secondItem="NzB-4v-rqc" secondAttribute="bottom" constant="2" id="d7q-XF-5ew"/>
                 <constraint firstItem="UjJ-hy-NDQ" firstAttribute="leading" secondItem="2DA-0I-FZf" secondAttribute="leading" constant="4" id="dcp-rk-ifL"/>
                 <constraint firstItem="HfZ-s3-eil" firstAttribute="leading" secondItem="2DA-0I-FZf" secondAttribute="leading" constant="4" id="hZq-Oe-RqI"/>
                 <constraint firstAttribute="trailing" secondItem="UjJ-hy-NDQ" secondAttribute="trailing" constant="4" id="mA9-JY-DUb"/>

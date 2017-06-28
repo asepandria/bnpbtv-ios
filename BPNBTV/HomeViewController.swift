@@ -33,15 +33,16 @@ class HomeViewController: UIViewController {
     
     func setCollectionView(){
         collectionLayout = UICollectionViewFlowLayout()
-        collectionLayout.sectionInset = UIEdgeInsets(top: 2, left: 4, bottom: 2, right: 4)
-        collectionLayout.itemSize = CGSize(width: (getScreenWidth() / 2) - 8, height: 150)
-        collectionLayout.minimumInteritemSpacing = 0
-        collectionLayout.minimumLineSpacing = 0
+        collectionLayout.sectionInset = UIEdgeInsets(top: 2, left: 4, bottom: 4, right: 4)
+        collectionLayout.itemSize = CGSize(width: (getScreenWidth() / 2) - 8, height: getScreenHeight()/3)
+        collectionLayout.minimumInteritemSpacing = -2
+        collectionLayout.minimumLineSpacing = 4
         //homeCollectionView.register(LeftCellCV.self, forCellWithReuseIdentifier: "LeftCellCV")
         homeCollectionView.register(UINib(nibName: "LeftCellCV", bundle: nil), forCellWithReuseIdentifier: "LeftCellCV")
         homeCollectionView?.collectionViewLayout = collectionLayout
         homeCollectionView?.delegate = self
         homeCollectionView?.dataSource = self
+        homeCollectionView?.showsVerticalScrollIndicator = false
     }
     
     func requestHeadline(){
@@ -69,7 +70,15 @@ class HomeViewController: UIViewController {
             DispatchQueue.main.async {
                 if let _videoItems = videoItems{
                     //self?.printLog(content: "Video Items Home : \(_videoItems)")
-                    self?.homeVideoItems = _videoItems
+                    if let _ = self!.homeVideoItems{
+                        for _v in _videoItems.videos{
+                            if !self!.homeVideoItems.videos.contains(where: {$0.idVideo == _v.idVideo}){
+                                self!.homeVideoItems.videos.append(_v)
+                            }
+                        }
+                    }else{
+                        self?.homeVideoItems = _videoItems
+                    }
                     self?.homeCollectionView.reloadData()
                 }
             }
@@ -90,20 +99,25 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource{
     func numberOfSections(in collectionView: UICollectionView) -> Int {
+//        if let _ = homeVideoItems{
+//            return homeVideoItems.videos.count
+//        }else{
+//            return 0
+//        }
+        return 1
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let _ = homeVideoItems{
-            return homeVideoItems.videos.count
+            return  homeVideoItems.videos.count
         }else{
             return 0
         }
     }
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       return  2
-    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LeftCellCV", for: indexPath) as! LeftCellCV
-        if indexPath.section == 0{
+        /*if indexPath.section == 0{
             video = homeVideoItems.videos[indexPath.row]
         }else{
             if indexPath.section % 2 == 0{
@@ -111,13 +125,13 @@ extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource
             }else{
                 currentIndex = (indexPath.section + 1) + (indexPath.row + 1)
             }
-            video = homeVideoItems.videos[indexPath.section]
-        }
+            
+        }*/
         
-        
+        video = homeVideoItems.videos[indexPath.row]
         cell.titleList?.text = video.judul
         if (video.description.characters.count > 50){
-            cell.contentList?.text = video.description.substring(to: video.description.index(video.description.startIndex, offsetBy: 50))
+            cell.contentList?.text = video.description.substring(to: video.description.index(video.description.startIndex, offsetBy: 50)) + "..."
         }else{
             cell.contentList?.text = video.description
         }
@@ -126,7 +140,7 @@ extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        cell.contentView.backgroundColor = UIColor.gray
+        cell.contentView.backgroundColor = UIColor.bnpbLightGrayColor()
     }
     
     /*func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

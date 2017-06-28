@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 struct VideoItems:ResponseObjectSerializable{
-    let videos:[Video]!
+    var videos:[Video]!
     init?(response: HTTPURLResponse, representation: Any) {
         if(response.statusCode == 200){
             guard let rep =  representation as? [String:Any] else{return nil}
