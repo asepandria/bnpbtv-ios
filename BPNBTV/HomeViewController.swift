@@ -16,6 +16,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         requestHeadline()
+        requestHomeVideo()
         // Do any additional setup after loading the view.
     }
 
@@ -39,6 +40,16 @@ class HomeViewController: UIViewController {
                     }
                 }else{
                     AlertHelper.showErrorAlert(message: errorReason ?? "")
+                }
+            }
+        })
+    }
+    
+    func requestHomeVideo(){
+        RequestHelper.requestListBasedOnCategory(params: ["function":"video","limit":"\(Constants.contentListLimit)"], callback: {[weak self](isSuccess,errorReason,videoItems) in
+            DispatchQueue.main.async {
+                if let _videoItems = videoItems{
+                    self?.printLog(content: "Video Items Home : \(_videoItems)")
                 }
             }
         })

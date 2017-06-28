@@ -13,12 +13,6 @@ class ProfileViewController: UIViewController,YTPlayerViewDelegate {
     
     @IBOutlet weak var videoContainer: UIView!
     @IBOutlet weak var youtubePlayer: YTPlayerView!
-    
-
-
-    
-    
-    
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var contentContainer: UIScrollView!
@@ -29,10 +23,12 @@ class ProfileViewController: UIViewController,YTPlayerViewDelegate {
         super.viewDidLoad()
         if let _ = profileModel{
             if let videoId = profileModel.youtube{
+                printLog(content: "VIDEO ID : \(videoId)")
                 youtubePlayer.load(withVideoId: videoId, playerVars: Constants.playerVars)
                 //youtubePlayer.webView?.frame = videoContainer.frame
                 youtubePlayer.webView?.bounds = videoContainer.bounds
                 youtubePlayer.webView?.scrollView.contentInset = UIEdgeInsets.zero
+                
                 youtubePlayer.playVideo()
             }
             contentTextView.text = profileModel.desc ?? ""
@@ -40,7 +36,7 @@ class ProfileViewController: UIViewController,YTPlayerViewDelegate {
             contentTextView.showsVerticalScrollIndicator = false
             contentTextView.showsHorizontalScrollIndicator = false
             contentTextView.isScrollEnabled = false
-            contentTextViewHeightConstraint.constant = contentTextView.sizeThatFits(CGSize(width: contentTextView.frame.width, height: CGFloat.greatestFiniteMagnitude)).height + 64
+            contentTextViewHeightConstraint.constant = contentTextView.sizeThatFits(CGSize(width: contentTextView.frame.width, height: CGFloat.greatestFiniteMagnitude)).height + 96
             titleLabel.text = profileModel.title ?? ""
             
             contentContainer.scrollsToTop = true

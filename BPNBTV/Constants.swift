@@ -13,6 +13,7 @@ class Constants{
     static let screenSize = UIScreen.main.bounds
     static let screenWidth = screenSize.width
     static let screenHeight = screenSize.height
+    static let contentListLimit = 10
     static let API_URL = "http://www.bnpbindonesia.tv/api/"
     static let playerVars = ["enablejsapi":1,
                       "autoplay":1,
