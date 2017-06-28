@@ -23,6 +23,9 @@
 		1813F2811EF5BBEB004B2422 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1813F2801EF5BBEB004B2422 /* ProfileViewController.swift */; };
 		182046A81E93241B0094D91C /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182046A71E93241B0094D91C /* Serializer.swift */; };
 		182707DB1E9D5FA8000530E5 /* CollapsibleTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182707DA1E9D5FA8000530E5 /* CollapsibleTableViewHeader.swift */; };
+		183F16A71F038B4900DDED4C /* LeftCellCV.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183F16A61F038B4900DDED4C /* LeftCellCV.xib */; };
+		183F16A91F038B5700DDED4C /* RightCellCV.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183F16A81F038B5700DDED4C /* RightCellCV.xib */; };
+		183F16AB1F038E7E00DDED4C /* LeftCellCV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183F16AA1F038E7E00DDED4C /* LeftCellCV.swift */; };
 		185EB87C1E957DEC00D7841F /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185EB87B1E957DEC00D7841F /* ContainerViewController.swift */; };
 		185EB87E1E95847E00D7841F /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185EB87D1E95847E00D7841F /* UIApplication.swift */; };
 		185EB8801E95871200D7841F /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185EB87F1E95871200D7841F /* UIViewController.swift */; };
@@ -85,6 +88,9 @@
 		1813F2801EF5BBEB004B2422 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		182046A71E93241B0094D91C /* Serializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializer.swift; sourceTree = "<group>"; };
 		182707DA1E9D5FA8000530E5 /* CollapsibleTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewHeader.swift; sourceTree = "<group>"; };
+		183F16A61F038B4900DDED4C /* LeftCellCV.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftCellCV.xib; sourceTree = "<group>"; };
+		183F16A81F038B5700DDED4C /* RightCellCV.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RightCellCV.xib; sourceTree = "<group>"; };
+		183F16AA1F038E7E00DDED4C /* LeftCellCV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftCellCV.swift; sourceTree = "<group>"; };
 		185EB87B1E957DEC00D7841F /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		185EB87D1E95847E00D7841F /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		185EB87F1E95871200D7841F /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
@@ -167,6 +173,9 @@
 			children = (
 				189765D51E975D6900D05B48 /* MenuTVCell.swift */,
 				182707DA1E9D5FA8000530E5 /* CollapsibleTableViewHeader.swift */,
+				183F16A61F038B4900DDED4C /* LeftCellCV.xib */,
+				183F16A81F038B5700DDED4C /* RightCellCV.xib */,
+				183F16AA1F038E7E00DDED4C /* LeftCellCV.swift */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -453,6 +462,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				067ADA0D1E7D13CC0030C686 /* LaunchScreen.storyboard in Resources */,
+				183F16A71F038B4900DDED4C /* LeftCellCV.xib in Resources */,
+				183F16A91F038B5700DDED4C /* RightCellCV.xib in Resources */,
 				067ADA0A1E7D13CB0030C686 /* Assets.xcassets in Resources */,
 				189765D41E975CFE00D05B48 /* MenuTVCell.xib in Resources */,
 				067ADA051E7D13CA0030C686 /* Main.storyboard in Resources */,
@@ -631,6 +642,7 @@
 				067ADA001E7D13C90030C686 /* AppDelegate.swift in Sources */,
 				186604CE1E95282B002C2016 /* MenuModel.swift in Sources */,
 				18FC04D61EF821A50092A17E /* RequestHelper.swift in Sources */,
+				183F16AB1F038E7E00DDED4C /* LeftCellCV.swift in Sources */,
 				186604D61E9564E1002C2016 /* VideoModel.swift in Sources */,
 				189765D61E975D6900D05B48 /* MenuTVCell.swift in Sources */,
 				067ADA081E7D13CB0030C686 /* BPNBTV.xcdatamodeld in Sources */,

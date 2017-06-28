@@ -8,13 +8,19 @@
 
 import UIKit
 import youtube_ios_player_helper
+import Kingfisher
 class HomeViewController: UIViewController {
 
     @IBOutlet weak var videoContainer: UIView!
     @IBOutlet weak var playerView: YTPlayerView!
-    
+    @IBOutlet weak var homeCollectionView: UICollectionView!
+    var homeVideoItems:VideoItems!
+    var video:Video!
+    var collectionLayout:UICollectionViewFlowLayout!
+    var currentIndex = 0
     override func viewDidLoad() {
         super.viewDidLoad()
+        setCollectionView()
         requestHeadline()
         requestHomeVideo()
         // Do any additional setup after loading the view.
@@ -23,6 +29,19 @@ class HomeViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func setCollectionView(){
+        collectionLayout = UICollectionViewFlowLayout()
+        collectionLayout.sectionInset = UIEdgeInsets(top: 2, left: 4, bottom: 2, right: 4)
+        collectionLayout.itemSize = CGSize(width: (getScreenWidth() / 2) - 8, height: 150)
+        collectionLayout.minimumInteritemSpacing = 0
+        collectionLayout.minimumLineSpacing = 0
+        //homeCollectionView.register(LeftCellCV.self, forCellWithReuseIdentifier: "LeftCellCV")
+        homeCollectionView.register(UINib(nibName: "LeftCellCV", bundle: nil), forCellWithReuseIdentifier: "LeftCellCV")
+        homeCollectionView?.collectionViewLayout = collectionLayout
+        homeCollectionView?.delegate = self
+        homeCollectionView?.dataSource = self
     }
     
     func requestHeadline(){
@@ -49,7 +68,9 @@ class HomeViewController: UIViewController {
         RequestHelper.requestListBasedOnCategory(params: ["function":"video","limit":"\(Constants.contentListLimit)"], callback: {[weak self](isSuccess,errorReason,videoItems) in
             DispatchQueue.main.async {
                 if let _videoItems = videoItems{
-                    self?.printLog(content: "Video Items Home : \(_videoItems)")
+                    //self?.printLog(content: "Video Items Home : \(_videoItems)")
+                    self?.homeVideoItems = _videoItems
+                    self?.homeCollectionView.reloadData()
                 }
             }
         })
@@ -65,4 +86,63 @@ class HomeViewController: UIViewController {
         playerView?.stopVideo()
     }
 
+}
+
+extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource{
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        if let _ = homeVideoItems{
+            return homeVideoItems.videos.count
+        }else{
+            return 0
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+       return  2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LeftCellCV", for: indexPath) as! LeftCellCV
+        if indexPath.section == 0{
+            video = homeVideoItems.videos[indexPath.row]
+        }else{
+            if indexPath.section % 2 == 0{
+                currentIndex = (indexPath.section + 1) + (indexPath.row)
+            }else{
+                currentIndex = (indexPath.section + 1) + (indexPath.row + 1)
+            }
+            video = homeVideoItems.videos[indexPath.section]
+        }
+        
+        
+        cell.titleList?.text = video.judul
+        if (video.description.characters.count > 50){
+            cell.contentList?.text = video.description.substring(to: video.description.index(video.description.startIndex, offsetBy: 50))
+        }else{
+            cell.contentList?.text = video.description
+        }
+        cell.imageList?.kf.setImage(with: URL(string: video.imageUrl ?? ""))
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        cell.contentView.backgroundColor = UIColor.gray
+    }
+    
+    /*func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: ((getScreenWidth() / 2) - 10)   , height: 100)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }*/
+    
 }
