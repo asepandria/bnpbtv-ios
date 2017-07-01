@@ -10,11 +10,17 @@ import Foundation
 import SwiftyJSON
 struct VideoItems:ResponseObjectSerializable{
     var videos:[Video]!
+    var totalPage:Int!
+    var currentPage:Int!
+    var limit:Int!
     init?(response: HTTPURLResponse, representation: Any) {
         if(response.statusCode == 200){
             guard let rep =  representation as? [String:Any] else{return nil}
             guard let jsonObject =  JSON(rep) as JSON? else{return nil}
             let _temp = jsonObject["video"].arrayValue
+            totalPage = jsonObject["total_page"].intValue
+            currentPage = jsonObject["current_page"].intValue
+            limit = jsonObject["limit"].intValue
             if(_temp.count == 0){
                 return nil
             }

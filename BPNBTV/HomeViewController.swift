@@ -18,6 +18,10 @@ class HomeViewController: UIViewController {
     var video:Video!
     var collectionLayout:UICollectionViewFlowLayout!
     var currentIndex = 0
+    var totalHomeVideo = 0
+    var currentPage = 1
+    var totalPage = 0
+    var totalLimitVideos = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         setCollectionView()
@@ -61,7 +65,7 @@ class HomeViewController: UIViewController {
         })
     }
     
-    func requestHomeVideo(params:[String:String] = ["function":"video","limit":"\(Constants.contentListLimit)"]){
+    func requestHomeVideo(params:[String:String] = ["function":"video","page":"\(1)"]){
         RequestHelper.requestListBasedOnCategory(params:params , callback: {[weak self](isSuccess,errorReason,videoItems) in
             DispatchQueue.main.async {
                 if let _videoItems = videoItems{
@@ -77,6 +81,9 @@ class HomeViewController: UIViewController {
                     }else{
                         self?.homeVideoItems = _videoItems
                     }
+                    self?.totalHomeVideo = (self?.homeVideoItems.videos.count) ?? 0
+                    self?.totalPage = (self?.homeVideoItems.totalPage) ?? 0
+                    self?.totalLimitVideos = (self?.homeVideoItems.limit) ?? 0
                     self?.homeCollectionView.reloadData()
                 }
             }
@@ -102,7 +109,7 @@ extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let _ = homeVideoItems{
-            return  homeVideoItems.videos.count
+            return totalHomeVideo
         }else{
             return 0
         }
@@ -147,8 +154,10 @@ extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         cell.contentView.backgroundColor = UIColor.bnpbLightGrayColor()
-        if(indexPath.row == homeVideoItems.videos.count - 1){
+        if(indexPath.row == homeVideoItems.videos.count - 1 && totalHomeVideo < totalLimitVideos){
             printLog(content: "Load More API...")
+            currentPage += 1
+            requestHomeVideo(params: ["function":"video","page":"\(currentPage)"])
         }
     }
     
@@ -184,7 +193,9 @@ extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        printLog(content: "SELECTED AT : \(indexPath.row)")
+        let storyBoard = UIStoryboard(name: "Content", bundle: nil)
+        let detailVC = storyBoard.instantiateViewController(withIdentifier: "DetailContentViewController") as! DetailContentViewController
+        self.navigationController?.pushViewController(detailVC, animated: true)
     }
     
     private func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {

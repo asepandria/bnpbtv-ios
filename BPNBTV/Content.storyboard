@@ -82,10 +82,10 @@
             </objects>
             <point key="canvasLocation" x="972" y="94.902548725637189"/>
         </scene>
-        <!--View Controller-->
+        <!--Detail Content View Controller-->
         <scene sceneID="Vbd-gX-QaC">
             <objects>
-                <viewController id="Jb2-zC-3O3" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailContentViewController" id="Jb2-zC-3O3" customClass="DetailContentViewController" customModule="BPNBTV" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GkW-QL-8k3"/>
                         <viewControllerLayoutGuide type="bottom" id="5vy-0K-9K4"/>
@@ -93,12 +93,29 @@
                     <view key="view" contentMode="scaleToFill" id="jRL-fK-ho1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Detail Content" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HQK-d0-31B">
+                                <rect key="frame" x="16" y="72" width="227" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="9Qd-ER-W0x">
+                        <barButtonItem key="leftBarButtonItem" image="icon_back" id="rrO-DL-aO5">
+                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="backAction:" destination="Jb2-zC-3O3" id="O8a-BO-vsg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AfR-Tu-Rcc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="990" y="782"/>
+            <point key="canvasLocation" x="972" y="780.35982008995506"/>
         </scene>
         <!--Collection View Controller-->
         <scene sceneID="eFP-tP-sPh">
@@ -271,5 +288,26 @@
             </objects>
             <point key="canvasLocation" x="3484" y="94.902548725637189"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Dj6-gb-xUe">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DnE-YL-z19" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="36g-0e-crv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Jb2-zC-3O3" kind="relationship" relationship="rootViewController" id="swG-tX-8KT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HcA-6W-Ppy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="33" y="781"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="icon_back" width="11" height="18"/>
+    </resources>
 </document>
