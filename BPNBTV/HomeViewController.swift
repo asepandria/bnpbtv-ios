@@ -22,6 +22,8 @@ class HomeViewController: UIViewController {
     var currentPage = 1
     var totalPage = 0
     var totalLimitVideos = 0
+    var progressIndicator: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setCollectionView()
@@ -36,13 +38,14 @@ class HomeViewController: UIViewController {
     }
     
     func setCollectionView(){
+        progressIndicator = UIActivityIndicatorView()
         homeCollectionView.register(UINib(nibName: "LeftCellCV", bundle: nil), forCellWithReuseIdentifier: "LeftCellCV")
         homeCollectionView.register(UINib(nibName: "RightCellCV", bundle: nil), forCellWithReuseIdentifier: "RightCellCV")
         homeCollectionView?.delegate = self
         homeCollectionView?.dataSource = self
         homeCollectionView?.showsVerticalScrollIndicator = false
         
-        homeCollectionView.register(CollectionFooterIndicator.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "FooterIndicator")
+        /*homeCollectionView.register(CollectionFooterIndicator.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "FooterIndicator")*/
     }
     
     func requestHeadline(){
@@ -68,6 +71,7 @@ class HomeViewController: UIViewController {
     func requestHomeVideo(params:[String:String] = ["function":"video","page":"\(1)"]){
         RequestHelper.requestListBasedOnCategory(params:params , callback: {[weak self](isSuccess,errorReason,videoItems) in
             DispatchQueue.main.async {
+                
                 if let _videoItems = videoItems{
                     //self?.printLog(content: "Video Items Home : \(_videoItems)")
                     if let _ = self?.homeVideoItems{
@@ -85,6 +89,7 @@ class HomeViewController: UIViewController {
                     self?.totalPage = (self?.homeVideoItems.totalPage) ?? 0
                     self?.totalLimitVideos = (self?.homeVideoItems.limit) ?? 0
                     self?.homeCollectionView.reloadData()
+                    
                 }
             }
         })
@@ -154,6 +159,8 @@ extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         cell.contentView.backgroundColor = UIColor.bnpbLightGrayColor()
+        progressIndicator?.stopAnimating()
+        progressIndicator?.removeFromSuperview()
         if(indexPath.row == homeVideoItems.videos.count - 1 && totalHomeVideo < totalLimitVideos){
             printLog(content: "Load More API...")
             currentPage += 1
@@ -198,17 +205,21 @@ extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
     
-    private func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-        
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return CGSize(width: getScreenWidth(), height: 30)
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionElementKindSectionFooter:
             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "FooterIndicator", for: indexPath as IndexPath)
             footerView.backgroundColor = UIColor.white
-            let progressIndicator = UIActivityIndicatorView()
             progressIndicator.startAnimating()
+            progressIndicator.frame = CGRect(x:(getScreenWidth()/2)-10,y:5,width:20,height:20)
             progressIndicator.color = UIColor.gray
+            footerView.addSubview(progressIndicator)
             return footerView
-            
         default:
             assert(false, "Unexpected element kind")
         }
