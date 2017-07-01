@@ -32,17 +32,13 @@ class HomeViewController: UIViewController {
     }
     
     func setCollectionView(){
-        collectionLayout = UICollectionViewFlowLayout()
-        collectionLayout.sectionInset = UIEdgeInsets(top: 2, left: 4, bottom: 4, right: 4)
-        collectionLayout.itemSize = CGSize(width: (getScreenWidth() / 2) - 8, height: getScreenHeight()/3)
-        collectionLayout.minimumInteritemSpacing = -2
-        collectionLayout.minimumLineSpacing = 4
-        //homeCollectionView.register(LeftCellCV.self, forCellWithReuseIdentifier: "LeftCellCV")
         homeCollectionView.register(UINib(nibName: "LeftCellCV", bundle: nil), forCellWithReuseIdentifier: "LeftCellCV")
-        homeCollectionView?.collectionViewLayout = collectionLayout
+        homeCollectionView.register(UINib(nibName: "RightCellCV", bundle: nil), forCellWithReuseIdentifier: "RightCellCV")
         homeCollectionView?.delegate = self
         homeCollectionView?.dataSource = self
         homeCollectionView?.showsVerticalScrollIndicator = false
+        
+        homeCollectionView.register(CollectionFooterIndicator.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "FooterIndicator")
     }
     
     func requestHeadline(){
@@ -65,15 +61,17 @@ class HomeViewController: UIViewController {
         })
     }
     
-    func requestHomeVideo(){
-        RequestHelper.requestListBasedOnCategory(params: ["function":"video","limit":"\(Constants.contentListLimit)"], callback: {[weak self](isSuccess,errorReason,videoItems) in
+    func requestHomeVideo(params:[String:String] = ["function":"video","limit":"\(Constants.contentListLimit)"]){
+        RequestHelper.requestListBasedOnCategory(params:params , callback: {[weak self](isSuccess,errorReason,videoItems) in
             DispatchQueue.main.async {
                 if let _videoItems = videoItems{
                     //self?.printLog(content: "Video Items Home : \(_videoItems)")
-                    if let _ = self!.homeVideoItems{
+                    if let _ = self?.homeVideoItems{
                         for _v in _videoItems.videos{
-                            if !self!.homeVideoItems.videos.contains(where: {$0.idVideo == _v.idVideo}){
-                                self!.homeVideoItems.videos.append(_v)
+                            if let checkerIf = self?.homeVideoItems.videos.contains(where: {$0.idVideo == _v.idVideo}){
+                                if !checkerIf{
+                                    self?.homeVideoItems.videos.append(_v)
+                                }
                             }
                         }
                     }else{
@@ -97,13 +95,8 @@ class HomeViewController: UIViewController {
 
 }
 
-extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource{
+extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-//        if let _ = homeVideoItems{
-//            return homeVideoItems.videos.count
-//        }else{
-//            return 0
-//        }
         return 1
     }
 
@@ -116,47 +109,97 @@ extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LeftCellCV", for: indexPath) as! LeftCellCV
-        /*if indexPath.section == 0{
-            video = homeVideoItems.videos[indexPath.row]
-        }else{
-            if indexPath.section % 2 == 0{
-                currentIndex = (indexPath.section + 1) + (indexPath.row)
+        video = homeVideoItems.videos[indexPath.row]
+        if(indexPath.row % 2 == 0){
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LeftCellCV", for: indexPath) as! LeftCellCV
+            cell.titleList?.text = video.judulEN
+            if (video.summaryEN.characters.count > 100){
+                cell.contentList?.text = video.summaryEN.substring(to: video.summaryEN.index(video.summaryEN.startIndex, offsetBy: 100)) + "..."
             }else{
-                currentIndex = (indexPath.section + 1) + (indexPath.row + 1)
+                cell.contentList?.text = video.summaryEN
+            }
+            cell.imageList?.kf.setImage(with: URL(string: video.imageUrl ?? ""))
+            return cell
+        }else{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RightCellCV", for: indexPath) as! RightCellCV
+            cell.position = indexPath.row - 1
+            //printLog(content: "\(cell.position)")
+            cell.titleList.text = video.judulEN
+            if (video.summaryEN.characters.count > 140){
+                cell.summaryList?.text = video.summaryEN.substring(to: video.summaryEN.index(video.summaryEN.startIndex, offsetBy: 140)) + "..."
+            }else{
+                cell.summaryList?.text = video.summaryEN
+            }
+            //cell.summaryList.text = video.summary
+            DispatchQueue.main.async {[weak self] in
+                cell.summaryList.frame.size.width = (((self?.getScreenWidth())! / 2) - 16)
+                cell.titleList.frame.size.width = (((self?.getScreenWidth())! / 2) - 10)
+                cell.titleList.setNeedsDisplay()
+                cell.titleList.setNeedsLayout()
+                cell.summaryList.setNeedsDisplay()
+                cell.summaryList.setNeedsLayout()
             }
             
-        }*/
-        
-        video = homeVideoItems.videos[indexPath.row]
-        cell.titleList?.text = video.judul
-        if (video.description.characters.count > 50){
-            cell.contentList?.text = video.description.substring(to: video.description.index(video.description.startIndex, offsetBy: 50)) + "..."
-        }else{
-            cell.contentList?.text = video.description
+            return cell
         }
-        cell.imageList?.kf.setImage(with: URL(string: video.imageUrl ?? ""))
-        return cell
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         cell.contentView.backgroundColor = UIColor.bnpbLightGrayColor()
+        if(indexPath.row == homeVideoItems.videos.count - 1){
+            printLog(content: "Load More API...")
+        }
     }
     
-    /*func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: ((getScreenWidth() / 2) - 10)   , height: 100)
+    
+    
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if indexPath.row % 2 == 0{
+            return CGSize(width: ((getScreenWidth() / 2) - 8)   , height: 180)
+        }else{
+            return CGSize(width: ((getScreenWidth() / 2) - 8)  , height: 180)
+        }
+        
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+        return UIEdgeInsets(top: 2, left: 4, bottom: 4, right: 4)
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }*/
+        return 4
+    }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        printLog(content: "SELECTED AT : \(indexPath.row)")
+    }
+    
+    private func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        
+        switch kind {
+        case UICollectionElementKindSectionFooter:
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "FooterIndicator", for: indexPath as IndexPath)
+            footerView.backgroundColor = UIColor.white
+            let progressIndicator = UIActivityIndicatorView()
+            progressIndicator.startAnimating()
+            progressIndicator.color = UIColor.gray
+            return footerView
+            
+        default:
+            assert(false, "Unexpected element kind")
+        }
+    }
 }

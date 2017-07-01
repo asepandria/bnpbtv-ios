@@ -26,7 +26,8 @@ struct VideoItems:ResponseObjectSerializable{
                                     judulEN: value["judul_EN"].stringValue, tanggal: value["tanggal"].stringValue,
                                     imageUrl: value["image"].stringValue, videoUrl: value["video"].stringValue,
                                     youtube: value["youtube"].stringValue, description: value["description"].stringValue,
-                                    descriptionEN: value["description_EN"].stringValue, aktivasi: value["aktivasi"].stringValue))
+                                    descriptionEN: value["description_EN"].stringValue, aktivasi: value["aktivasi"].stringValue,summary:value["summary"].stringValue,
+                                    summaryEN:value["summary_EN"].stringValue))
             }
             videos = _tempVideos
         }else{
@@ -47,6 +48,8 @@ struct Video:ResponseObjectSerializable {
     let youtube:String!
     let description:String!
     let descriptionEN:String!
+    let summary:String!
+    let summaryEN:String!
     let aktivasi:String!
     
     init?(response: HTTPURLResponse, representation: Any) {
@@ -65,12 +68,14 @@ struct Video:ResponseObjectSerializable {
         self.description = rep["description"] as? String
         self.descriptionEN = rep["description_EN"] as? String
         self.aktivasi = rep["aktivasi"] as? String
+        self.summary = rep["summary"] as? String
+        self.summaryEN = rep["summary_EN"] as? String
     }
     
     init(id:String="",idVideo:String="",category:String="",
          judul:String="",judulEN:String="",tanggal:String="",imageUrl:String="",
          videoUrl:String="",youtube:String="",description:String="",descriptionEN:String="",
-         aktivasi:String="") {
+         aktivasi:String="",summary:String="",summaryEN:String="") {
         self.id = id
         self.idVideo = idVideo
         self.category = category
@@ -83,6 +88,8 @@ struct Video:ResponseObjectSerializable {
         self.description = description
         self.descriptionEN = descriptionEN
         self.aktivasi = aktivasi
+        self.summary = summary
+        self.summaryEN = summaryEN
     }
 }
 

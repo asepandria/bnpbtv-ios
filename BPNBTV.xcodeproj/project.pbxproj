@@ -37,6 +37,10 @@
 		186604D61E9564E1002C2016 /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186604D51E9564E1002C2016 /* VideoModel.swift */; };
 		189765D41E975CFE00D05B48 /* MenuTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189765D31E975CFE00D05B48 /* MenuTVCell.xib */; };
 		189765D61E975D6900D05B48 /* MenuTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189765D51E975D6900D05B48 /* MenuTVCell.swift */; };
+		18E0683F1F06479600277353 /* RightCellCV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E0683E1F06479600277353 /* RightCellCV.swift */; };
+		18E068411F07164600277353 /* ColletionFooterIndicator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E068401F07164600277353 /* ColletionFooterIndicator.xib */; };
+		18E068431F0716B200277353 /* CollectionFooterIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E068421F0716B200277353 /* CollectionFooterIndicator.swift */; };
+		18E068451F07225200277353 /* DetailContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E068441F07225200277353 /* DetailContentViewController.swift */; };
 		18F15EEA1EF051A900B82694 /* OrderedDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F15EE91EF051A900B82694 /* OrderedDict.swift */; };
 		18F742FE1EEEF5DB00CD6B40 /* MenuSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F742FD1EEEF5DB00CD6B40 /* MenuSection.swift */; };
 		18F743001EEF04FF00CD6B40 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F742FF1EEF04FF00CD6B40 /* StringExtension.swift */; };
@@ -103,6 +107,10 @@
 		189765D31E975CFE00D05B48 /* MenuTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuTVCell.xib; sourceTree = "<group>"; };
 		189765D51E975D6900D05B48 /* MenuTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTVCell.swift; sourceTree = "<group>"; };
 		18CB59D91EF6A8BC00AD6D9D /* BPNBTV-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BPNBTV-Bridging-Header.h"; sourceTree = "<group>"; };
+		18E0683E1F06479600277353 /* RightCellCV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightCellCV.swift; sourceTree = "<group>"; };
+		18E068401F07164600277353 /* ColletionFooterIndicator.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ColletionFooterIndicator.xib; sourceTree = "<group>"; };
+		18E068421F0716B200277353 /* CollectionFooterIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionFooterIndicator.swift; sourceTree = "<group>"; };
+		18E068441F07225200277353 /* DetailContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailContentViewController.swift; sourceTree = "<group>"; };
 		18F15EE91EF051A900B82694 /* OrderedDict.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderedDict.swift; sourceTree = "<group>"; };
 		18F742FD1EEEF5DB00CD6B40 /* MenuSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSection.swift; sourceTree = "<group>"; };
 		18F742FF1EEF04FF00CD6B40 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
@@ -176,6 +184,9 @@
 				183F16A61F038B4900DDED4C /* LeftCellCV.xib */,
 				183F16A81F038B5700DDED4C /* RightCellCV.xib */,
 				183F16AA1F038E7E00DDED4C /* LeftCellCV.swift */,
+				18E0683E1F06479600277353 /* RightCellCV.swift */,
+				18E068401F07164600277353 /* ColletionFooterIndicator.xib */,
+				18E068421F0716B200277353 /* CollectionFooterIndicator.swift */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -295,6 +306,7 @@
 				1813F27C1EF5BB36004B2422 /* Content.storyboard */,
 				1813F27E1EF5BB76004B2422 /* CollectionViewController.swift */,
 				1813F2801EF5BBEB004B2422 /* ProfileViewController.swift */,
+				18E068441F07225200277353 /* DetailContentViewController.swift */,
 			);
 			name = content;
 			sourceTree = "<group>";
@@ -463,6 +475,7 @@
 			files = (
 				067ADA0D1E7D13CC0030C686 /* LaunchScreen.storyboard in Resources */,
 				183F16A71F038B4900DDED4C /* LeftCellCV.xib in Resources */,
+				18E068411F07164600277353 /* ColletionFooterIndicator.xib in Resources */,
 				183F16A91F038B5700DDED4C /* RightCellCV.xib in Resources */,
 				067ADA0A1E7D13CB0030C686 /* Assets.xcassets in Resources */,
 				189765D41E975CFE00D05B48 /* MenuTVCell.xib in Resources */,
@@ -633,7 +646,10 @@
 				18FC04D81EF822270092A17E /* AlertHelper.swift in Sources */,
 				186116F81EE84B9A0007871D /* NSObject.swift in Sources */,
 				186604D21E9535D7002C2016 /* BRouter.swift in Sources */,
+				18E0683F1F06479600277353 /* RightCellCV.swift in Sources */,
 				185EB8801E95871200D7841F /* UIViewController.swift in Sources */,
+				18E068451F07225200277353 /* DetailContentViewController.swift in Sources */,
+				18E068431F0716B200277353 /* CollectionFooterIndicator.swift in Sources */,
 				180865D91EE9857200930FB5 /* NewMenuVC.swift in Sources */,
 				185EB87C1E957DEC00D7841F /* ContainerViewController.swift in Sources */,
 				18F15EEA1EF051A900B82694 /* OrderedDict.swift in Sources */,

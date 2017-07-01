@@ -22,6 +22,10 @@ extension UIColor{
     }
     
     class func bnpbOrangeColor() -> UIColor{
+        return UIColor(red: 1.0, green: 0.56078431372549, blue: 0.0, alpha: 1.0)
+    }
+    
+    class func bnpbDarkOrangeColor()->UIColor{
         return UIColor(red: 0.933333333333333, green: 0.513725490196078, blue: 0.0, alpha: 1.0)
     }
     
