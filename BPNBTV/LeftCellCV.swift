@@ -13,4 +13,10 @@ class LeftCellCV: UICollectionViewCell {
     @IBOutlet weak var titleList: UILabel!
     @IBOutlet weak var contentList: UILabel!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.layer.borderWidth = 0.5
+        self.layer.borderColor = UIColor.bnpbLightGrayColor().cgColor
+        self.layer.cornerRadius = 1
+    }
 }

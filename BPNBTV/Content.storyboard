@@ -122,7 +122,7 @@
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="PzA-Ov-8nk">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="50" height="125"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="50" height="50"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
@@ -149,6 +149,7 @@
                                                 <segment title="ID"/>
                                                 <segment title="EN"/>
                                             </segments>
+                                            <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <action selector="langChangeAction:" destination="xVh-Zh-UXW" eventType="valueChanged" id="89c-IK-ZVH"/>
                                             </connections>
@@ -188,6 +189,10 @@
                                         <outlet property="langSegment" destination="e5s-J2-HFL" id="gqI-MC-nwT"/>
                                         <outlet property="titleLabel" destination="JOn-Pl-4O4" id="VDl-oQ-m3E"/>
                                     </connections>
+                                </collectionReusableView>
+                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FooterIndicatorDetail" id="qZY-WZ-QCT">
+                                    <rect key="frame" x="0.0" y="175" width="375" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
                                 </collectionReusableView>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p9l-B7-9Ag">

@@ -83,7 +83,8 @@ class HomeViewController: UIViewController {
     func requestHomeVideo(params:[String:String] = ["function":"video","page":"\(1)"]){
         RequestHelper.requestListBasedOnCategory(params:params , callback: {[weak self](isSuccess,errorReason,videoItems) in
             DispatchQueue.main.async {
-                
+                self?.progressIndicator?.stopAnimating()
+                self?.progressIndicator?.removeFromSuperview()
                 if let _videoItems = videoItems{
                     //self?.printLog(content: "Video Items Home : \(_videoItems)")
                     if let _ = self?.homeVideoItems{
@@ -117,6 +118,9 @@ class HomeViewController: UIViewController {
         playerView?.stopVideo()
     }
 
+    deinit {
+        printLog(content: "HOMEVIEWCONTROLLER DEINIT...")
+    }
 }
 
 extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
