@@ -137,8 +137,8 @@ extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource
         if(indexPath.row % 2 == 0){
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LeftCellCV", for: indexPath) as! LeftCellCV
             cell.titleList?.text = video.judulEN
-            if (video.summaryEN.characters.count > 100){
-                cell.contentList?.text = video.summaryEN.substring(to: video.summaryEN.index(video.summaryEN.startIndex, offsetBy: 100)) + "..."
+            if (video.summaryEN.characters.count > 80){
+                cell.contentList?.text = video.summaryEN.substring(to: video.summaryEN.index(video.summaryEN.startIndex, offsetBy: 80)) + "..."
             }else{
                 cell.contentList?.text = video.summaryEN
             }
@@ -149,8 +149,8 @@ extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource
             cell.position = indexPath.row - 1
             //printLog(content: "\(cell.position)")
             cell.titleList.text = video.judulEN
-            if (video.summaryEN.characters.count > 140){
-                cell.summaryList?.text = video.summaryEN.substring(to: video.summaryEN.index(video.summaryEN.startIndex, offsetBy: 140)) + "..."
+            if (video.summaryEN.characters.count > 150){
+                cell.summaryList?.text = video.summaryEN.substring(to: video.summaryEN.index(video.summaryEN.startIndex, offsetBy: 150)) + "..."
             }else{
                 cell.summaryList?.text = video.summaryEN
             }
