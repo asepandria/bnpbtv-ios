@@ -13,8 +13,8 @@ class DetailContentViewController: UIViewController {
     @IBOutlet weak var videoContainer: UIView!
     @IBOutlet weak var playerView: YTPlayerView!
     @IBOutlet weak var collectionView: UICollectionView!
-    
-    
+    var headerView:DetailHeader!
+    var progressIndicator: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,6 +23,8 @@ class DetailContentViewController: UIViewController {
 
     
     func setupViews(){
+        progressIndicator = UIActivityIndicatorView()
+        collectionView?.register(UINib(nibName: "LeftCellCV", bundle: nil), forCellWithReuseIdentifier: "LeftCellCV")
         collectionView?.delegate = self
         collectionView?.dataSource = self
         collectionView?.showsVerticalScrollIndicator = false
@@ -55,7 +57,10 @@ class DetailContentViewController: UIViewController {
 }
 
 
-extension DetailContentViewController:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+extension DetailContentViewController:UICollectionViewDelegate,
+            UICollectionViewDataSource,
+            UICollectionViewDelegateFlowLayout,
+            DetailHeaderDelegate{
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -65,18 +70,58 @@ extension DetailContentViewController:UICollectionViewDelegate,UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LeftCellCV", for: indexPath) as! LeftCellCV
+        cell.titleList?.text = video.judulEN
+        if (video.summaryEN.characters.count > 80){
+            cell.contentList?.text = video.summaryEN.substring(to: video.summaryEN.index(video.summaryEN.startIndex, offsetBy: 80)) + "..."
+        }else{
+            cell.contentList?.text = video.summaryEN
+        }
+        cell.imageList?.kf.setImage(with: URL(string: video.imageUrl ?? ""))
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionElementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "DetailHeader", for: indexPath as IndexPath) as! DetailHeader
-            headerView.titleLabel.text = video?.judulEN
-            headerView.contentLabel.text = video?.descriptionEN
+            
+            headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "DetailHeader", for: indexPath as IndexPath) as! DetailHeader
+            if headerView.detailHeaderDelegate == nil{
+                headerView.detailHeaderDelegate = self
+            }
+            setContentForHeader()
             return headerView
         default:
             assert(false, "Unexpected element kind")
         }
+    }
+    func refreshContent() {
+        setContentForHeader()
+    }
+    
+    func setContentForHeader(){
+        let tempLabel = UILabel()
+        tempLabel.font = UIFont(name: "Helvetica", size: 15)
+        tempLabel.frame = CGRect(x: 0, y: 0, width: getScreenWidth() - 16, height: CGFloat.greatestFiniteMagnitude)
+        tempLabel.numberOfLines = 0
+        if let selectedLang = UserDefaults.standard.integer(forKey: Constants.langKey) as Int?{
+            if selectedLang == Constants.langID{
+                headerView.titleLabel.text = video?.judul
+                headerView.contentLabel.text = video?.description
+                tempLabel.text = video?.description
+            }else if selectedLang == Constants.langEN{
+                headerView.titleLabel.text = video?.judulEN
+                headerView.contentLabel.text = video?.descriptionEN
+                tempLabel.text = video?.descriptionEN
+            }
+        }else{
+            headerView.titleLabel.text = video?.judulEN
+            headerView.contentLabel.text = video?.descriptionEN
+            tempLabel.text = video?.descriptionEN
+        }
+        tempLabel.sizeToFit()
+        headerView.contentHeightConstraint.constant = tempLabel.frame.height
+        headerView.frame.size.height = tempLabel.frame.height + 105
+        headerView.setNeedsDisplay()
+        headerView.setNeedsLayout()
     }
 }

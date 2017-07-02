@@ -24,5 +24,7 @@ class Constants{
                       //@"origin"         : @"https://www.example.com", // this is critical
         "modestbranding" : 1]
     
-    
+    static let langKey = "langKey"
+    static let langID = 0
+    static let langEN = 1
 }
