@@ -37,6 +37,18 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        DispatchQueue.main.async {[weak self] in
+            self?.playerView?.webView?.scrollView.contentInset = UIEdgeInsets.zero
+        }
+        
+    }
     func setCollectionView(){
         progressIndicator = UIActivityIndicatorView()
         homeCollectionView.register(UINib(nibName: "LeftCellCV", bundle: nil), forCellWithReuseIdentifier: "LeftCellCV")
@@ -144,8 +156,10 @@ extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource
             }
             //cell.summaryList.text = video.summary
             DispatchQueue.main.async {[weak self] in
-                cell.summaryList.frame.size.width = (((self?.getScreenWidth())! / 2) - 16)
-                cell.titleList.frame.size.width = (((self?.getScreenWidth())! / 2) - 10)
+                cell.summaryList.frame.size.width = (((self?.getScreenWidth())! / 2) - 20)
+                cell.summaryList.frame.origin.x = 8
+                cell.titleList.frame.size.width = (((self?.getScreenWidth())! / 2) - 20)
+                cell.titleList.frame.origin.x = 8
                 cell.titleList.setNeedsDisplay()
                 cell.titleList.setNeedsLayout()
                 cell.summaryList.setNeedsDisplay()
@@ -162,7 +176,7 @@ extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource
         progressIndicator?.stopAnimating()
         progressIndicator?.removeFromSuperview()
         if(indexPath.row == homeVideoItems.videos.count - 1 && totalHomeVideo < totalLimitVideos){
-            printLog(content: "Load More API...")
+            //printLog(content: "Load More API...")
             currentPage += 1
             requestHomeVideo(params: ["function":"video","page":"\(currentPage)"])
         }
@@ -202,6 +216,7 @@ extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyBoard = UIStoryboard(name: "Content", bundle: nil)
         let detailVC = storyBoard.instantiateViewController(withIdentifier: "DetailContentViewController") as! DetailContentViewController
+        detailVC.video = homeVideoItems.videos[indexPath.row]
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
     

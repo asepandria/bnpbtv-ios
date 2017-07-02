@@ -98,15 +98,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Detail Content" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HQK-d0-31B">
-                                <rect key="frame" x="16" y="72" width="227" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XIl-p9-Q3L">
+                                <rect key="frame" x="0.0" y="64" width="375" height="225"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="XIl-p9-Q3L" secondAttribute="height" multiplier="5:3" id="IVr-Bu-AD0"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="XIl-p9-Q3L" firstAttribute="leading" secondItem="jRL-fK-ho1" secondAttribute="leading" id="Bwl-Lp-fYG"/>
+                            <constraint firstAttribute="trailing" secondItem="XIl-p9-Q3L" secondAttribute="trailing" id="KQD-Io-tGB"/>
+                            <constraint firstItem="XIl-p9-Q3L" firstAttribute="top" secondItem="GkW-QL-8k3" secondAttribute="bottom" id="fpJ-8r-Rrt"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9Qd-ER-W0x">
                         <barButtonItem key="leftBarButtonItem" image="icon_back" id="rrO-DL-aO5">
@@ -116,6 +121,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="videoContainer" destination="XIl-p9-Q3L" id="EmB-Gx-Zrr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AfR-Tu-Rcc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
