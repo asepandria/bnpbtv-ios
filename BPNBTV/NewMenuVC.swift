@@ -13,27 +13,34 @@ protocol MenuSelectedDelegate:class {
     func menuTapped(menu:Menu)
 }
 class NewMenuVC: UIViewController {
-    var menuItems:[Menu] = [Menu]()
-    //var menuItemsChild:[String:[Menu]] = [String:[Menu]]()
-    var menuItemsChild = OrderedDict<String,[Menu]>()
+    //var menuItems:[Menu] = [Menu]()
+    var menuItems:[Menu]!
+    var menuItemsChild:OrderedDict<String,[Menu]>!
     weak var menuSelectedDelegate:SideMenuToContainerDelegate?
     var headerTB:CollapsibleTableViewHeader?
-    var sections = [MenuSection]()
-    //var mainViewController: UIViewController!
+    var sections:[MenuSection]!
+    
     @IBOutlet weak var menuTable: UITableView!
     @IBOutlet weak var searchTF: UITextField!
     
-    
-    var headers = [CollapsibleTableViewHeader]()
+    var headers:[CollapsibleTableViewHeader]!
     var selectedMenuCell:(Int,Int)!
     var isFirstLoad = true
+    
+    
+    var selectedMenuString = "Home"
     override func viewDidLoad() {
         super.viewDidLoad()
+        menuItems = [Menu]()
+        menuItemsChild = OrderedDict<String,[Menu]>()
+        headers = [CollapsibleTableViewHeader]()
+        sections = [MenuSection]()
         setMenuData()
         setupViews()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        menuTable?.reloadData()
     }
     
     
@@ -81,6 +88,9 @@ class NewMenuVC: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        for header in headers{
+            header.delegate = nil
+        }
         headerTB?.delegate = nil
         headerTB = nil
     }

@@ -17,6 +17,8 @@
 		067ADA231E7D13D70030C686 /* BPNBTVUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067ADA221E7D13D70030C686 /* BPNBTVUITests.swift */; };
 		180865D91EE9857200930FB5 /* NewMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180865D81EE9857200930FB5 /* NewMenuVC.swift */; };
 		180865DE1EE9876900930FB5 /* NewMenuVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180865DD1EE9876900930FB5 /* NewMenuVCExtension.swift */; };
+		1809E3851F0ACCF400A9DFDD /* KontakViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1809E3841F0ACCF400A9DFDD /* KontakViewController.swift */; };
+		1809E3871F0AD00700A9DFDD /* KontakModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1809E3861F0AD00700A9DFDD /* KontakModel.swift */; };
 		18123F0E1F091DFF00ED411C /* DetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18123F0D1F091DFF00ED411C /* DetailHeader.swift */; };
 		1813F27B1EF5BA30004B2422 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1813F27A1EF5BA30004B2422 /* HomeViewController.swift */; };
 		1813F27D1EF5BB36004B2422 /* Content.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1813F27C1EF5BB36004B2422 /* Content.storyboard */; };
@@ -87,6 +89,8 @@
 		067ADA241E7D13D70030C686 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		180865D81EE9857200930FB5 /* NewMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMenuVC.swift; sourceTree = "<group>"; };
 		180865DD1EE9876900930FB5 /* NewMenuVCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMenuVCExtension.swift; sourceTree = "<group>"; };
+		1809E3841F0ACCF400A9DFDD /* KontakViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KontakViewController.swift; sourceTree = "<group>"; };
+		1809E3861F0AD00700A9DFDD /* KontakModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KontakModel.swift; sourceTree = "<group>"; };
 		18123F0D1F091DFF00ED411C /* DetailHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailHeader.swift; sourceTree = "<group>"; };
 		1813F27A1EF5BA30004B2422 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1813F27C1EF5BB36004B2422 /* Content.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Content.storyboard; sourceTree = "<group>"; };
@@ -202,6 +206,7 @@
 				18F742FD1EEEF5DB00CD6B40 /* MenuSection.swift */,
 				186320F51EF6984700ED4ED2 /* ProfileModel.swift */,
 				18FC04D31EF81E500092A17E /* HeadlineModel.swift */,
+				1809E3861F0AD00700A9DFDD /* KontakModel.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -310,6 +315,7 @@
 				1813F27E1EF5BB76004B2422 /* CollectionViewController.swift */,
 				1813F2801EF5BBEB004B2422 /* ProfileViewController.swift */,
 				18E068461F077E4900277353 /* DetailContentViewController.swift */,
+				1809E3841F0ACCF400A9DFDD /* KontakViewController.swift */,
 			);
 			name = content;
 			sourceTree = "<group>";
@@ -651,6 +657,7 @@
 				186604D21E9535D7002C2016 /* BRouter.swift in Sources */,
 				18E0683F1F06479600277353 /* RightCellCV.swift in Sources */,
 				185EB8801E95871200D7841F /* UIViewController.swift in Sources */,
+				1809E3871F0AD00700A9DFDD /* KontakModel.swift in Sources */,
 				18E068471F077E4900277353 /* DetailContentViewController.swift in Sources */,
 				18E068431F0716B200277353 /* CollectionFooterIndicator.swift in Sources */,
 				180865D91EE9857200930FB5 /* NewMenuVC.swift in Sources */,
@@ -674,6 +681,7 @@
 				185EB8831E958A7800D7841F /* UIColor.swift in Sources */,
 				062AA3B41E90B4A400B26F44 /* Constants.swift in Sources */,
 				186320F61EF6984700ED4ED2 /* ProfileModel.swift in Sources */,
+				1809E3851F0ACCF400A9DFDD /* KontakViewController.swift in Sources */,
 				1813F27F1EF5BB76004B2422 /* CollectionViewController.swift in Sources */,
 				18F742FE1EEEF5DB00CD6B40 /* MenuSection.swift in Sources */,
 				182046A81E93241B0094D91C /* Serializer.swift in Sources */,

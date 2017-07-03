@@ -66,4 +66,15 @@ class RequestHelper{
             }
         }
     }
+    
+    class func requestContact(callback:((Bool,String?,KontakModel?) -> Void)?){
+        _ = RequestHelper.requestManager.request(BRouter.commonRequest(parameters:["function":"kontak"])).responseObject(queue: DispatchQueue.global()){(response:DataResponse<KontakModel>) in
+            do{
+                let kontak = try response.result.unwrap() as KontakModel
+                callback?(true,nil,kontak)
+            }catch{
+                callback?(false,response.error?.localizedDescription,nil)
+            }
+        }
+    }
 }

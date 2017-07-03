@@ -80,6 +80,7 @@ extension ContainerViewController{
 
 extension ContainerViewController:SideMenuToContainerDelegate{
     func selectedMenu(menuName: String) {
+        
         HUD.show(HUDContentType.progress)
         removeChildViewControllers()
         let contentStoryBoard = UIStoryboard(name: "Content", bundle: nil)
@@ -113,7 +114,7 @@ extension ContainerViewController:SideMenuToContainerDelegate{
                             let profileVC = contentStoryBoard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
                             profileVC.profileModel = profile
                             _self.addChildViewController(profileVC)
-                            profileVC.view.frame = CGRect(x:0, y:0, width:_self.view.frame.size.width, height:_self.view.frame.size.height);
+                            profileVC.view.frame = CGRect(x:0, y:0, width:_self.view.frame.size.width, height:_self.view.frame.size.height)
                             _self.view.addSubview(profileVC.view)
                             profileVC.didMove(toParentViewController: _self)
                             
@@ -126,7 +127,28 @@ extension ContainerViewController:SideMenuToContainerDelegate{
             })
             
         }else if(menuName.lowercased() == MENU_CLASS.KONTAK_KAMI.rawValue){
-            printLog(content: "KONTAK KAMI TAPPED....")
+            RequestHelper.requestContact(callback: {[weak self](isSuccess,reason,kontak) in
+                DispatchQueue.main.async {
+                    HUD.hide()
+                    if isSuccess{
+                        if let _ = self{
+                            let kontakVC = contentStoryBoard.instantiateViewController(withIdentifier: "KontakViewController") as! KontakViewController
+                            kontakVC.kontakString = (kontak?.kontakString) ?? ""
+                            self!.addChildViewController(kontakVC)
+                            
+                            kontakVC.view.frame = CGRect(x:0, y:0, width:self!.view.frame.size.width, height:self!.view.frame.size.height)
+                            self!.view.addSubview(kontakVC.view)
+                            kontakVC.didMove(toParentViewController: self!)
+                        }
+                        
+                    }else{
+                       AlertHelper.showErrorAlert(message: reason ?? "")
+                    }
+                }
+            
+            })
+            
+            
         }else{
             //this is collection
             RequestHelper.requestListBasedOnCategory(params: ["function":"video"], callback: {[weak self](isSuccess,reason,videoItems) in

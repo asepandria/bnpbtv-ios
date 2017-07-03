@@ -235,6 +235,45 @@
             </objects>
             <point key="canvasLocation" x="972" y="780.35982008995506"/>
         </scene>
+        <!--Kontak View Controller-->
+        <scene sceneID="aUL-tc-naT">
+            <objects>
+                <viewController storyboardIdentifier="KontakViewController" id="Z3j-qF-u2Z" customClass="KontakViewController" customModule="BPNBTV" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8Qy-rn-Gjd"/>
+                        <viewControllerLayoutGuide type="bottom" id="Jqw-UL-NAI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Kvb-WM-nDe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="Ejf-WZ-Zu7">
+                                <rect key="frame" x="8" y="72" width="359" height="175"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="175" id="gQZ-jO-7u0"/>
+                                </constraints>
+                                <string key="text">BADAN NASIONAL PENANGGULANGAN BENCANA\n\nGRAHA BNPB Jalan Pramuka Kav. 38, Jakarta Timur 13120\nTelp.021-29827793\nFax. 021-21281200\nLine (BNPB Indonesia)\nWebsite: www.bnpb.go.id\nEmail: contact@bnpb.go.id\n\n</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Ejf-WZ-Zu7" firstAttribute="top" secondItem="8Qy-rn-Gjd" secondAttribute="bottom" constant="8" id="Miq-Gw-glF"/>
+                            <constraint firstItem="Ejf-WZ-Zu7" firstAttribute="leading" secondItem="Kvb-WM-nDe" secondAttribute="leading" constant="8" id="vXL-r1-tVS"/>
+                            <constraint firstAttribute="trailing" secondItem="Ejf-WZ-Zu7" secondAttribute="trailing" constant="8" id="voI-DY-fF4"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="qcf-x6-ghM"/>
+                    <connections>
+                        <outlet property="labelKontak" destination="Ejf-WZ-Zu7" id="jSi-4s-ZCA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vz5-Ka-enh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2756" y="779.46026986506752"/>
+        </scene>
         <!--Collection View Controller-->
         <scene sceneID="eFP-tP-sPh">
             <objects>
@@ -423,6 +462,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HcA-6W-Ppy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="33" y="781"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="BLU-EQ-xBI">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wfs-6f-Jod" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6l4-sx-5Xt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Z3j-qF-u2Z" kind="relationship" relationship="rootViewController" id="HyE-On-iI2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="053-pJ-iQi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1817" y="780"/>
         </scene>
     </scenes>
     <resources>

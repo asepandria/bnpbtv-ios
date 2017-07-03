@@ -21,6 +21,7 @@ extension NewMenuVC:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "menuTVCell", for: indexPath) as! MenuTVCell
         cell.menuLabel?.text = sections[indexPath.section].items[indexPath.row].menu
+        
         return cell
     }
     
@@ -33,6 +34,7 @@ extension NewMenuVC:UITableViewDelegate,UITableViewDataSource{
             //self?.printLog(content: "\(self?.selectedMenuCell)")
             if let menuSelected = self?.sections[indexPath.section].items[indexPath.row]{
                 self?.menuSelectedDelegate?.selectedMenu(menuName: menuSelected.menu)
+                self?.selectedMenuString = menuSelected.menu
             }
             self?.dismiss(animated: true, completion: nil)
         }
@@ -59,6 +61,12 @@ extension NewMenuVC:UITableViewDelegate,UITableViewDataSource{
             cell.contentView.backgroundColor = UIColor.white
         }
         
+        if selectedMenuString == sections[indexPath.section].items[indexPath.row].menu{
+            (cell as! MenuTVCell).menuLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 15.0)
+        }else{
+            (cell as! MenuTVCell).menuLabel.font = UIFont(name:"HelveticaNeue", size: 15.0)
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -69,12 +77,17 @@ extension NewMenuVC:UITableViewDelegate,UITableViewDataSource{
             headerTB?.arrowImage.isHidden = false
         }
         headerTB?.titleLabel.text = sections[section].name.firstCharToUpper()
-        if isFirstLoad && section == 0{
+        if selectedMenuString == sections[section].name.firstCharToUpper(){
+            headerTB?.titleLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 17.0)
+        }else{
+            headerTB?.titleLabel.font = UIFont(name:"HelveticaNeue", size: 17.0)
+        }
+        /*if isFirstLoad && section == 0{
             headerTB?.titleLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 17.0)
             isFirstLoad = false
         }else{
             headerTB?.titleLabel.font = UIFont(name:"HelveticaNeue", size: 17.0)
-        }
+        }*/
         headerTB?.setCollapsed(collapsed: sections[section].collapsed)
         headerTB?.section = section
         headerTB?.delegate = self
@@ -119,6 +132,7 @@ extension NewMenuVC:CollapsibleTableViewHeaderDelegate{
                 self?.resetHeaderFont()
                 header.titleLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 17.0)
                 self?.menuSelectedDelegate?.selectedMenu(menuName:(self?.sections[section].name)!)
+                self?.selectedMenuString = (self?.sections[section].name) ?? ""
                 self?.dismiss(animated: true, completion: nil)
                 guard let _self = self else{return}
                 guard let _selectedMenuCell = _self.selectedMenuCell else{return}
