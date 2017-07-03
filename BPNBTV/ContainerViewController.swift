@@ -18,6 +18,7 @@ enum MENU_CLASS:String{
     case PROFILE = "profile"
     case PROFIL = "profil"
     case COLLECTION = "collection"
+    case KONTAK_KAMI = "kontak kami"
 }
 class ContainerViewController:UIViewController{
     var menuLeftNavigationController:UISideMenuNavigationController!
@@ -124,6 +125,8 @@ extension ContainerViewController:SideMenuToContainerDelegate{
                 }
             })
             
+        }else if(menuName.lowercased() == MENU_CLASS.KONTAK_KAMI.rawValue){
+            printLog(content: "KONTAK KAMI TAPPED....")
         }else{
             //this is collection
             RequestHelper.requestListBasedOnCategory(params: ["function":"video"], callback: {[weak self](isSuccess,reason,videoItems) in
