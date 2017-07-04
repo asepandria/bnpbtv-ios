@@ -19,6 +19,7 @@ target 'BPNBTV' do
   pod 'youtube-ios-player-helper', '~> 0.1.4'
   pod 'ReachabilitySwift', '~> 3'
   pod 'PKHUD', '~> 4.0'
+  pod 'BMPlayer'
   target 'BPNBTVTests' do
     inherit! :search_paths
     # Pods for testing

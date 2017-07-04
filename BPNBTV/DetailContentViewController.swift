@@ -8,6 +8,8 @@
 
 import UIKit
 import youtube_ios_player_helper
+import AVKit
+import AVFoundation
 class DetailContentViewController: UIViewController {
     var video:Video!
     @IBOutlet weak var videoContainer: UIView!
@@ -20,20 +22,33 @@ class DetailContentViewController: UIViewController {
     var currentPage = 1
     var totalPage = 0
     var totalLimitVideos = 0
+    var avPlayer:AVPlayer!
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         if let _ = video{
+            //printLog(content: "VIDEO ID : \(video.youtube)")
             requestRelatedVideos(params: ["function":"video","category":video.category ?? "","page":"\(currentPage)"])
         }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        DispatchQueue.main.async {[weak self] in
-            self?.playerView?.webView?.scrollView.contentInset = UIEdgeInsets.zero
+        if let _ = video{
+            if video.youtube == ""{
+                avPlayer?.play()
+            }else{
+                DispatchQueue.main.async {[weak self] in
+                    self?.playerView?.webView?.scrollView.contentInset = UIEdgeInsets.zero
+                }
+            }
         }
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        avPlayer?.pause()
     }
     func setupViews(){
         progressIndicator = UIActivityIndicatorView()
@@ -43,7 +58,21 @@ class DetailContentViewController: UIViewController {
         collectionView?.showsVerticalScrollIndicator = false
         DispatchQueue.main.async {[weak self] in
             if let _ = self?.video{
-                self?.playerView.load(withVideoId: self?.video.youtube ?? "", playerVars: Constants.playerVars)
+                if self?.video.youtube == ""{
+                    self?.playerView.removeFromSuperview()
+                    let videoURL = URL(string: self?.video.videoUrl ?? "")
+                    self?.avPlayer = AVPlayer(url: videoURL!)
+                    
+                    let playerLayer = AVPlayerLayer(player: self?.avPlayer)
+                    playerLayer.frame = (self?.videoContainer.bounds)!
+                    
+                    self?.videoContainer.layer.addSublayer(playerLayer)
+                    self?.videoContainer.backgroundColor = UIColor.black
+                    self?.avPlayer.play()
+                }else{
+                    self?.playerView.load(withVideoId: self?.video.youtube ?? "", playerVars: Constants.playerVars)
+                }
+                
                 self?.playerView.webView?.bounds = (self?.videoContainer.bounds)!
                 self?.playerView.webView?.scrollView.contentInset = UIEdgeInsets.zero
                 self?.playerView.playVideo()
