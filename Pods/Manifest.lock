@@ -1,14 +1,24 @@
 PODS:
   - Alamofire (4.4.0)
+  - BMPlayer (0.8.7):
+    - BMPlayer/Full (= 0.8.7)
+  - BMPlayer/Core (0.8.7)
+  - BMPlayer/Full (0.8.7):
+    - BMPlayer/Core
+    - NVActivityIndicatorView (~> 3.5)
+    - SnapKit (~> 3.2)
   - Kingfisher (3.6.1)
+  - NVActivityIndicatorView (3.6.1)
   - PKHUD (4.2.3)
   - ReachabilitySwift (3)
   - SideMenu (2.3.2)
+  - SnapKit (3.2.0)
   - SwiftyJSON (3.1.4)
   - youtube-ios-player-helper (0.1.6)
 
 DEPENDENCIES:
   - Alamofire (~> 4.4)
+  - BMPlayer
   - Kingfisher (~> 3.0)
   - PKHUD (~> 4.0)
   - ReachabilitySwift (~> 3)
@@ -18,13 +28,16 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  BMPlayer: 5ba9e3f3d61ccc5a24ebd9cdc24901dcf28c98bc
   Kingfisher: 2f31cb75f3e98d3d4c406cbdcd9b263e956cfa67
+  NVActivityIndicatorView: 9f52a7f84bf5c6a798722c450fe3c198e01c56ed
   PKHUD: c7692163a09875cbf15827dc581df3c5cf7f1015
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   SideMenu: 3fa07dd05d4bade2b6f9889fb1877e312e1ba319
+  SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: ba3c1dff67828dfe317ce132a2e8a9f0c650b2d1
+PODFILE CHECKSUM: 1d11255752f19501aeeda01b72e0bfb7d38abfe5
 
 COCOAPODS: 1.2.0
