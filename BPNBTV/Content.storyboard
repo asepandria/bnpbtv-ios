@@ -100,7 +100,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XIl-p9-Q3L">
-                                <rect key="frame" x="0.0" y="64" width="375" height="225"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="225"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zl4-UD-915" customClass="YTPlayerView">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
@@ -117,7 +117,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cT1-KD-tpa">
-                                <rect key="frame" x="0.0" y="297" width="375" height="330"/>
+                                <rect key="frame" x="0.0" y="253" width="375" height="374"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="PzA-Ov-8nk">
                                     <size key="itemSize" width="50" height="50"/>
@@ -229,6 +229,7 @@
                         <outlet property="collectionView" destination="cT1-KD-tpa" id="mgE-Y2-0se"/>
                         <outlet property="playerView" destination="Zl4-UD-915" id="Jac-1c-Bn0"/>
                         <outlet property="videoContainer" destination="XIl-p9-Q3L" id="EmB-Gx-Zrr"/>
+                        <outlet property="videoContainerHeightConstraint" destination="IVr-Bu-AD0" id="O7A-CM-I0p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AfR-Tu-Rcc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -444,24 +445,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KvE-54-aWm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3484" y="94.902548725637189"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Dj6-gb-xUe">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DnE-YL-z19" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="36g-0e-crv">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Jb2-zC-3O3" kind="relationship" relationship="rootViewController" id="swG-tX-8KT"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HcA-6W-Ppy" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="33" y="781"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BLU-EQ-xBI">

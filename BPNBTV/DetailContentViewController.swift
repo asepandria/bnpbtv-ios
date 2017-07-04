@@ -10,9 +10,12 @@ import UIKit
 import youtube_ios_player_helper
 import AVKit
 import AVFoundation
+import BMPlayer
 class DetailContentViewController: UIViewController {
     var video:Video!
     @IBOutlet weak var videoContainer: UIView!
+    @IBOutlet weak var videoContainerHeightConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var playerView: YTPlayerView!
     @IBOutlet weak var collectionView: UICollectionView!
     var headerView:DetailHeader!
@@ -22,7 +25,10 @@ class DetailContentViewController: UIViewController {
     var currentPage = 1
     var totalPage = 0
     var totalLimitVideos = 0
-    var avPlayer:AVPlayer!
+    var avpController:AVPlayerViewController!
+    var overlayPlayer:UIView!
+    //var player:Player!
+    var player:BMPlayer!
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -36,7 +42,7 @@ class DetailContentViewController: UIViewController {
         super.viewWillAppear(animated)
         if let _ = video{
             if video.youtube == ""{
-                avPlayer?.play()
+                avpController?.player?.play()
             }else{
                 DispatchQueue.main.async {[weak self] in
                     self?.playerView?.webView?.scrollView.contentInset = UIEdgeInsets.zero
@@ -48,9 +54,15 @@ class DetailContentViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        avPlayer?.pause()
+        headerView?.detailHeaderDelegate = nil
+        avpController?.player?.pause()
+        player?.playerLayer?.resetPlayer()
     }
     func setupViews(){
+        
+        overlayPlayer = UIView()
+        overlayPlayer.frame = videoContainer.bounds
+        overlayPlayer.backgroundColor = UIColor.clear
         progressIndicator = UIActivityIndicatorView()
         collectionView?.register(UINib(nibName: "LeftCellCV", bundle: nil), forCellWithReuseIdentifier: "LeftCellCV")
         collectionView?.delegate = self
@@ -61,15 +73,57 @@ class DetailContentViewController: UIViewController {
                 if self?.video.youtube == ""{
                     self?.playerView.removeFromSuperview()
                     let videoURL = URL(string: self?.video.videoUrl ?? "")
-                    self?.avPlayer = AVPlayer(url: videoURL!)
+                    self?.videoContainer.backgroundColor = UIColor.clear
                     
-                    let playerLayer = AVPlayerLayer(player: self?.avPlayer)
-                    playerLayer.frame = (self?.videoContainer.bounds)!
+                    /*self?.avpController = AVPlayerViewController()
+                    let player = AVPlayer(url: videoURL!)
                     
-                    self?.videoContainer.layer.addSublayer(playerLayer)
-                    self?.videoContainer.backgroundColor = UIColor.black
-                    self?.avPlayer.play()
+                    self?.avpController.showsPlaybackControls = false
+                    self?.avpController.view.frame = (self?.videoContainer.bounds)!
+                    
+                    self?.addChildViewController((self?.avpController)!)
+                    self?.videoContainer.insertSubview((self?.avpController.view)!, at: 0)
+                    //self?.videoContainer.addSubview((self?.avpController.view)!)
+                    //self?.videoContainer.autoresizesSubviews = true
+                    self?.overlayPlayer?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(DetailContentViewController.showPlaybackControl(sender:))))
+                    self?.videoContainer.addSubview((self?.overlayPlayer)!)
+                    self?.avpController.player = player
+                    self?.avpController.player?.play()*/
+                    
+                    /*self?.player = Player()
+                    self?.player.view.frame = (self?.videoContainer.bounds)!
+                    self?.addChildViewController((self?.player)!)
+                    self?.videoContainer.insertSubview((self?.player.view)!, at: 0)
+                    
+                    self?.player.url = videoURL!
+                    self?.player.playFromBeginning()*/
+                    
+                    //BMPlayerConf.topBarShowInCase = BMPlayerTopBarShowCase.none
+                    
+                    self?.player = BMPlayer()
+                    
+                    self?.view.addSubview((self?.player)!)
+                    self?.player.snp.makeConstraints { (make) in
+                        make.top.equalTo((self?.view)!)//.offset(20)
+                        make.left.right.equalTo((self?.view)!)
+                        // Note here, the aspect ratio 16:9 priority is lower than 1000 on the line, because the 4S iPhone aspect ratio is not 16:9
+                        make.height.equalTo((self?.player.snp.width)!).multipliedBy(9.0/16.0).priority(750)
+                    }
+                    self?.videoContainer.frame.size.height = (self?.videoContainer.frame.height)!
+                    //self?.videoContainerHeightConstraint.constant = (self?.player.frame.height)!
+                    //self?.videoContainer.setNeedsLayout()
+                    self?.player.backBlock = { finish in
+                        //let _ = self?.navigationController?.popViewController(animated: true)
+                        let _ = self?.dismiss(animated: true, completion: nil)
+                    }
+                    let asset = BMPlayerResource(url: videoURL!)
+                    self?.player.setVideo(resource: asset)
+                    
                 }else{
+                    let buttonBack = UIImageView()
+                    buttonBack.frame = CGRect(x: 8, y: 8, width: 44, height: 44)
+                    buttonBack.image = UIImage(named: "icon_back")
+                    self?.videoContainer.addSubview(buttonBack)
                     self?.playerView.load(withVideoId: self?.video.youtube ?? "", playerVars: Constants.playerVars)
                 }
                 
@@ -79,6 +133,13 @@ class DetailContentViewController: UIViewController {
             }
         }
     }
+    
+    func showPlaybackControl(sender:UITapGestureRecognizer){
+        overlayPlayer.removeFromSuperview()
+        avpController?.showsPlaybackControls = true
+    }
+    
+  
     
     func requestRelatedVideos(params:[String:String]){
         RequestHelper.requestListBasedOnCategory(params: params, callback: {[weak self](isSuccess,reason,videoItems) in
@@ -259,3 +320,6 @@ extension DetailContentViewController:UICollectionViewDelegate,
         //collectionView.reloadData()
     }
 }
+
+
+

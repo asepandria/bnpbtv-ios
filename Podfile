@@ -19,6 +19,8 @@ target 'BPNBTV' do
   pod 'youtube-ios-player-helper', '~> 0.1.4'
   pod 'ReachabilitySwift', '~> 3'
   pod 'PKHUD', '~> 4.0'
+  #pod 'Player', '~> 0.5.0'
+  #pod 'XCDYouTubeKit', '~> 2.5'
   pod 'BMPlayer'
   target 'BPNBTVTests' do
     inherit! :search_paths
@@ -30,4 +32,13 @@ target 'BPNBTV' do
     # Pods for testing
   end
 
+end
+
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['SWIFT_VERSION'] = '3.0'
+    end
+  end
 end

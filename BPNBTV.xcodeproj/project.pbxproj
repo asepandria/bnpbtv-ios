@@ -47,6 +47,7 @@
 		18F15EEA1EF051A900B82694 /* OrderedDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F15EE91EF051A900B82694 /* OrderedDict.swift */; };
 		18F742FE1EEEF5DB00CD6B40 /* MenuSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F742FD1EEEF5DB00CD6B40 /* MenuSection.swift */; };
 		18F743001EEF04FF00CD6B40 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F742FF1EEF04FF00CD6B40 /* StringExtension.swift */; };
+		18FB23D91F0BF34A0083071C /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FB23D81F0BF34A0083071C /* Player.swift */; };
 		18FC04D41EF81E500092A17E /* HeadlineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FC04D31EF81E500092A17E /* HeadlineModel.swift */; };
 		18FC04D61EF821A50092A17E /* RequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FC04D51EF821A50092A17E /* RequestHelper.swift */; };
 		18FC04D81EF822270092A17E /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FC04D71EF822270092A17E /* AlertHelper.swift */; };
@@ -120,6 +121,7 @@
 		18F15EE91EF051A900B82694 /* OrderedDict.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderedDict.swift; sourceTree = "<group>"; };
 		18F742FD1EEEF5DB00CD6B40 /* MenuSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSection.swift; sourceTree = "<group>"; };
 		18F742FF1EEF04FF00CD6B40 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		18FB23D81F0BF34A0083071C /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		18FC04D31EF81E500092A17E /* HeadlineModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadlineModel.swift; sourceTree = "<group>"; };
 		18FC04D51EF821A50092A17E /* RequestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestHelper.swift; sourceTree = "<group>"; };
 		18FC04D71EF822270092A17E /* AlertHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 		062AA3B51E90B6EE00B26F44 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				18FB23D81F0BF34A0083071C /* Player.swift */,
 				062AA3B31E90B4A400B26F44 /* Constants.swift */,
 				182046A71E93241B0094D91C /* Serializer.swift */,
 				18F15EE91EF051A900B82694 /* OrderedDict.swift */,
@@ -684,6 +687,7 @@
 				1809E3851F0ACCF400A9DFDD /* KontakViewController.swift in Sources */,
 				1813F27F1EF5BB76004B2422 /* CollectionViewController.swift in Sources */,
 				18F742FE1EEEF5DB00CD6B40 /* MenuSection.swift in Sources */,
+				18FB23D91F0BF34A0083071C /* Player.swift in Sources */,
 				182046A81E93241B0094D91C /* Serializer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

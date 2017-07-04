@@ -221,7 +221,8 @@ extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource
         let storyBoard = UIStoryboard(name: "Content", bundle: nil)
         let detailVC = storyBoard.instantiateViewController(withIdentifier: "DetailContentViewController") as! DetailContentViewController
         detailVC.video = homeVideoItems.videos[indexPath.row]
-        self.navigationController?.pushViewController(detailVC, animated: true)
+        //self.navigationController?.pushViewController(detailVC, animated: true)
+        present(detailVC, animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
