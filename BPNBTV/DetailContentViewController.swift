@@ -29,10 +29,18 @@ class DetailContentViewController: UIViewController {
     var overlayPlayer:UIView!
     //var player:Player!
     var player:BMPlayer!
+    var playerBMSeek:TimeInterval = 0
+    var videoSelectedLang=0
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let selectedLang = UserDefaults.standard.integer(forKey: Constants.langKey) as Int?{
+            videoSelectedLang = selectedLang
+        }
         setupViews()
         if let _ = video{
+            if video.youtube == ""{
+                self.navigationController?.navigationBar.isHidden = true
+            }
             //printLog(content: "VIDEO ID : \(video.youtube)")
             requestRelatedVideos(params: ["function":"video","category":video.category ?? "","page":"\(currentPage)"])
         }
@@ -40,13 +48,15 @@ class DetailContentViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.shouldRotate = true
+        DispatchQueue.main.async {[weak self] in
+            self?.playerView?.webView?.scrollView.contentInset = UIEdgeInsets.zero
+        }
         if let _ = video{
             if video.youtube == ""{
                 avpController?.player?.play()
-            }else{
-                DispatchQueue.main.async {[weak self] in
-                    self?.playerView?.webView?.scrollView.contentInset = UIEdgeInsets.zero
-                }
+                setBMPlayerPortrait(videoURL: URL(string: video!.videoUrl ?? "")!,videoName: videoSelectedLang == Constants.langID ? video.judul:video.judulEN)
             }
         }
         
@@ -54,10 +64,50 @@ class DetailContentViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.shouldRotate = false
         headerView?.detailHeaderDelegate = nil
         avpController?.player?.pause()
-        player?.playerLayer?.resetPlayer()
+        cleanUpBMPlayer()
     }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        playerView?.webView?.scrollView.contentInset = UIEdgeInsets.zero
+        
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if let _ = video{
+            cleanUpBMPlayer()
+            if UIDevice.current.orientation.isLandscape{
+                if video!.youtube == ""{
+                    setBMPlayerLandscape(videoURL: URL(string: video!.videoUrl ?? "")!,videoName: videoSelectedLang == Constants.langID ? video.judul:video.judulEN )
+                    //setBMPlayerLayoutLandscape()
+                }else{
+                    self.navigationController?.navigationBar.isHidden = true
+                    playerView?.webView?.allowsInlineMediaPlayback = false
+                    DispatchQueue.main.async {[weak self] in
+                        self?.playerView?.webView?.clipsToBounds = false
+                        self?.playerView?.snp.removeConstraints()
+                    }
+                }
+            }else {
+                
+                if video!.youtube == ""{
+                    setBMPlayerPortrait(videoURL: URL(string: video!.videoUrl ?? "")!,videoName: videoSelectedLang == Constants.langID ? video.judul:video.judulEN)
+                    //setBMPlayerLayoutPortrait()
+                }else{
+                    self.navigationController?.navigationBar.isHidden = false
+                    playerView?.webView?.allowsInlineMediaPlayback = true
+                    
+                }
+            }
+            
+        }
+        
+    }
+    
     func setupViews(){
         
         overlayPlayer = UIView()
@@ -73,57 +123,10 @@ class DetailContentViewController: UIViewController {
                 if self?.video.youtube == ""{
                     self?.playerView.removeFromSuperview()
                     let videoURL = URL(string: self?.video.videoUrl ?? "")
-                    self?.videoContainer.backgroundColor = UIColor.clear
-                    
-                    /*self?.avpController = AVPlayerViewController()
-                    let player = AVPlayer(url: videoURL!)
-                    
-                    self?.avpController.showsPlaybackControls = false
-                    self?.avpController.view.frame = (self?.videoContainer.bounds)!
-                    
-                    self?.addChildViewController((self?.avpController)!)
-                    self?.videoContainer.insertSubview((self?.avpController.view)!, at: 0)
-                    //self?.videoContainer.addSubview((self?.avpController.view)!)
-                    //self?.videoContainer.autoresizesSubviews = true
-                    self?.overlayPlayer?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(DetailContentViewController.showPlaybackControl(sender:))))
-                    self?.videoContainer.addSubview((self?.overlayPlayer)!)
-                    self?.avpController.player = player
-                    self?.avpController.player?.play()*/
-                    
-                    /*self?.player = Player()
-                    self?.player.view.frame = (self?.videoContainer.bounds)!
-                    self?.addChildViewController((self?.player)!)
-                    self?.videoContainer.insertSubview((self?.player.view)!, at: 0)
-                    
-                    self?.player.url = videoURL!
-                    self?.player.playFromBeginning()*/
-                    
-                    //BMPlayerConf.topBarShowInCase = BMPlayerTopBarShowCase.none
-                    
-                    self?.player = BMPlayer()
-                    
-                    self?.view.addSubview((self?.player)!)
-                    self?.player.snp.makeConstraints { (make) in
-                        make.top.equalTo((self?.view)!)//.offset(20)
-                        make.left.right.equalTo((self?.view)!)
-                        // Note here, the aspect ratio 16:9 priority is lower than 1000 on the line, because the 4S iPhone aspect ratio is not 16:9
-                        make.height.equalTo((self?.player.snp.width)!).multipliedBy(9.0/16.0).priority(750)
-                    }
-                    self?.videoContainer.frame.size.height = (self?.videoContainer.frame.height)!
-                    //self?.videoContainerHeightConstraint.constant = (self?.player.frame.height)!
-                    //self?.videoContainer.setNeedsLayout()
-                    self?.player.backBlock = { finish in
-                        //let _ = self?.navigationController?.popViewController(animated: true)
-                        let _ = self?.dismiss(animated: true, completion: nil)
-                    }
-                    let asset = BMPlayerResource(url: videoURL!)
-                    self?.player.setVideo(resource: asset)
+                    self?.videoContainer.backgroundColor = UIColor.black
+                    self?.setBMPlayerPortrait(videoURL: videoURL!,videoName:(self!.videoSelectedLang  == Constants.langID) ? self!.video.judul:self!.video.judulEN)
                     
                 }else{
-                    let buttonBack = UIImageView()
-                    buttonBack.frame = CGRect(x: 8, y: 8, width: 44, height: 44)
-                    buttonBack.image = UIImage(named: "icon_back")
-                    self?.videoContainer.addSubview(buttonBack)
                     self?.playerView.load(withVideoId: self?.video.youtube ?? "", playerVars: Constants.playerVars)
                 }
                 
@@ -134,12 +137,76 @@ class DetailContentViewController: UIViewController {
         }
     }
     
-    func showPlaybackControl(sender:UITapGestureRecognizer){
-        overlayPlayer.removeFromSuperview()
-        avpController?.showsPlaybackControls = true
+    
+    
+    
+    func cleanUpBMPlayer(){
+        player?.playerLayer?.resetPlayer()
+        player?.removeFromSuperview()
+        player?.delegate = self
+        player = nil
     }
     
+    func setBMPlayerPortrait(videoURL:URL,videoName:String){
+        BMPlayerConf.topBarShowInCase = BMPlayerTopBarShowCase.always
+        if player ==  nil{
+            player = BMPlayer()
+            player.delegate = self
+            view.addSubview((player)!)
+            setBMPlayerLayoutPortrait()
+            //videoContainer.frame.size.height = (videoContainer.frame.height)
+            player.backBlock = { finish in
+                let _ = self.navigationController?.popViewController(animated: true)
+                //let _ = self?.dismiss(animated: true, completion: nil)
+            }
+        }
+        let asset = BMPlayerResource(url: videoURL,name:videoName)
+        player.seek(playerBMSeek)
+        player.setVideo(resource: asset)
+        
+    }
+    
+    func setBMPlayerLayoutPortrait(){
+        BMPlayerConf.topBarShowInCase = BMPlayerTopBarShowCase.always
+        player.snp.makeConstraints { (make) in
+            make.top.equalTo((view)).offset(20)//.offset((navigationController?.navigationBar.frame.height ?? 0)+20)
+            make.left.right.equalTo((view)!)
+            // Note here, the aspect ratio 16:9 priority is lower than 1000 on the line, because the 4S iPhone aspect ratio is not 16:9
+            //make.height.equalTo((self?.player.snp.width)!).multipliedBy(9.0/16.0).priority(750)
+            make.height.equalTo((videoContainer.snp.height))
+        }
+    }
   
+    func setBMPlayerLandscape(videoURL:URL,videoName:String){
+        BMPlayerConf.topBarShowInCase = BMPlayerTopBarShowCase.horizantalOnly
+        if player ==  nil{
+            player = BMPlayer()
+            player.delegate = self
+            view.addSubview((player)!)
+            setBMPlayerLayoutLandscape()
+            player.backBlock = { finish in
+                //let _ = self.navigationController?.popViewController(animated: true)
+                UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+                UIApplication.shared.setStatusBarHidden(false, with: .fade)
+                UIApplication.shared.statusBarOrientation = UIInterfaceOrientation.portrait
+                //let _ = self?.dismiss(animated: true, completion: nil)
+            }
+        }
+        let asset = BMPlayerResource(url: videoURL,name:videoName)
+        player.seek(playerBMSeek)
+        player.setVideo(resource: asset)
+        
+    }
+    
+    func setBMPlayerLayoutLandscape(){
+        player.snp.makeConstraints { (make) in
+            make.top.equalTo((view))
+            make.left.right.equalTo((view)!)
+            // Note here, the aspect ratio 16:9 priority is lower than 1000 on the line, because the 4S iPhone aspect ratio is not 16:9
+            make.height.equalTo((player.snp.width)).multipliedBy(9.0/16.0).priority(750)
+            
+        }
+    }
     
     func requestRelatedVideos(params:[String:String]){
         RequestHelper.requestListBasedOnCategory(params: params, callback: {[weak self](isSuccess,reason,videoItems) in
@@ -271,6 +338,7 @@ extension DetailContentViewController:UICollectionViewDelegate,
         let storyBoard = UIStoryboard(name: "Content", bundle: nil)
         let detailVC = storyBoard.instantiateViewController(withIdentifier: "DetailContentViewController") as! DetailContentViewController
         detailVC.video = videoItems.videos[indexPath.row]
+        self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
     
@@ -290,6 +358,20 @@ extension DetailContentViewController:UICollectionViewDelegate,
     
     func refreshContent() {
         setContentForHeader()
+        setVideoName(selectedLang: videoSelectedLang)
+    }
+    
+    func setVideoName(selectedLang:Int){
+        cleanUpBMPlayer()
+        if UIDevice.current.orientation.isLandscape{
+            if(video?.youtube == ""){
+                setBMPlayerLandscape(videoURL: URL(string: video!.videoUrl ?? "")!,videoName: videoSelectedLang == Constants.langID ? video.judul:video.judulEN)
+            }
+        }else{
+            if(video?.youtube == ""){
+                setBMPlayerPortrait(videoURL: URL(string: video!.videoUrl ?? "")!,videoName: videoSelectedLang == Constants.langID ? video.judul:video.judulEN)
+            }
+        }
     }
     
     func setContentForHeader(){
@@ -298,6 +380,7 @@ extension DetailContentViewController:UICollectionViewDelegate,
         tempLabel.frame = CGRect(x: 0, y: 0, width: getScreenWidth() - 16, height: CGFloat.greatestFiniteMagnitude)
         tempLabel.numberOfLines = 0
         if let selectedLang = UserDefaults.standard.integer(forKey: Constants.langKey) as Int?{
+            videoSelectedLang = selectedLang
             if selectedLang == Constants.langID{
                 headerView.titleLabel.text = video?.judul
                 headerView.contentLabel.text = video?.description
@@ -322,4 +405,13 @@ extension DetailContentViewController:UICollectionViewDelegate,
 }
 
 
+
+extension DetailContentViewController:BMPlayerDelegate{
+    func bmPlayer(player: BMPlayer ,playerStateDidChange state: BMPlayerState) { }
+    func bmPlayer(player: BMPlayer ,loadedTimeDidChange loadedDuration: TimeInterval, totalDuration: TimeInterval)  { }
+    func bmPlayer(player: BMPlayer ,playTimeDidChange currentTime : TimeInterval, totalTime: TimeInterval)  {
+        playerBMSeek = currentTime
+    }
+    func bmPlayer(player: BMPlayer ,playerIsPlaying playing: Bool){}
+}
 

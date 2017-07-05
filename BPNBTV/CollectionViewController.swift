@@ -10,6 +10,11 @@ import UIKit
 
 class CollectionViewController: UIViewController {
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.navigationBar.isHidden = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

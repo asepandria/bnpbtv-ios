@@ -443,7 +443,7 @@
 				TargetAttributes = {
 					067AD9FB1E7D13C30030C686 = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = 63M7Z7Q4QJ;
+						DevelopmentTeam = 742KJK328B;
 						ProvisioningStyle = Automatic;
 					};
 					067ADA121E7D13D60030C686 = {
@@ -839,7 +839,7 @@
 			baseConfigurationReference = E17B026014F3F4B438FFA3AA /* Pods-BPNBTV.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 63M7Z7Q4QJ;
+				DEVELOPMENT_TEAM = 742KJK328B;
 				INFOPLIST_FILE = BPNBTV/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -854,7 +854,7 @@
 			baseConfigurationReference = 9BB5751925274A3B7059ECAB /* Pods-BPNBTV.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 63M7Z7Q4QJ;
+				DEVELOPMENT_TEAM = 742KJK328B;
 				INFOPLIST_FILE = BPNBTV/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
