@@ -287,17 +287,60 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="COLLECTION" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQu-hK-wes">
-                                <rect key="frame" x="16" y="75" width="173" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="E0R-lI-6aW">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Q2k-Az-kxz">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="50" height="50"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Ay8-c3-zA9">
+                                        <rect key="frame" x="0.0" y="50" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SectionCategoryHeader" id="syD-py-4Sn" customClass="SectionCategoryHeader" customModule="BPNBTV" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="uzu-4E-Kc6">
+                                            <rect key="frame" x="8" y="15" width="359" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="uzu-4E-Kc6" secondAttribute="bottom" constant="6" id="Xbi-yN-eO1"/>
+                                        <constraint firstItem="uzu-4E-Kc6" firstAttribute="trailing" secondItem="syD-py-4Sn" secondAttribute="trailingMargin" id="kQz-NO-7SV"/>
+                                        <constraint firstItem="uzu-4E-Kc6" firstAttribute="top" secondItem="syD-py-4Sn" secondAttribute="topMargin" constant="7" id="pwB-cu-E1P"/>
+                                        <constraint firstItem="uzu-4E-Kc6" firstAttribute="leading" secondItem="syD-py-4Sn" secondAttribute="leadingMargin" id="wW1-8f-1jb"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="sectionTitleLabel" destination="uzu-4E-Kc6" id="EZI-lM-8ag"/>
+                                    </connections>
+                                </collectionReusableView>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="E0R-lI-6aW" firstAttribute="top" secondItem="lKL-FZ-ryr" secondAttribute="bottom" id="4er-bX-B6x"/>
+                            <constraint firstItem="tDB-DE-WlF" firstAttribute="top" secondItem="E0R-lI-6aW" secondAttribute="bottom" id="cuc-WW-YHW"/>
+                            <constraint firstAttribute="trailing" secondItem="E0R-lI-6aW" secondAttribute="trailing" id="dRA-Xe-Okt"/>
+                            <constraint firstItem="E0R-lI-6aW" firstAttribute="leading" secondItem="kK2-us-xbq" secondAttribute="leading" id="tIw-cZ-AAV"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="nkh-Wv-98l"/>
+                    <connections>
+                        <outlet property="collectionView" destination="E0R-lI-6aW" id="NWp-Ss-MGZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B3s-cx-ozO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
