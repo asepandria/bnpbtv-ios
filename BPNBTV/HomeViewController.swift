@@ -103,7 +103,6 @@ class HomeViewController: UIViewController {
                     self?.totalPage = (self?.homeVideoItems.totalPage) ?? 0
                     self?.totalLimitVideos = (self?.homeVideoItems.limit) ?? 0
                     self?.homeCollectionView.reloadData()
-                    
                 }
             }
         })

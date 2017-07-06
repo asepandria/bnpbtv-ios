@@ -26,9 +26,8 @@ class NewMenuVC: UIViewController {
     var headers:[CollapsibleTableViewHeader]!
     var selectedMenuCell:(Int,Int)!
     var isFirstLoad = true
-    
-    
     var selectedMenuString = "Home"
+    var reloadCounterRefreshMenu = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         menuItems = [Menu]()
@@ -41,6 +40,21 @@ class NewMenuVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         menuTable?.reloadData()
+        /*if(reloadCounterRefreshMenu > 5){
+            reloadCounterRefreshMenu = 0
+            UserDefaults.standard.removeObject(forKey: "MENU")
+            menuItems?.removeAll()
+            menuItemsChild = nil
+            menuItemsChild = OrderedDict<String,[Menu]>()
+            headers.removeAll()
+            sections.removeAll()
+            setMenuData()
+            //setupViews()
+            
+            
+        }else{
+            reloadCounterRefreshMenu += 1
+        }*/
     }
     
     
@@ -72,14 +86,18 @@ class NewMenuVC: UIViewController {
         imageSearch.addGestureRecognizer(searchImageTap)
         searchTF.rightView = imageSearch
         searchTF.rightViewMode = UITextFieldViewMode.always
+        searchTF.delegate = self
         
     }
     
     
     func searchTapped(gesture:UITapGestureRecognizer){
         printLog(content: "Search Tapped")
+        searchTF.resignFirstResponder()
         view.endEditing(true)
-        //self.slideMenuController()?.closeLeft()
+        self.menuSelectedDelegate?.searchSelected(keyword: searchTF.text ?? "")
+        dismiss(animated: true, completion: nil)
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -157,15 +175,18 @@ class NewMenuVC: UIViewController {
     func requestMenu(){
         RequestHelper.requestAndUpdateMainMenu(callback: {[weak self] (isSuccess,reason) in
             if isSuccess{
-                self?.setMenuData()
+                DispatchQueue.main.async {
+                    self?.setMenuData()
+                }
+                
             }else{
                 AlertHelper.showErrorAlert(message: reason ?? "")
             }
         })
     }
-    
     deinit {
         printLog(content:"NEW MENU TV DESTROYED")
     }
-
 }
+
+

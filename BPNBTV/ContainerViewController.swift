@@ -12,6 +12,7 @@ import SideMenu
 import PKHUD
 protocol SideMenuToContainerDelegate:class {
     func selectedMenu(menuName:String)
+    func searchSelected(keyword:String)
 }
 enum MENU_CLASS:String{
     case HOME = "home"
@@ -79,12 +80,25 @@ extension ContainerViewController{
 }
 
 extension ContainerViewController:SideMenuToContainerDelegate{
+    func searchSelected(keyword: String) {
+        self.removeChildViewControllers()
+        let contentStoryBoard = UIStoryboard(name: "Content", bundle: nil)
+        let collectionVC = contentStoryBoard.instantiateViewController(withIdentifier: "CollectionViewController") as! CollectionViewController
+        collectionVC.isSearch = true
+        collectionVC.keyWord = keyword
+        addChildViewController(collectionVC)
+        collectionVC.view.frame = CGRect(x:0, y:0, width:view.frame.size.width, height:view.frame.size.height);
+        view.addSubview(collectionVC.view)
+        collectionVC.didMove(toParentViewController:self)
+    }
     func selectedMenu(menuName: String) {
         
-        HUD.show(HUDContentType.progress)
+        
         removeChildViewControllers()
         let contentStoryBoard = UIStoryboard(name: "Content", bundle: nil)
+        self.removeChildViewControllers()
         if(menuName.lowercased() == MENU_CLASS.HOME.rawValue){
+            HUD.show(HUDContentType.progress)
             RequestHelper.requestListBasedOnCategory(params: ["function":"video"], callback: {[weak self](isSuccess,reason,videoItems) in
                 DispatchQueue.main.async {
                     HUD.hide()
@@ -106,6 +120,7 @@ extension ContainerViewController:SideMenuToContainerDelegate{
             
         }else if(menuName.lowercased() == MENU_CLASS.PROFILE.rawValue ||
             menuName.lowercased() == MENU_CLASS.PROFIL.rawValue){
+            HUD.show(HUDContentType.progress)
             RequestHelper.requestProfile(callback: {[weak self](isSuccess,reason,profile) in
                 DispatchQueue.main.async {
                     HUD.hide()
@@ -127,6 +142,7 @@ extension ContainerViewController:SideMenuToContainerDelegate{
             })
             
         }else if(menuName.lowercased() == MENU_CLASS.KONTAK_KAMI.rawValue){
+            HUD.show(HUDContentType.progress)
             RequestHelper.requestContact(callback: {[weak self](isSuccess,reason,kontak) in
                 DispatchQueue.main.async {
                     HUD.hide()
@@ -151,7 +167,7 @@ extension ContainerViewController:SideMenuToContainerDelegate{
             
         }else{
             //this is collection
-            RequestHelper.requestListBasedOnCategory(params: ["function":"video"], callback: {[weak self](isSuccess,reason,videoItems) in
+            /*RequestHelper.requestListBasedOnCategory(params: ["function":"video"], callback: {[weak self](isSuccess,reason,videoItems) in
                 DispatchQueue.main.async {
                     HUD.hide()
                     if isSuccess{
@@ -167,7 +183,15 @@ extension ContainerViewController:SideMenuToContainerDelegate{
                     }
                     
                 }
-            })
+            })*/
+            
+            let collectionVC = contentStoryBoard.instantiateViewController(withIdentifier: "CollectionViewController") as! CollectionViewController
+            collectionVC.selectedCategory = menuName.lowercased()
+            addChildViewController(collectionVC)
+            collectionVC.view.frame = CGRect(x:0, y:0, width:view.frame.size.width, height:view.frame.size.height);
+            view.addSubview(collectionVC.view)
+            collectionVC.didMove(toParentViewController:self)
+            
         }
         
     }

@@ -31,13 +31,17 @@ class RequestHelper{
     class func requestListBasedOnCategory(params:[String:String],callback:((Bool,String?,VideoItems?) -> Void)?){
         _ = RequestHelper.requestManager.request(BRouter.commonRequest(parameters: params)).responseObject(queue: DispatchQueue.global()){(response:DataResponse<VideoItems>) in
             do{
-                
                 let videoItems = try response.result.unwrap() as VideoItems
                 callback?(true,nil,videoItems)
             }catch{
                 //Catch Error Menu And Display it to user
                 //debugPrint("Error Retrieving Menu Video Items : Response -> \(response.error.debugDescription)")
-                callback?(false,response.error?.localizedDescription,nil)
+                if response.response?.statusCode == 200{
+                    callback?(true,nil,nil)
+                }else{
+                    callback?(false,response.error?.localizedDescription,nil)
+                }
+                
             }
         }
     }

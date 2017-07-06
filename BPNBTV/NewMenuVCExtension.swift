@@ -14,13 +14,18 @@ extension NewMenuVC:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if sections.count <= section {return 0}
         return sections[section].items.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "menuTVCell", for: indexPath) as! MenuTVCell
-        cell.menuLabel?.text = sections[indexPath.section].items[indexPath.row].menu
+        if sections.count >  indexPath.section{
+            cell.menuLabel?.text = sections[indexPath.section].items[indexPath.row].menu
+        }else{
+            cell.menuLabel?.text = ""
+        }
         
         return cell
     }
@@ -46,7 +51,11 @@ extension NewMenuVC:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return sections[indexPath.section].collapsed! ? 0 : 44
+        if sections.count > indexPath.section{
+            return sections[indexPath.section].collapsed! ? 0 : 44
+        }else{
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -60,7 +69,7 @@ extension NewMenuVC:UITableViewDelegate,UITableViewDataSource{
         }else{
             cell.contentView.backgroundColor = UIColor.white
         }
-        
+        if(sections.count <= indexPath.section){return}
         if selectedMenuString == sections[indexPath.section].items[indexPath.row].menu{
             (cell as! MenuTVCell).menuLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 15.0)
         }else{
@@ -71,11 +80,14 @@ extension NewMenuVC:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         headerTB = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? CollapsibleTableViewHeader ?? CollapsibleTableViewHeader(reuseIdentifier: "header")
+        if sections.count <=  section{ return nil}
         if(sections[section].items.count == 0){
             headerTB?.arrowImage.isHidden = true
         }else{
             headerTB?.arrowImage.isHidden = false
         }
+        
+        
         headerTB?.titleLabel.text = sections[section].name.firstCharToUpper()
         if selectedMenuString == sections[section].name.firstCharToUpper(){
             headerTB?.titleLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 17.0)
@@ -110,7 +122,7 @@ extension NewMenuVC:UITableViewDelegate,UITableViewDataSource{
 }
 extension NewMenuVC:CollapsibleTableViewHeaderDelegate{
     func toggleSection(header: CollapsibleTableViewHeader, section: Int) {
-        
+        if sections.count <= section {return}
         let collapsed = !sections[section].collapsed
         // Toggle collapse
         sections[section].collapsed = collapsed
@@ -157,4 +169,16 @@ extension NewMenuVC:CollapsibleTableViewHeaderDelegate{
             header.setNeedsLayout()
         }
     }
+}
+
+
+extension NewMenuVC:UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        view.endEditing(true)
+        self.menuSelectedDelegate?.searchSelected(keyword: searchTF.text ?? "")
+        dismiss(animated: true, completion: nil)
+        return true
+    }
+    
 }

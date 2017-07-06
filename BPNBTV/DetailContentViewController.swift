@@ -8,8 +8,7 @@
 
 import UIKit
 import youtube_ios_player_helper
-import AVKit
-import AVFoundation
+
 import BMPlayer
 class DetailContentViewController: UIViewController {
     var video:Video!
@@ -25,7 +24,7 @@ class DetailContentViewController: UIViewController {
     var currentPage = 1
     var totalPage = 0
     var totalLimitVideos = 0
-    var avpController:AVPlayerViewController!
+    
     var overlayPlayer:UIView!
     //var player:Player!
     var player:BMPlayer!
@@ -40,6 +39,8 @@ class DetailContentViewController: UIViewController {
         if let _ = video{
             if video.youtube == ""{
                 self.navigationController?.navigationBar.isHidden = true
+            }else{
+                self.navigationController?.navigationBar.isHidden = false
             }
             //printLog(content: "VIDEO ID : \(video.youtube)")
             requestRelatedVideos(params: ["function":"video","category":video.category ?? "","page":"\(currentPage)"])
@@ -50,13 +51,16 @@ class DetailContentViewController: UIViewController {
         super.viewWillAppear(animated)
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.shouldRotate = true
-        DispatchQueue.main.async {[weak self] in
-            self?.playerView?.webView?.scrollView.contentInset = UIEdgeInsets.zero
-        }
+        
         if let _ = video{
             if video.youtube == ""{
-                avpController?.player?.play()
+                self.navigationController?.navigationBar.isHidden = true
                 setBMPlayerPortrait(videoURL: URL(string: video!.videoUrl ?? "")!,videoName: videoSelectedLang == Constants.langID ? video.judul:video.judulEN)
+            }else{
+                self.navigationController?.navigationBar.isHidden = false
+                DispatchQueue.main.async {[weak self] in
+                    self?.playerView?.webView?.scrollView.contentInset = UIEdgeInsets.zero
+                }
             }
         }
         
@@ -67,7 +71,6 @@ class DetailContentViewController: UIViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.shouldRotate = false
         headerView?.detailHeaderDelegate = nil
-        avpController?.player?.pause()
         cleanUpBMPlayer()
     }
     
@@ -143,7 +146,7 @@ class DetailContentViewController: UIViewController {
     func cleanUpBMPlayer(){
         player?.playerLayer?.resetPlayer()
         player?.removeFromSuperview()
-        player?.delegate = self
+        player?.delegate = nil
         player = nil
     }
     
@@ -160,7 +163,7 @@ class DetailContentViewController: UIViewController {
                 //let _ = self?.dismiss(animated: true, completion: nil)
             }
         }
-        let asset = BMPlayerResource(url: videoURL,name:videoName)
+        let asset = BMPlayerResource(url: videoURL)
         player.seek(playerBMSeek)
         player.setVideo(resource: asset)
         

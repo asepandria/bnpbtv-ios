@@ -23,15 +23,33 @@ class CollectionViewController: UIViewController {
     var selectedCategory = ""
     var isSearch = false
     var keyWord = ""
+    
+    @IBOutlet weak var indexLabel: UILabel!
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.navigationBar.isHidden = false
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        DispatchQueue.main.async {[weak self] in
+            self?.collectionView?.contentInset = UIEdgeInsets.zero
+        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setCollectionView()
+        
+        if !isSearch{
+            indexLabel?.text = "Index : "+selectedCategory.capitalized(with: Locale(identifier: "ID"))
+            requestVideoItems(params: ["function":"video","page":"\(currentPage)","category":"\(selectedCategory)"])
+        }else{
+            indexLabel?.text = "Index Pencarian : "+keyWord.capitalized(with: Locale(identifier: "ID"))
+            requestVideoItems(params: ["function":"video","page":"\(currentPage)","keyword":"\(keyWord)"])
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,30 +57,158 @@ class CollectionViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
+    var isRequestFinish = false
     func requestVideoItems(params:[String:String] = ["function":"video","page":"\(1)"]){
-        if !isSearch{
-            RequestHelper.requestListBasedOnCategory(params: params, callback: {[weak self] (isSuccess,errorReason,videoItems) in
-                DispatchQueue.main.async {[weak self] in
-                    if isSuccess{
-                        self?.printLog(content: "CONTENT : \(videoItems)")
-                    }else{
-                        AlertHelper.showErrorAlert(message: errorReason ?? "")
-                    }
-                }
+        RequestHelper.requestListBasedOnCategory(params: params, callback: {[weak self] (isSuccess,errorReason,videoItems) in
+            DispatchQueue.main.async {
+                self?.isRequestFinish = true
+                self?.progressIndicator?.stopAnimating()
+                self?.progressIndicator?.removeFromSuperview()
                 
-            })
+                if isSuccess{
+                    //self?.printLog(content: "CONTENT : \(String(describing: videoItems))")
+                    if let _videoItems = videoItems{
+                        //self?.printLog(content: "Video Items Home : \(_videoItems)")
+                        if let _ = self?.collectionVideoItems{
+                            for _v in _videoItems.videos{
+                                if let checkerIf = self?.collectionVideoItems.videos.contains(where: {$0.idVideo == _v.idVideo}){
+                                    if !checkerIf{
+                                        self?.collectionVideoItems.videos.append(_v)
+                                    }
+                                }
+                            }
+                        }else{
+                            self?.collectionVideoItems = _videoItems
+                        }
+                        self?.totalCollectionVideo = (self?.collectionVideoItems.videos.count) ?? 0
+                        self?.totalPage = (self?.collectionVideoItems.totalPage) ?? 0
+                        self?.totalLimitVideos = (self?.collectionVideoItems.limit) ?? 0
+                    }
+                    self?.collectionView.reloadData()
+                }else{
+                    AlertHelper.showErrorAlert(message: errorReason ?? "")
+                }
+            }
+            
+        })
+    }
+
+    func setCollectionView(){
+        progressIndicator = UIActivityIndicatorView()
+        collectionView.register(UINib(nibName: "LeftCellCV", bundle: nil), forCellWithReuseIdentifier: "LeftCellCV")
+        collectionView?.delegate = self
+        collectionView?.dataSource = self
+        collectionView?.showsVerticalScrollIndicator = false
+        
+    }
+}
+
+
+extension CollectionViewController:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if let _ = collectionVideoItems{
+            return totalCollectionVideo
+        }else{
+            return 0
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        video = collectionVideoItems.videos[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LeftCellCV", for: indexPath) as! LeftCellCV
+        cell.titleList?.text = video.judulEN
+        if (video.summaryEN.characters.count > 80){
+            cell.contentList?.text = video.summaryEN.substring(to: video.summaryEN.index(video.summaryEN.startIndex, offsetBy: 80)) + "..."
+        }else{
+            cell.contentList?.text = video.summaryEN
+        }
+        cell.imageList?.kf.setImage(with: URL(string: video.imageUrl ?? ""))
+        return cell
+        
     }
-    */
-
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        cell.contentView.backgroundColor = UIColor.bnpbLightGrayColor()
+        progressIndicator?.stopAnimating()
+        progressIndicator?.removeFromSuperview()
+        if(indexPath.row == collectionVideoItems.videos.count - 1 && totalCollectionVideo < totalLimitVideos){
+            //printLog(content: "Load More API...")
+            currentPage += 1
+            isRequestFinish = false
+            //collectionView.reloadItems(at: [indexPath])
+            requestVideoItems(params: ["function":"video","page":"\(currentPage)","category":"\(selectedCategory)"])
+        }
+    }
+    
+    
+    
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: ((getScreenWidth() / 2) - 8)  , height: 180)
+        
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isLandscape{
+            
+        }else if UIDevice.current.orientation.isPortrait{
+            
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 2, left: 4, bottom: 4, right: 4)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyBoard = UIStoryboard(name: "Content", bundle: nil)
+        let detailVC = storyBoard.instantiateViewController(withIdentifier: "DetailContentViewController") as! DetailContentViewController
+        detailVC.video = collectionVideoItems.videos[indexPath.row]
+        self.navigationController?.pushViewController(detailVC, animated: true)
+        //present(detailVC, animated: true, completion: nil)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        /*if isRequestFinish{
+            return CGSize.zero
+        }else{
+            return CGSize(width: getScreenWidth(), height: 30)
+        }*/
+        return CGSize(width: getScreenWidth(), height: 30)
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionElementKindSectionFooter:
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "FooterIndicator", for: indexPath as IndexPath)
+            footerView.backgroundColor = UIColor.white
+            progressIndicator.startAnimating()
+            progressIndicator.frame = CGRect(x:(getScreenWidth()/2)-10,y:5,width:20,height:20)
+            progressIndicator.color = UIColor.gray
+            footerView.addSubview(progressIndicator)
+            return footerView
+        default:
+            assert(false, "Unexpected element kind")
+        }
+    }
 }
