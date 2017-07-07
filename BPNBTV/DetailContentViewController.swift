@@ -8,8 +8,14 @@
 
 import UIKit
 import youtube_ios_player_helper
-
 import BMPlayer
+import Social
+import Kingfisher
+enum ShareButtonTag:Int{
+    case Facebook = 1
+    case Twitter = 2
+    case More = 3
+}
 class DetailContentViewController: UIViewController {
     var video:Video!
     @IBOutlet weak var videoContainer: UIView!
@@ -30,6 +36,7 @@ class DetailContentViewController: UIViewController {
     var player:BMPlayer!
     var playerBMSeek:TimeInterval = 0
     var videoSelectedLang=0
+    var imageViewVideo:UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         if let selectedLang = UserDefaults.standard.integer(forKey: Constants.langKey) as Int?{
@@ -37,6 +44,9 @@ class DetailContentViewController: UIViewController {
         }
         setupViews()
         if let _ = video{
+            imageViewVideo = UIImageView()
+            imageViewVideo.frame = CGRect(x: 0, y: 0, width: getScreenWidth()/4, height: getScreenWidth()/4)
+            imageViewVideo.kf.setImage(with: URL(string: video.imageUrl ?? ""))
             if video.youtube == ""{
                 self.navigationController?.navigationBar.isHidden = true
             }else{
@@ -141,6 +151,55 @@ class DetailContentViewController: UIViewController {
     }
     
     
+    
+    
+    @IBAction func shareAction(_ sender: UIButton) {
+        switch sender.tag{
+        case ShareButtonTag.Facebook.rawValue:
+            //printLog(content: "Share Facebook")
+            if let vc = SLComposeViewController(forServiceType:SLServiceTypeFacebook){
+                vc.add(imageViewVideo?.image)
+                vc.add(URL(string: video.videoUrl))
+                if videoSelectedLang == Constants.langEN{
+                    vc.setInitialText(video.judulEN)
+                }else{
+                    vc.setInitialText(video.judul)
+                }
+                self.present(vc, animated: true, completion: nil)
+            }
+        case ShareButtonTag.Twitter.rawValue:
+            //printLog(content: "Share Twitter")
+            if let vc = SLComposeViewController(forServiceType:SLServiceTypeTwitter){
+                vc.add(imageViewVideo?.image)
+                vc.add(URL(string: video.videoUrl))
+                if videoSelectedLang == Constants.langEN{
+                    vc.setInitialText(video.judulEN)
+                }else{
+                    vc.setInitialText(video.judul)
+                }
+                self.present(vc, animated: true, completion: nil)
+            }
+        case ShareButtonTag.More.rawValue:
+            //printLog(content: "Share More")
+            var shareJudul = ""
+            if videoSelectedLang == Constants.langEN{
+                shareJudul = video.judulEN
+            }else{
+                shareJudul = video.judulEN
+            }
+            
+            let activityVC = UIActivityViewController(activityItems: [shareJudul,URL(string: video.videoUrl ?? "") as Any,imageViewVideo.image as Any], applicationActivities: nil)
+            activityVC.excludedActivityTypes = [UIActivityType.assignToContact,
+                                                UIActivityType.addToReadingList,
+                                                UIActivityType.print,
+                                                UIActivityType.openInIBooks,
+                                                UIActivityType.saveToCameraRoll]
+            present(activityVC, animated: true, completion: nil)
+            
+        default:
+            break
+        }
+    }
     
     
     func cleanUpBMPlayer(){

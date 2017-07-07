@@ -56,6 +56,10 @@ class ContainerViewController:UIViewController{
         present(SideMenuManager.menuLeftNavigationController!, animated: true, completion: nil)
     }
     
+    @IBAction func searchAction(_ sender: Any) {
+        present(SideMenuManager.menuLeftNavigationController!, animated: true, completion: nil)
+        newMenuVC.searchTF.becomeFirstResponder()
+    }
 
     /*
     // MARK: - Navigation

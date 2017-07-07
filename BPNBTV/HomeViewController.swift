@@ -230,7 +230,16 @@ extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource
         let detailVC = storyBoard.instantiateViewController(withIdentifier: "DetailContentViewController") as! DetailContentViewController
         detailVC.video = homeVideoItems.videos[indexPath.row]
         self.navigationController?.pushViewController(detailVC, animated: true)
-        //present(detailVC, animated: true, completion: nil)
+        /*if let rootVC = self.navigationController?.viewControllers.first{
+            if rootVC.isKind(of: ContainerViewController.self){
+                (rootVC as! ContainerViewController).removeChildViewControllers()
+                (rootVC as! ContainerViewController).addChildViewController(detailVC)
+                
+                detailVC.view.frame = CGRect(x:0, y:0, width:rootVC.view.frame.size.width, height:rootVC.view.frame.size.height)
+                rootVC.view.addSubview(detailVC.view)
+                detailVC.didMove(toParentViewController: rootVC)
+            }
+        }*/
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {

@@ -31,6 +31,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="dCv-bE-qfN">
                             <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="searchAction:" destination="3Ld-MG-YBa" id="Qsh-VJ-3is"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>

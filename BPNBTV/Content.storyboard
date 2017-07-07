@@ -197,9 +197,62 @@
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p9l-B7-9Ag">
                                 <rect key="frame" x="0.0" y="627" width="375" height="40"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="3z6-YG-IDR">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please Share" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="7Jn-yj-zOD">
+                                                <rect key="frame" x="4" y="4" width="89" height="32"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Txg-Kl-q0s">
+                                                <rect key="frame" x="97" y="4" width="88.5" height="32"/>
+                                                <color key="backgroundColor" red="0.22352941176470587" green="0.3411764705882353" blue="0.60392156862745094" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                <state key="normal" title="Facebook" image="icon_facebook">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="shareAction:" destination="Jb2-zC-3O3" eventType="touchUpInside" id="r3o-VT-kYY"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Pb-g3-Pdm">
+                                                <rect key="frame" x="189.5" y="4" width="89" height="32"/>
+                                                <color key="backgroundColor" red="0.2196078431372549" green="0.7803921568627451" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                <inset key="imageEdgeInsets" minX="-8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="Twitter" image="icon_twitter">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="shareAction:" destination="Jb2-zC-3O3" eventType="touchUpInside" id="BS5-2x-aNo"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mrU-JO-mle">
+                                                <rect key="frame" x="282.5" y="4" width="88.5" height="32"/>
+                                                <color key="backgroundColor" red="0.9293244745996263" green="0.53247950782839604" blue="0.34891166976348709" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                <inset key="imageEdgeInsets" minX="-8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="More" image="icon_plus_white">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="shareAction:" destination="Jb2-zC-3O3" eventType="touchUpInside" id="oUq-51-vwd"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <edgeInsets key="layoutMargins" top="4" left="4" bottom="4" right="4"/>
+                                    </stackView>
+                                </subviews>
                                 <color key="backgroundColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="3z6-YG-IDR" secondAttribute="trailing" id="7bM-9H-aDn"/>
                                     <constraint firstAttribute="height" constant="40" id="LcN-28-5oI"/>
+                                    <constraint firstItem="3z6-YG-IDR" firstAttribute="leading" secondItem="p9l-B7-9Ag" secondAttribute="leading" id="dSm-i1-4Ez"/>
+                                    <constraint firstItem="3z6-YG-IDR" firstAttribute="top" secondItem="p9l-B7-9Ag" secondAttribute="top" id="dgR-xb-bkK"/>
+                                    <constraint firstAttribute="bottom" secondItem="3z6-YG-IDR" secondAttribute="bottom" id="lcV-1e-k33"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -522,5 +575,8 @@
     </scenes>
     <resources>
         <image name="icon_back" width="11" height="18"/>
+        <image name="icon_facebook" width="18" height="18"/>
+        <image name="icon_plus_white" width="22" height="22"/>
+        <image name="icon_twitter" width="18" height="18"/>
     </resources>
 </document>
