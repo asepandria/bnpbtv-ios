@@ -7,6 +7,20 @@ PODS:
     - BMPlayer/Core
     - NVActivityIndicatorView (~> 3.5)
     - SnapKit (~> 3.2)
+  - Firebase/Core (4.0.2):
+    - FirebaseAnalytics (= 4.0.1)
+    - FirebaseCore (= 4.0.2)
+  - FirebaseAnalytics (4.0.1):
+    - FirebaseCore (~> 4.0)
+    - FirebaseInstanceID (~> 2.0)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseCore (4.0.2):
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseInstanceID (2.0.0):
+    - FirebaseCore (~> 4.0)
+  - GoogleToolboxForMac/Defines (2.1.1)
+  - GoogleToolboxForMac/NSData+zlib (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
   - Kingfisher (3.6.1)
   - NVActivityIndicatorView (3.6.1)
   - PKHUD (4.2.3)
@@ -19,6 +33,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.4)
   - BMPlayer
+  - Firebase/Core
   - Kingfisher (~> 3.0)
   - PKHUD (~> 4.0)
   - ReachabilitySwift (~> 3)
@@ -29,6 +44,11 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   BMPlayer: 5ba9e3f3d61ccc5a24ebd9cdc24901dcf28c98bc
+  Firebase: c7ad0731eab26d18a3fc547dd048b0f7cd9c63ae
+  FirebaseAnalytics: 4d7040fefc3cd8b291cde35f12cf063d7963f15d
+  FirebaseCore: 1a8bf6c795ad07d2918278657954ffd2552e9c17
+  FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
+  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   Kingfisher: 2f31cb75f3e98d3d4c406cbdcd9b263e956cfa67
   NVActivityIndicatorView: 9f52a7f84bf5c6a798722c450fe3c198e01c56ed
   PKHUD: c7692163a09875cbf15827dc581df3c5cf7f1015
@@ -38,6 +58,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: c5784b9c393393f3a021f38d65672fdd70828af6
+PODFILE CHECKSUM: 05130f758018fa97d4d7eb32fb2e1bfa370c6d07
 
 COCOAPODS: 1.2.0
