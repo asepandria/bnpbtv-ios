@@ -9,12 +9,34 @@
 import UIKit
 import CoreData
 import Firebase
+import FirebaseInstanceID
+import FirebaseMessaging
+import UserNotifications
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate,
+UNUserNotificationCenterDelegate, MessagingDelegate {
 
     var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         UserDefaults.standard.removeObject(forKey: "MENU")
+        if #available(iOS 10.0, *) {
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {gra, _ in
+            
+            })
+            // For iOS 10 data message (sent via FCM
+            Messaging.messaging().delegate = self
+        } else {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        
+        application.registerForRemoteNotifications()
         FirebaseApp.configure()
         return true
     }
@@ -47,7 +69,79 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
     }
+    
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        printLog(content: "DEVICE TOKEN : \(deviceToken)")
+        Messaging.messaging().apnsToken = deviceToken
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+        printLog(content: "MESSGE REMOTE : \(userInfo)")
+    }
+    
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        printLog(content: "RESPONSE : \(response.notification)")
+    }
+    
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let userInfo = notification.request.content.userInfo
+        // Print message ID.
+        //print("Message ID: \(userInfo["gcm.message_id"]!)")
+        
+        // Print full message.
+        print("%@", userInfo)
+        
+        let aps = userInfo["aps"] as! [String: Any]
+        let notificationMessage = aps["alert"] as! String // processed content from notificaton
+        printLog(content: "NOTIFICATION MESSAGFWE : \(notificationMessage)")
+        redirectToHomeForNotification()
+    }
+    
+    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
+        //print(remoteMessage.appData)
+        printLog(content: "REMOTE MESSAGE : \(remoteMessage.appData)")
+    }
 
+    func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
+        printLog(content: "FCM TOKEN : \(fcmToken)")
+    }
+    
+    func redirectToHomeForNotification(){
+        if let rootVC = UIApplication.shared.keyWindow?.rootViewController{
+            for rvc in rootVC.childViewControllers{
+                if !rvc.isKind(of: ContainerViewController.self){
+                    if rvc.isKind(of: NewMenuVC.self){
+                        rvc.dismiss(animated: true, completion: nil)
+                    }else if rvc.isKind(of: DetailContentViewController.self){
+                        rvc.navigationController?.popToRootViewController(animated: false)
+                    }else{
+                        rvc.willMove(toParentViewController: nil)
+                        rvc.view.removeFromSuperview()
+                        rvc.removeFromParentViewController()
+                        
+                    }
+                }else{
+                    for cvc in rvc.childViewControllers{
+                        cvc.willMove(toParentViewController: nil)
+                        cvc.view.removeFromSuperview()
+                        cvc.removeFromParentViewController()
+                    }
+                    let homeSB = UIStoryboard(name: "Content", bundle: nil)
+                    let homeVC = homeSB.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+                    homeVC.isFromNotification = true
+                    rvc.addChildViewController(homeVC)
+                    homeVC.view.frame = CGRect(x:0, y:0, width:rvc.view.frame.size.width, height:rvc.view.frame.size.height);
+                    rvc.view.addSubview(homeVC.view)
+                    homeVC.didMove(toParentViewController: rvc)
+                }
+            }
+            
+        }
+    }
+    
     // MARK: - Core Data stack
 
     @available(iOS 10.0, *)

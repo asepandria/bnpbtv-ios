@@ -23,11 +23,17 @@ class HomeViewController: UIViewController {
     var totalPage = 0
     var totalLimitVideos = 0
     var progressIndicator: UIActivityIndicatorView!
-    
+    var isFromNotification = false
+    var notificationContainer:UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         setCollectionView()
-        requestHeadline()
+        if !isFromNotification{
+            requestHeadline()
+        }else{
+            playerView?.removeFromSuperview()
+            setNotificationContainer()
+        }
         requestHomeVideo()
         // Do any additional setup after loading the view.
     }
@@ -45,10 +51,24 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        DispatchQueue.main.async {[weak self] in
-            self?.playerView?.webView?.scrollView.contentInset = UIEdgeInsets.zero
+        if isFromNotification{
+            DispatchQueue.main.async {[weak self] in
+                self?.playerView?.webView?.scrollView.contentInset = UIEdgeInsets.zero
+            }
         }
         
+    }
+    
+    func setNotificationContainer(){
+        notificationContainer = UIView()
+        notificationContainer.frame = CGRect(x: 0, y: 0, width: getScreenWidth(), height: videoContainer.frame.height)
+        /*notificationContainer.snp.makeConstraints({ make in
+            make.top.equalTo(videoContainer)
+            make.left.right.equalTo(videoContainer)
+            make.height.equalTo(videoContainer.snp.height)
+        })*/
+        notificationContainer.backgroundColor = UIColor.blue
+        videoContainer.addSubview(notificationContainer)
     }
     func setCollectionView(){
         progressIndicator = UIActivityIndicatorView()

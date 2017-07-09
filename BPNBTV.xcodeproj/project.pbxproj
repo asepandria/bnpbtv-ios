@@ -119,6 +119,7 @@
 		1896B9D21F12815C004470A2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		189765D31E975CFE00D05B48 /* MenuTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuTVCell.xib; sourceTree = "<group>"; };
 		189765D51E975D6900D05B48 /* MenuTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTVCell.swift; sourceTree = "<group>"; };
+		189990881F128387000DEDA5 /* BPNBTV.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BPNBTV.entitlements; sourceTree = "<group>"; };
 		18CB59D91EF6A8BC00AD6D9D /* BPNBTV-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BPNBTV-Bridging-Header.h"; sourceTree = "<group>"; };
 		18E0683E1F06479600277353 /* RightCellCV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightCellCV.swift; sourceTree = "<group>"; };
 		18E068401F07164600277353 /* ColletionFooterIndicator.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ColletionFooterIndicator.xib; sourceTree = "<group>"; };
@@ -275,6 +276,7 @@
 		067AD9FE1E7D13C90030C686 /* BPNBTV */ = {
 			isa = PBXGroup;
 			children = (
+				189990881F128387000DEDA5 /* BPNBTV.entitlements */,
 				1896B9D41F128163004470A2 /* plist */,
 				1896B9CF1F1269E5004470A2 /* images */,
 				185EB8811E958A6400D7841F /* ext */,
@@ -470,6 +472,11 @@
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = 742KJK328B;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					067ADA121E7D13D60030C686 = {
 						CreatedOnToolsVersion = 8.2;
@@ -867,12 +874,14 @@
 			baseConfigurationReference = E17B026014F3F4B438FFA3AA /* Pods-BPNBTV.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BPNBTV/BPNBTV.entitlements;
 				DEVELOPMENT_TEAM = 742KJK328B;
 				INFOPLIST_FILE = BPNBTV/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = kompas.BPNBTV;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kompas.bnpbtv;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -882,12 +891,14 @@
 			baseConfigurationReference = 9BB5751925274A3B7059ECAB /* Pods-BPNBTV.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BPNBTV/BPNBTV.entitlements;
 				DEVELOPMENT_TEAM = 742KJK328B;
 				INFOPLIST_FILE = BPNBTV/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = kompas.BPNBTV;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kompas.bnpbtv;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
