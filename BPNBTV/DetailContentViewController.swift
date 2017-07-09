@@ -11,6 +11,7 @@ import youtube_ios_player_helper
 import BMPlayer
 import Social
 import Kingfisher
+import SideMenu
 enum ShareButtonTag:Int{
     case Facebook = 1
     case Twitter = 2
@@ -48,13 +49,15 @@ class DetailContentViewController: UIViewController {
             imageViewVideo.frame = CGRect(x: 0, y: 0, width: getScreenWidth()/4, height: getScreenWidth()/4)
             imageViewVideo.kf.setImage(with: URL(string: video.imageUrl ?? ""))
             if video.youtube == ""{
-                self.navigationController?.navigationBar.isHidden = true
+                //self.navigationController?.navigationBar.isHidden = true
             }else{
                 self.navigationController?.navigationBar.isHidden = false
             }
             //printLog(content: "VIDEO ID : \(video.youtube)")
             requestRelatedVideos(params: ["function":"video","category":video.category ?? "","page":"\(currentPage)"])
         }
+        
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -64,7 +67,7 @@ class DetailContentViewController: UIViewController {
         
         if let _ = video{
             if video.youtube == ""{
-                self.navigationController?.navigationBar.isHidden = true
+                self.navigationController?.navigationBar.isHidden = false
                 setBMPlayerPortrait(videoURL: URL(string: video!.videoUrl ?? "")!,videoName: videoSelectedLang == Constants.langID ? video.judul:video.judulEN)
             }else{
                 self.navigationController?.navigationBar.isHidden = false
@@ -95,6 +98,7 @@ class DetailContentViewController: UIViewController {
             cleanUpBMPlayer()
             if UIDevice.current.orientation.isLandscape{
                 if video!.youtube == ""{
+                    self.navigationController?.navigationBar.isHidden = true
                     setBMPlayerLandscape(videoURL: URL(string: video!.videoUrl ?? "")!,videoName: videoSelectedLang == Constants.langID ? video.judul:video.judulEN )
                     //setBMPlayerLayoutLandscape()
                 }else{
@@ -106,7 +110,7 @@ class DetailContentViewController: UIViewController {
                     }
                 }
             }else {
-                
+                self.navigationController?.navigationBar.isHidden = false
                 if video!.youtube == ""{
                     setBMPlayerPortrait(videoURL: URL(string: video!.videoUrl ?? "")!,videoName: videoSelectedLang == Constants.langID ? video.judul:video.judulEN)
                     //setBMPlayerLayoutPortrait()
@@ -136,7 +140,7 @@ class DetailContentViewController: UIViewController {
                 if self?.video.youtube == ""{
                     self?.playerView.removeFromSuperview()
                     let videoURL = URL(string: self?.video.videoUrl ?? "")
-                    self?.videoContainer.backgroundColor = UIColor.black
+                    //self?.videoContainer.backgroundColor = UIColor.black
                     self?.setBMPlayerPortrait(videoURL: videoURL!,videoName:(self!.videoSelectedLang  == Constants.langID) ? self!.video.judul:self!.video.judulEN)
                     
                 }else{
@@ -148,8 +152,17 @@ class DetailContentViewController: UIViewController {
                 self?.playerView.playVideo()
             }
         }
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 44, height: getScreenWidth()/3))
+        imageView.contentMode = .scaleAspectFit
+        let image = UIImage(named: "bnpbtv")
+        imageView.image = image
+        navigationItem.titleView = imageView
     }
     
+    @IBAction func searchAction(_ sender: UIBarButtonItem) {
+        printLog(content: "seach Action Detail...")
+        present(SideMenuManager.menuLeftNavigationController!, animated: true, completion: nil)
+    }
     
     
     
@@ -210,7 +223,7 @@ class DetailContentViewController: UIViewController {
     }
     
     func setBMPlayerPortrait(videoURL:URL,videoName:String){
-        BMPlayerConf.topBarShowInCase = BMPlayerTopBarShowCase.always
+        BMPlayerConf.topBarShowInCase = BMPlayerTopBarShowCase.none
         if player ==  nil{
             player = BMPlayer()
             player.delegate = self
@@ -229,9 +242,10 @@ class DetailContentViewController: UIViewController {
     }
     
     func setBMPlayerLayoutPortrait(){
-        BMPlayerConf.topBarShowInCase = BMPlayerTopBarShowCase.always
+        BMPlayerConf.topBarShowInCase = BMPlayerTopBarShowCase.none
         player.snp.makeConstraints { (make) in
-            make.top.equalTo((view)).offset(20)//.offset((navigationController?.navigationBar.frame.height ?? 0)+20)
+            //make.top.equalTo((view)).offset((navigationController?.navigationBar.frame.height ?? 0)+20+12)
+            make.top.equalTo(videoContainer)
             make.left.right.equalTo((view)!)
             // Note here, the aspect ratio 16:9 priority is lower than 1000 on the line, because the 4S iPhone aspect ratio is not 16:9
             //make.height.equalTo((self?.player.snp.width)!).multipliedBy(9.0/16.0).priority(750)
@@ -249,7 +263,8 @@ class DetailContentViewController: UIViewController {
             player.backBlock = { finish in
                 //let _ = self.navigationController?.popViewController(animated: true)
                 UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
-                UIApplication.shared.setStatusBarHidden(false, with: .fade)
+                //UIApplication.shared.setStatusBarHidden(false, with: .fade)
+                //prefersStatusBarHidden = false
                 UIApplication.shared.statusBarOrientation = UIInterfaceOrientation.portrait
                 //let _ = self?.dismiss(animated: true, completion: nil)
             }
@@ -375,7 +390,7 @@ extension DetailContentViewController:UICollectionViewDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: ((getScreenWidth() / 2) - 8)   , height: 180)
+        return CGSize(width: ((getScreenWidth() / 2) - 8)   , height: 200)
     }
     
     

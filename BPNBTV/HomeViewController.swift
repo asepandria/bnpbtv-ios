@@ -192,9 +192,9 @@ extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.row % 2 == 0{
-            return CGSize(width: ((getScreenWidth() / 2) - 8)   , height: 180)
+            return CGSize(width: ((getScreenWidth() / 2) - 8)   , height: 200)
         }else{
-            return CGSize(width: ((getScreenWidth() / 2) - 8)  , height: 180)
+            return CGSize(width: ((getScreenWidth() / 2) - 8)  , height: 200)
         }
         
     }

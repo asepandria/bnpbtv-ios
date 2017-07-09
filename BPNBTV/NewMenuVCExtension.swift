@@ -176,6 +176,14 @@ extension NewMenuVC:UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         view.endEditing(true)
+        if let _topVC = UIApplication.shared.keyWindow?.rootViewController{
+            for _tvc in _topVC.childViewControllers{
+                if(_tvc.isKind(of: DetailContentViewController.self)){
+                    //_tvc.navigationController?.popViewController(animated: true)
+                    _tvc.navigationController?.popToRootViewController(animated: true)
+                }
+            }
+        }
         self.menuSelectedDelegate?.searchSelected(keyword: searchTF.text ?? "")
         dismiss(animated: true, completion: nil)
         return true

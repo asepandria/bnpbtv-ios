@@ -95,6 +95,14 @@ class NewMenuVC: UIViewController {
         printLog(content: "Search Tapped")
         searchTF.resignFirstResponder()
         view.endEditing(true)
+        if let _topVC = UIApplication.shared.keyWindow?.rootViewController{
+            for _tvc in _topVC.childViewControllers{
+                if(_tvc.isKind(of: DetailContentViewController.self)){
+                    //_tvc.navigationController?.popViewController(animated: true)
+                    _tvc.navigationController?.popToRootViewController(animated: true)
+                }
+            }
+        }
         self.menuSelectedDelegate?.searchSelected(keyword: searchTF.text ?? "")
         dismiss(animated: true, completion: nil)
         

@@ -12,17 +12,17 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RightCellCV" id="GF1-yk-j3c" customClass="RightCellCV" customModule="BPNBTV" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="240" height="180"/>
+            <rect key="frame" x="0.0" y="0.0" width="240" height="200"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="240" height="180"/>
+                <rect key="frame" x="0.0" y="0.0" width="240" height="200"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pNO-me-AMK">
-                        <rect key="frame" x="0.0" y="0.0" width="240" height="180"/>
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="200"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="oZt-h0-iim">
-                                <rect key="frame" x="4" y="4" width="230" height="45"/>
+                                <rect key="frame" x="4" y="3" width="230" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="Zr9-1Q-OP4"/>
                                 </constraints>
@@ -31,7 +31,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c1x-NZ-Qkb">
-                                <rect key="frame" x="0.0" y="145" width="240" height="35"/>
+                                <rect key="frame" x="0.0" y="165" width="240" height="35"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_play_video" translatesAutoresizingMaskIntoConstraints="NO" id="mt3-d7-5iB">
                                         <rect key="frame" x="4" y="4" width="27" height="27"/>
@@ -60,7 +60,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="pIS-ei-94K">
-                                <rect key="frame" x="4" y="53" width="230" height="88"/>
+                                <rect key="frame" x="4" y="52" width="230" height="108"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -70,11 +70,11 @@
                         <constraints>
                             <constraint firstItem="c1x-NZ-Qkb" firstAttribute="leading" secondItem="pNO-me-AMK" secondAttribute="leading" id="DGA-9O-f1m"/>
                             <constraint firstAttribute="trailing" secondItem="c1x-NZ-Qkb" secondAttribute="trailing" id="GgS-S9-sbS"/>
-                            <constraint firstItem="c1x-NZ-Qkb" firstAttribute="top" secondItem="pIS-ei-94K" secondAttribute="bottom" constant="4" id="Haf-uF-qqp"/>
+                            <constraint firstItem="c1x-NZ-Qkb" firstAttribute="top" secondItem="pIS-ei-94K" secondAttribute="bottom" constant="5" id="Haf-uF-qqp"/>
                             <constraint firstItem="pIS-ei-94K" firstAttribute="leading" secondItem="pNO-me-AMK" secondAttribute="leading" constant="4" id="L9a-m4-oq1"/>
                             <constraint firstAttribute="bottom" secondItem="c1x-NZ-Qkb" secondAttribute="bottom" id="VeU-9I-AWI"/>
                             <constraint firstItem="pIS-ei-94K" firstAttribute="leading" secondItem="pNO-me-AMK" secondAttribute="leading" constant="4" id="c6M-W6-OKy"/>
-                            <constraint firstItem="oZt-h0-iim" firstAttribute="top" secondItem="pNO-me-AMK" secondAttribute="top" constant="4" id="iiE-hU-aKO"/>
+                            <constraint firstItem="oZt-h0-iim" firstAttribute="top" secondItem="pNO-me-AMK" secondAttribute="top" constant="3" id="iiE-hU-aKO"/>
                             <constraint firstAttribute="trailing" secondItem="pIS-ei-94K" secondAttribute="trailing" constant="6" id="nfx-br-hCv"/>
                             <constraint firstAttribute="trailing" secondItem="pIS-ei-94K" secondAttribute="trailing" constant="6" id="p37-HB-K1I"/>
                             <constraint firstAttribute="trailing" secondItem="oZt-h0-iim" secondAttribute="trailing" constant="6" id="tc1-ec-1o9"/>

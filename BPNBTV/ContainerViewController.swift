@@ -45,6 +45,12 @@ class ContainerViewController:UIViewController{
         SideMenuManager.menuPresentMode = SideMenuManager.MenuPresentMode.menuSlideIn
         
         selectedMenu(menuName: "HOME")
+        
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 44, height: getScreenWidth()/3))
+        imageView.contentMode = .scaleAspectFit
+        let image = UIImage(named: "bnpbtv")
+        imageView.image = image
+        navigationItem.titleView = imageView
     }
 
     override func didReceiveMemoryWarning() {

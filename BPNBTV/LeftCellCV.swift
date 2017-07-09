@@ -18,5 +18,7 @@ class LeftCellCV: UICollectionViewCell {
         self.layer.borderWidth = 0.5
         self.layer.borderColor = UIColor.bnpbLightGrayColor().cgColor
         self.layer.cornerRadius = 1
+        
+        imageList.contentMode = UIViewContentMode.scaleToFill
     }
 }

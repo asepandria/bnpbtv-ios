@@ -277,6 +277,12 @@
                                 <action selector="backAction:" destination="Jb2-zC-3O3" id="O8a-BO-vsg"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="al6-K4-QNf">
+                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="searchAction:" destination="Jb2-zC-3O3" id="qi2-Xy-22M"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="cT1-KD-tpa" id="mgE-Y2-0se"/>

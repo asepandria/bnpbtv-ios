@@ -149,7 +149,7 @@ extension CollectionViewController:UICollectionViewDelegate,UICollectionViewData
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: ((getScreenWidth() / 2) - 8)  , height: 180)
+        return CGSize(width: ((getScreenWidth() / 2) - 8)  , height: 200)
         
     }
     
