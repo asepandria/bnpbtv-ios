@@ -23,7 +23,7 @@ target 'BPNBTV' do
   #pod 'XCDYouTubeKit', '~> 2.5'
   pod 'BMPlayer'
   pod 'Firebase/Core'
-  
+  pod 'Firebase/Messaging'
   target 'BPNBTVTests' do
     inherit! :search_paths
     # Pods for testing
