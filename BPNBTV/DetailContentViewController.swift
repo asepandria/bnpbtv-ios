@@ -160,7 +160,7 @@ class DetailContentViewController: UIViewController {
     }
     
     @IBAction func searchAction(_ sender: UIBarButtonItem) {
-        printLog(content: "seach Action Detail...")
+        //printLog(content: "seach Action Detail...")
         present(SideMenuManager.menuLeftNavigationController!, animated: true, completion: nil)
     }
     

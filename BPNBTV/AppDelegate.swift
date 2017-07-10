@@ -12,6 +12,8 @@ import Firebase
 import FirebaseInstanceID
 import FirebaseMessaging
 import UserNotifications
+import GooglePlaces
+import GoogleMaps
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate,
 UNUserNotificationCenterDelegate, MessagingDelegate {
@@ -38,6 +40,10 @@ UNUserNotificationCenterDelegate, MessagingDelegate {
         
         application.registerForRemoteNotifications()
         FirebaseApp.configure()
+        
+        //setup google maps
+        GMSPlacesClient.provideAPIKey(Constants.GMAP_API_KEY)
+        GMSServices.provideAPIKey(Constants.GMAP_API_KEY)
         return true
     }
 

@@ -16,6 +16,9 @@ class Constants{
     static let contentListLimit = 10
     static let API_URL = "http://www.bnpbindonesia.tv/api/"
     static let GMAP_API_KEY = "AIzaSyBOT5sh-UqEINFc8VD5CwDFXLZbOK2rYCY"
+    static let GMAP_GEOCODING_API_KEY = "AIzaSyBc8ihrXC5gKVimDpyPnT9jKrB5Me9Dt4U"
+    //https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyBc8ihrXC5gKVimDpyPnT9jKrB5Me9Dt4U
+    static let GMAP_GEOCODING_URL = "https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyBc8ihrXC5gKVimDpyPnT9jKrB5Me9Dt4U"
     static let playerVars = ["enablejsapi":1,
                       "autoplay":1,
                       "controls":1,

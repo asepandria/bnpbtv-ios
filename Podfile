@@ -26,6 +26,7 @@ target 'BPNBTV' do
   pod 'Firebase/Messaging'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
+  pod 'ImageSlideshow', '~> 1.3'
   target 'BPNBTVTests' do
     inherit! :search_paths
     # Pods for testing

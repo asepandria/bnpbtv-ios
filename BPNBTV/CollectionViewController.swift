@@ -224,10 +224,13 @@ extension CollectionViewController:UICollectionViewDelegate,UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyBoard = UIStoryboard(name: "Content", bundle: nil)
         if isAlertList{
-            
+            let detailAlertVC = storyBoard.instantiateViewController(withIdentifier: "DetailAlertViewController") as! DetailAlertViewController
+            detailAlertVC.alertModel = alertItems.alertModel[indexPath.row]
+            self.navigationController?.pushViewController(detailAlertVC, animated: true)
         }else{
-            let storyBoard = UIStoryboard(name: "Content", bundle: nil)
+            
             let detailVC = storyBoard.instantiateViewController(withIdentifier: "DetailContentViewController") as! DetailContentViewController
             detailVC.video = collectionVideoItems.videos[indexPath.row]
             self.navigationController?.pushViewController(detailVC, animated: true)
