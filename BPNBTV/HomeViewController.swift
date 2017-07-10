@@ -278,7 +278,8 @@ extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource
             footerView.addSubview(progressIndicator)
             return footerView
         default:
-            assert(false, "Unexpected element kind")
+            //assert(false, "Unexpected element kind")
+            fatalError("Unexpected element kind")
         }
     }
 }
