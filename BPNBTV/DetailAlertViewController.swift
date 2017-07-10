@@ -9,18 +9,28 @@
 import UIKit
 import GoogleMaps
 import SideMenu
+import ImageSlideshow
 
 class DetailAlertViewController: UIViewController {
    
     @IBOutlet weak var mapContainer: UIView!
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var slideShow: ImageSlideshow!
+    @IBOutlet weak var detailTypeLabel: UILabel!
+    
     var alertModel:AlertModel!
     var longitude:CLLocationDegrees!
     var latitude:CLLocationDegrees!
+    
+    @IBOutlet weak var eartQuakeLabelHint: UILabel!
+    @IBOutlet weak var earthQuakeLabelScale: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupView()
+        
     }
     
     
@@ -29,6 +39,20 @@ class DetailAlertViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    func setupSlideShow(){
+        slideShow.activityIndicator = DefaultActivityIndicator()
+        slideShow.backgroundColor = UIColor.black
+        slideShow.contentScaleMode = UIViewContentMode.scaleAspectFill
+        if alertModel.imageSliderURLArr.count > 0{
+            var kfSource = [KingfisherSource]()
+            for aim in alertModel.imageSliderURLArr{
+                kfSource.append(KingfisherSource(url: URL(string: aim)!))
+            }
+            slideShow.setImageInputs(kfSource)
+        }else{
+            slideShow.setImageInputs([KingfisherSource(url:URL(string:alertModel.imageSliderSingle)!)])
+        }
+    }
     func setupView(){
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 44, height: getScreenWidth()/3))
         imageView.contentMode = .scaleAspectFit
@@ -37,7 +61,9 @@ class DetailAlertViewController: UIViewController {
         navigationItem.titleView = imageView
         
         if let _  = alertModel{
+            setupSlideShow()
             typeLabel?.text = alertModel.type ?? ""
+            detailTypeLabel?.text = alertModel.type ?? ""
             addressLabel?.text = alertModel.address ?? ""
             if let _longLat  = alertModel.longlat{
                 let splitLongLat = _longLat.components(separatedBy: "/")
@@ -45,6 +71,12 @@ class DetailAlertViewController: UIViewController {
                     longitude = (splitLongLat[0] as NSString).doubleValue
                     latitude = (splitLongLat[1] as NSString).doubleValue
                 }
+            }
+            if alertModel.scale == ""{
+                eartQuakeLabelHint.isHidden = true
+                earthQuakeLabelScale.isHidden = true
+            }else{
+                earthQuakeLabelScale.text = alertModel.scale
             }
         }
         

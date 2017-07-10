@@ -27,6 +27,7 @@ target 'BPNBTV' do
   pod 'GoogleMaps'
   pod 'GooglePlaces'
   pod 'ImageSlideshow', '~> 1.3'
+  pod 'ImageSlideshow/Kingfisher'
   target 'BPNBTVTests' do
     inherit! :search_paths
     # Pods for testing

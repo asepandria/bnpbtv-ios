@@ -42,6 +42,9 @@ PODS:
   - ImageSlideshow (1.3.2):
     - ImageSlideshow/Core (= 1.3.2)
   - ImageSlideshow/Core (1.3.2)
+  - ImageSlideshow/Kingfisher (1.3.2):
+    - ImageSlideshow/Core
+    - Kingfisher (~> 3.0)
   - Kingfisher (3.6.1)
   - NVActivityIndicatorView (3.6.1)
   - PKHUD (4.2.3)
@@ -60,6 +63,7 @@ DEPENDENCIES:
   - GoogleMaps
   - GooglePlaces
   - ImageSlideshow (~> 1.3)
+  - ImageSlideshow/Kingfisher
   - Kingfisher (~> 3.0)
   - PKHUD (~> 4.0)
   - ReachabilitySwift (~> 3)
@@ -89,6 +93,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: 89fe7ef749490ad1d800d65de42f9a90da34faa3
+PODFILE CHECKSUM: 674fbdeab094fa28b65779c93623249660e45864
 
 COCOAPODS: 1.2.0

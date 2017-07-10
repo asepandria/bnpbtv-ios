@@ -66,6 +66,7 @@ class CollectionViewController: UIViewController {
     
     var isRequestFinish = false
     func requestVideoItems(params:[String:String] = ["function":"video","page":"\(1)"]){
+        progressIndicator?.startAnimating()
         RequestHelper.requestListBasedOnCategory(params: params, callback: {[weak self] (isSuccess,errorReason,videoItems) in
             DispatchQueue.main.async {
                 self?.isRequestFinish = true
@@ -101,8 +102,11 @@ class CollectionViewController: UIViewController {
     }
     
     func requestAlertList(){
+        progressIndicator?.startAnimating()
         RequestHelper.requestAlertList(callback: {[weak self] isSuccess,errorReason,alertItems in
             DispatchQueue.main.async {
+                self?.progressIndicator?.stopAnimating()
+                self?.progressIndicator?.removeFromSuperview()
                 if isSuccess{
                     //self?.printLog(content: "ALERT LISt : \(alertItems)")
                     self?.alertItems = alertItems
@@ -171,8 +175,8 @@ extension CollectionViewController:UICollectionViewDelegate,UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         cell.contentView.backgroundColor = UIColor.bnpbLightGrayColor()
-        progressIndicator?.stopAnimating()
-        progressIndicator?.removeFromSuperview()
+        //progressIndicator?.stopAnimating()
+        //progressIndicator?.removeFromSuperview()
         if !isAlertList{
             if(indexPath.row == collectionVideoItems.videos.count - 1 && totalCollectionVideo < totalLimitVideos){
                 //printLog(content: "Load More API...")
@@ -186,8 +190,8 @@ extension CollectionViewController:UICollectionViewDelegate,UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        progressIndicator?.stopAnimating()
-        progressIndicator?.removeFromSuperview()
+        //progressIndicator?.stopAnimating()
+        //progressIndicator?.removeFromSuperview()
     }
     
     
@@ -253,7 +257,7 @@ extension CollectionViewController:UICollectionViewDelegate,UICollectionViewData
         case UICollectionElementKindSectionFooter:
             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "FooterIndicator", for: indexPath as IndexPath)
             footerView.backgroundColor = UIColor.white
-            progressIndicator.startAnimating()
+            //progressIndicator.startAnimating()
             progressIndicator.frame = CGRect(x:(getScreenWidth()/2)-10,y:5,width:20,height:20)
             progressIndicator.color = UIColor.gray
             footerView.addSubview(progressIndicator)
