@@ -16,4 +16,11 @@ class AlertHelper{
             topVC.present(alert, animated: true, completion: nil)
         }
     }
+    class func showCommonAlert(message:String){
+        let alert = UIAlertController(title: "TEST ALERT", message:message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: nil))
+        if let topVC = UIApplication.topViewController(){
+            topVC.present(alert, animated: true, completion: nil)
+        }
+    }
 }

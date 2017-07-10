@@ -27,6 +27,13 @@ PODS:
     - FirebaseInstanceID (~> 2.0)
     - GoogleToolboxForMac/Logger (~> 2.1)
     - Protobuf (~> 3.1)
+  - GoogleMaps (2.3.0):
+    - GoogleMaps/Maps (= 2.3.0)
+  - GoogleMaps/Base (2.3.0)
+  - GoogleMaps/Maps (2.3.0):
+    - GoogleMaps/Base
+  - GooglePlaces (2.3.0):
+    - GoogleMaps/Base (= 2.3.0)
   - GoogleToolboxForMac/Defines (2.1.1)
   - GoogleToolboxForMac/Logger (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
@@ -47,6 +54,8 @@ DEPENDENCIES:
   - BMPlayer
   - Firebase/Core
   - Firebase/Messaging
+  - GoogleMaps
+  - GooglePlaces
   - Kingfisher (~> 3.0)
   - PKHUD (~> 4.0)
   - ReachabilitySwift (~> 3)
@@ -62,6 +71,8 @@ SPEC CHECKSUMS:
   FirebaseCore: 1a8bf6c795ad07d2918278657954ffd2552e9c17
   FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
   FirebaseMessaging: 227406c05b0dc9290702d2e9f18ab5528f0c2cf2
+  GoogleMaps: 340a6a0bebd17c2db8abcd3921976c7c53c86cb8
+  GooglePlaces: 74d322c74184ea4576184089b496d291cf0dcd38
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   Kingfisher: 2f31cb75f3e98d3d4c406cbdcd9b263e956cfa67
   NVActivityIndicatorView: 9f52a7f84bf5c6a798722c450fe3c198e01c56ed
@@ -73,6 +84,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: 733cd10734b0f974875d3996c138bdeda1575d63
+PODFILE CHECKSUM: d6e2448045a558fa430df6d30349c70544c4cabf
 
 COCOAPODS: 1.2.0

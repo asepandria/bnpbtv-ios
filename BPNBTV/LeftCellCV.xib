@@ -75,6 +75,7 @@
             <size key="customSize" width="240" height="163"/>
             <connections>
                 <outlet property="contentList" destination="UjJ-hy-NDQ" id="jtP-Q5-TCU"/>
+                <outlet property="iconPlay" destination="y4B-Ut-63X" id="Jhw-uo-2mN"/>
                 <outlet property="imageList" destination="NzB-4v-rqc" id="5Jv-FZ-5Su"/>
                 <outlet property="titleList" destination="HfZ-s3-eil" id="SZi-9S-9SY"/>
             </connections>

@@ -293,7 +293,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AfR-Tu-Rcc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1911.2" y="780.35982008995506"/>
+            <point key="canvasLocation" x="1817" y="780"/>
         </scene>
         <!--Kontak View Controller-->
         <scene sceneID="aUL-tc-naT">
@@ -308,7 +308,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="Ejf-WZ-Zu7">
-                                <rect key="frame" x="8" y="72" width="359" height="175"/>
+                                <rect key="frame" x="8" y="107" width="359" height="175"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="175" id="gQZ-jO-7u0"/>
                                 </constraints>
@@ -317,10 +317,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="KONTAK KAMI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lnm-pG-rEY">
+                                <rect key="frame" x="8" y="80" width="251" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Ejf-WZ-Zu7" firstAttribute="top" secondItem="8Qy-rn-Gjd" secondAttribute="bottom" constant="8" id="Miq-Gw-glF"/>
+                            <constraint firstItem="Ejf-WZ-Zu7" firstAttribute="top" secondItem="8Qy-rn-Gjd" secondAttribute="bottom" constant="43" id="Miq-Gw-glF"/>
                             <constraint firstItem="Ejf-WZ-Zu7" firstAttribute="leading" secondItem="Kvb-WM-nDe" secondAttribute="leading" constant="8" id="vXL-r1-tVS"/>
                             <constraint firstAttribute="trailing" secondItem="Ejf-WZ-Zu7" secondAttribute="trailing" constant="8" id="voI-DY-fF4"/>
                         </constraints>

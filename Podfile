@@ -24,6 +24,8 @@ target 'BPNBTV' do
   pod 'BMPlayer'
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
   target 'BPNBTVTests' do
     inherit! :search_paths
     # Pods for testing

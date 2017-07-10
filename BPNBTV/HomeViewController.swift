@@ -27,6 +27,7 @@ class HomeViewController: UIViewController {
     var notificationContainer:UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        AlertHelper.showCommonAlert(message: "BETA TEST!!!!!")
         setCollectionView()
         if !isFromNotification{
             requestHeadline()
@@ -46,6 +47,9 @@ class HomeViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.navigationBar.isHidden = false
+        DispatchQueue.main.async {[weak self] in
+            self?.playerView?.webView?.scrollView.contentInset = UIEdgeInsets.zero
+        }
     }
     
     
@@ -54,6 +58,9 @@ class HomeViewController: UIViewController {
         if isFromNotification{
             DispatchQueue.main.async {[weak self] in
                 self?.playerView?.webView?.scrollView.contentInset = UIEdgeInsets.zero
+                self?.videoContainer?.setNeedsLayout()
+                self?.playerView?.setNeedsDisplay()
+                self?.homeCollectionView?.reloadData()
             }
         }
         
@@ -130,12 +137,15 @@ class HomeViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        playerView?.webView?.scrollView.contentInset = UIEdgeInsets.zero
+        DispatchQueue.main.async {[weak self] in
+            self?.playerView?.webView?.scrollView.contentInset = UIEdgeInsets.zero
+        }
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        playerView?.stopVideo()
+        //playerView?.stopVideo()
     }
 
     deinit {

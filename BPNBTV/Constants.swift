@@ -15,6 +15,7 @@ class Constants{
     static let screenHeight = screenSize.height
     static let contentListLimit = 10
     static let API_URL = "http://www.bnpbindonesia.tv/api/"
+    static let GMAP_API_KEY = "AIzaSyBOT5sh-UqEINFc8VD5CwDFXLZbOK2rYCY"
     static let playerVars = ["enablejsapi":1,
                       "autoplay":1,
                       "controls":1,

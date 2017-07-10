@@ -46,6 +46,23 @@ class RequestHelper{
         }
     }
     
+    class func requestAlertList(params:[String:String] = ["function":"alert"],callback:((Bool,String?,AlertItemsModel?) -> Void)?){
+        _ = RequestHelper.requestManager.request(BRouter.commonRequest(parameters: params)).responseObject(queue: DispatchQueue.global()){(response:DataResponse<AlertItemsModel>) in
+            do{
+                let alertItems = try response.result.unwrap() as AlertItemsModel
+                callback?(true,nil,alertItems)
+            }catch{
+                if response.response?.statusCode == 200{
+                    callback?(true,nil,nil)
+                }else{
+                    callback?(false,response.error?.localizedDescription,nil)
+                }
+                
+            }
+        }
+    }
+    
+    
     class func requestProfile(callback:((Bool,String?,ProfileModel?) -> Void)?){
         _ = RequestHelper.requestManager.request(BRouter.commonRequest(parameters: ["function":"profil"])).responseObject(queue: DispatchQueue.global()){(response:DataResponse<ProfileModel>) in
             do{

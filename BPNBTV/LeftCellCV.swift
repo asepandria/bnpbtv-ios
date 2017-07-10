@@ -13,6 +13,7 @@ class LeftCellCV: UICollectionViewCell {
     @IBOutlet weak var titleList: UILabel!
     @IBOutlet weak var contentList: UILabel!
     
+    @IBOutlet weak var iconPlay: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         self.layer.borderWidth = 0.5
@@ -20,5 +21,9 @@ class LeftCellCV: UICollectionViewCell {
         self.layer.cornerRadius = 1
         
         imageList.contentMode = UIViewContentMode.scaleToFill
+    }
+    
+    func hideIconPlay(){
+        iconPlay.isHidden = true
     }
 }

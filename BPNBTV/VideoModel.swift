@@ -23,19 +23,20 @@ struct VideoItems:ResponseObjectSerializable{
             limit = jsonObject["limit"].intValue
             if(_temp.count == 0){
                 return nil
+            }else{
+                var _tempVideos = [Video]()
+                for value in _temp {
+                    //items.append(Menu(_parent: value["parent"].stringValue, _menu: value["menu"].stringValue)!)
+                    _tempVideos.append(Video(id: value["id"].stringValue, idVideo: value["idvideo"].stringValue,
+                                        category: value["category"].stringValue, judul: value["judul"].stringValue,
+                                        judulEN: value["judul_EN"].stringValue, tanggal: value["tanggal"].stringValue,
+                                        imageUrl: value["image"].stringValue, videoUrl: value["video"].stringValue,
+                                        youtube: value["youtube"].stringValue, description: value["description"].stringValue,
+                                        descriptionEN: value["description_EN"].stringValue, aktivasi: value["aktivasi"].stringValue,summary:value["summary"].stringValue,
+                                        summaryEN:value["summary_EN"].stringValue))
+                }
+                videos = _tempVideos
             }
-            var _tempVideos = [Video]()
-            for value in _temp {
-                //items.append(Menu(_parent: value["parent"].stringValue, _menu: value["menu"].stringValue)!)
-                _tempVideos.append(Video(id: value["id"].stringValue, idVideo: value["idvideo"].stringValue,
-                                    category: value["category"].stringValue, judul: value["judul"].stringValue,
-                                    judulEN: value["judul_EN"].stringValue, tanggal: value["tanggal"].stringValue,
-                                    imageUrl: value["image"].stringValue, videoUrl: value["video"].stringValue,
-                                    youtube: value["youtube"].stringValue, description: value["description"].stringValue,
-                                    descriptionEN: value["description_EN"].stringValue, aktivasi: value["aktivasi"].stringValue,summary:value["summary"].stringValue,
-                                    summaryEN:value["summary_EN"].stringValue))
-            }
-            videos = _tempVideos
         }else{
             return nil
         }

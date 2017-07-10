@@ -20,6 +20,7 @@ enum MENU_CLASS:String{
     case PROFIL = "profil"
     case COLLECTION = "collection"
     case KONTAK_KAMI = "kontak kami"
+    case BERITA_BENCANA = "berita bencana"
 }
 class ContainerViewController:UIViewController{
     var menuLeftNavigationController:UISideMenuNavigationController!
@@ -175,7 +176,16 @@ extension ContainerViewController:SideMenuToContainerDelegate{
             })
             
             
-        }else{
+        }else if (menuName.lowercased() == MENU_CLASS.BERITA_BENCANA.rawValue){
+            let collectionVC = contentStoryBoard.instantiateViewController(withIdentifier: "CollectionViewController") as! CollectionViewController
+            collectionVC.isAlertList = true
+            collectionVC.selectedCategory = menuName.lowercased()
+            addChildViewController(collectionVC)
+            collectionVC.view.frame = CGRect(x:0, y:0, width:view.frame.size.width, height:view.frame.size.height);
+            view.addSubview(collectionVC.view)
+            collectionVC.didMove(toParentViewController:self)
+        }
+        else{
             //this is collection
             /*RequestHelper.requestListBasedOnCategory(params: ["function":"video"], callback: {[weak self](isSuccess,reason,videoItems) in
                 DispatchQueue.main.async {
