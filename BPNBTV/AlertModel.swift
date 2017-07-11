@@ -29,7 +29,7 @@ struct AlertItemsModel:ResponseObjectSerializable {
                             tempImageArr.append(iat.stringValue)
                         }
                     }
-                    tempAlert.append(AlertModel(_imageSliderURLArr: tempImageArr, _imageSliderSingle: imageSingle, _id: value["id"].stringValue, _title: value["title"].stringValue, _date: value["date"].stringValue, _address: value["address"].stringValue, _longlat: value["longlat"].stringValue, _scale: value["scale"].stringValue, _description: value["description"].stringValue, _shortURL: value["short_url"].stringValue,_type:value["type"].stringValue))
+                    tempAlert.append(AlertModel(_imageSliderURLArr: tempImageArr, _imageSliderSingle: imageSingle, _id: value["id"].stringValue, _title: value["title"].stringValue, _date: value["date"].stringValue, _address: value["address"].stringValue, _longlat: value["longlat"].stringValue, _scale: value["scale"].stringValue, _description: value["description"].stringValue, _shortURL: value["short_url"].stringValue,_type:value["type"].stringValue,_googleMaps:value["googlemaps"].stringValue))
                 }
                 alertModel = tempAlert
             }
@@ -52,6 +52,7 @@ struct AlertModel:ResponseObjectSerializable{
     let scale:String!
     let description:String!
     let shortURL:String!
+    let googleMaps:String!
     init?(response: HTTPURLResponse, representation: Any) {
         if(response.statusCode != 200){ return nil}
         guard let rep = representation as? [String:Any]
@@ -67,6 +68,7 @@ struct AlertModel:ResponseObjectSerializable{
         self.imageSliderSingle = rep["image"] as? String
         self.imageSliderURLArr = rep["image"] as? [String]
         self.type = rep["type"] as? String
+        self.googleMaps = rep["googlemaps"] as? String
     }
     init(_imageSliderURLArr:[String] = [String](),
          _imageSliderSingle:String = "",
@@ -78,7 +80,7 @@ struct AlertModel:ResponseObjectSerializable{
          _scale:String = "",
          _description:String = "",
          _shortURL:String = "",
-         _type:String = "") {
+         _type:String = "",_googleMaps:String="") {
         self.imageSliderURLArr = _imageSliderURLArr
         self.imageSliderSingle = _imageSliderSingle
         self.id = _id
@@ -90,5 +92,6 @@ struct AlertModel:ResponseObjectSerializable{
         self.description = _description
         self.shortURL = _shortURL
         self.type = _type
+        self.googleMaps = _googleMaps
     }
 }

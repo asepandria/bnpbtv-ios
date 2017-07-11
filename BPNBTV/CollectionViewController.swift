@@ -152,8 +152,13 @@ extension CollectionViewController:UICollectionViewDelegate,UICollectionViewData
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LeftCellCV", for: indexPath) as! LeftCellCV
         if isAlertList{
             cell.hideIconPlay()
-            cell.titleList?.text = alertItems.alertModel[indexPath.row].title ?? ""
-            cell.contentList?.text = alertItems.alertModel[indexPath.row].description ?? ""
+            let alertItem = alertItems.alertModel[indexPath.row]
+            cell.titleList?.text = alertItem.title ?? ""
+            if (alertItem.description.characters.count > 90){
+                cell.contentList?.text = alertItem.description.substring(to: alertItem.description.index( alertItem.description.startIndex, offsetBy: 90)) + "..."
+            }else{
+                cell.contentList?.text = alertItem.description ?? ""
+            }
             if alertItems.alertModel[indexPath.row].imageSliderURLArr.count > 0{
                 cell.imageList?.kf.setImage(with: URL(string: alertItems.alertModel[indexPath.row].imageSliderURLArr.first ?? ""))
             }else{
