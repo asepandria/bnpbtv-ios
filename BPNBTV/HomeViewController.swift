@@ -9,6 +9,7 @@
 import UIKit
 import youtube_ios_player_helper
 import Kingfisher
+import GoogleMaps
 class HomeViewController: UIViewController {
 
     @IBOutlet weak var videoContainer: UIView!
@@ -24,6 +25,11 @@ class HomeViewController: UIViewController {
     var totalLimitVideos = 0
     var progressIndicator: UIActivityIndicatorView!
     var isFromNotification = false
+    var alertModel:AlertModel!{
+        didSet{
+            
+        }
+    }
     var notificationContainer:UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,8 +80,70 @@ class HomeViewController: UIViewController {
             make.left.right.equalTo(videoContainer)
             make.height.equalTo(videoContainer.snp.height)
         })*/
-        notificationContainer.backgroundColor = UIColor.blue
+        notificationContainer.backgroundColor = UIColor.bnpbBlueColor()
         videoContainer.addSubview(notificationContainer)
+        setupMap()
+        
+    }
+    lazy var longitude:CLLocationDegrees = 0
+    lazy var latitude:CLLocationDegrees = 0
+    lazy var zoomScale:Float = 15
+    func getLongLatFromGoogleMapsURL(urlString:String){
+        let regexp = "/@(-?\\d+\\.\\d+,-?\\d+\\.\\d+,\\d+)"
+        if let range = alertModel.googleMaps!.range(of: regexp, options: String.CompareOptions.regularExpression){
+            let resultLonglat = alertModel.googleMaps!.substring(with: range)
+            let resultLongLatFix = resultLonglat.replacingOccurrences(of:"/@", with: "")
+            let splitLongLat = resultLongLatFix.components(separatedBy: ",")
+            if splitLongLat.count > 1{
+                longitude = (splitLongLat[1] as NSString).doubleValue
+                latitude = (splitLongLat[0] as NSString).doubleValue
+            }
+            if splitLongLat.count > 2{
+                zoomScale = Float((splitLongLat[2] as NSString).doubleValue)
+            }
+        }
+    }
+    func setupMap(){
+        if let _  = alertModel{
+            //typeLabel?.text = alertModel.type ?? ""
+            //addressLabel?.text = alertModel.address ?? ""
+            if let _longLat  = alertModel.longlat{
+                if _longLat != ""{
+                    let splitLongLat = _longLat.components(separatedBy: "/")
+                    if splitLongLat.count > 1{
+                        longitude = (splitLongLat[0] as NSString).doubleValue
+                        latitude = (splitLongLat[1] as NSString).doubleValue
+                    }
+                }
+            }
+            
+            if longitude == 0 && latitude == 0{
+                getLongLatFromGoogleMapsURL(urlString: alertModel.googleMaps)
+                
+            }
+            
+            
+        }
+        
+        
+        let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: zoomScale)
+        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
+        notificationContainer.addSubview(mapView)
+        mapView.snp.makeConstraints({make in
+            make.top.equalTo(notificationContainer)
+            make.left.right.equalTo(notificationContainer)
+            make.height.equalTo(notificationContainer).offset(-50)
+        })
+        mapView.center = notificationContainer.center
+        //mapContainer = mapView
+        
+        // Creates a marker in the center of the map.
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        
+        marker.title = alertModel.address
+        //marker.snippet = alertModel.address
+        marker.map = mapView
     }
     func setCollectionView(){
         progressIndicator = UIActivityIndicatorView()

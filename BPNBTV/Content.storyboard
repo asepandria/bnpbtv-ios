@@ -203,13 +203,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please Share" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="7Jn-yj-zOD">
-                                                <rect key="frame" x="4" y="4" width="89" height="32"/>
+                                                <rect key="frame" x="4" y="2" width="89" height="36"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Txg-Kl-q0s">
-                                                <rect key="frame" x="97" y="4" width="88.5" height="32"/>
+                                                <rect key="frame" x="97" y="2" width="88.5" height="36"/>
                                                 <color key="backgroundColor" red="0.22352941176470587" green="0.3411764705882353" blue="0.60392156862745094" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                 <state key="normal" title="Facebook" image="icon_facebook">
@@ -220,7 +220,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Pb-g3-Pdm">
-                                                <rect key="frame" x="189.5" y="4" width="89" height="32"/>
+                                                <rect key="frame" x="189.5" y="2" width="89" height="36"/>
                                                 <color key="backgroundColor" red="0.2196078431372549" green="0.7803921568627451" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                 <inset key="imageEdgeInsets" minX="-8" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -232,7 +232,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mrU-JO-mle">
-                                                <rect key="frame" x="282.5" y="4" width="88.5" height="32"/>
+                                                <rect key="frame" x="282.5" y="2" width="88.5" height="36"/>
                                                 <color key="backgroundColor" red="0.9293244745996263" green="0.53247950782839604" blue="0.34891166976348709" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                 <inset key="imageEdgeInsets" minX="-8" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -244,7 +244,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <edgeInsets key="layoutMargins" top="4" left="4" bottom="4" right="4"/>
+                                        <edgeInsets key="layoutMargins" top="2" left="4" bottom="2" right="4"/>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -507,13 +507,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please share" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9eS-kJ-j5W">
-                                                <rect key="frame" x="8" y="4" width="87" height="32"/>
+                                                <rect key="frame" x="8" y="2" width="87" height="36"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FQY-Lg-g4p">
-                                                <rect key="frame" x="99" y="4" width="86.5" height="32"/>
+                                                <rect key="frame" x="99" y="2" width="86.5" height="36"/>
                                                 <color key="backgroundColor" red="0.22352941179999999" green="0.3411764706" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                 <inset key="imageEdgeInsets" minX="-8" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -525,7 +525,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WDe-ew-nVL">
-                                                <rect key="frame" x="189.5" y="4" width="87" height="32"/>
+                                                <rect key="frame" x="189.5" y="2" width="87" height="36"/>
                                                 <color key="backgroundColor" red="0.21960784310000001" green="0.78039215689999997" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                 <inset key="imageEdgeInsets" minX="-8" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -537,7 +537,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nJr-vc-PLz">
-                                                <rect key="frame" x="280.5" y="4" width="86.5" height="32"/>
+                                                <rect key="frame" x="280.5" y="2" width="86.5" height="36"/>
                                                 <color key="backgroundColor" red="0.98431372549999996" green="0.5568627451" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                 <inset key="imageEdgeInsets" minX="-8" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -547,7 +547,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <edgeInsets key="layoutMargins" top="4" left="8" bottom="4" right="8"/>
+                                        <edgeInsets key="layoutMargins" top="2" left="8" bottom="2" right="8"/>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>

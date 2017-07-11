@@ -14,6 +14,7 @@ import FirebaseMessaging
 import UserNotifications
 import GooglePlaces
 import GoogleMaps
+import SwiftyJSON
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate,
 UNUserNotificationCenterDelegate, MessagingDelegate {
@@ -78,9 +79,16 @@ UNUserNotificationCenterDelegate, MessagingDelegate {
     
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        printLog(content: "DEVICE TOKEN : \(deviceToken)")
-        Messaging.messaging().apnsToken = deviceToken
+        let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+        printLog(content: "DEVICE TOKEN : \(token)")
+        if let apns = Messaging.messaging().apnsToken{
+            let token2 = apns.map { String(format: "%02.2hhx", $0) }.joined()
+            printLog(content: "APNS TOKEN : \(InstanceID.instanceID().token())")
+        }
+        
+        //Messaging.messaging().apnsToken = deviceToken
     }
+    
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
         printLog(content: "MESSGE REMOTE : \(userInfo)")
@@ -88,6 +96,8 @@ UNUserNotificationCenterDelegate, MessagingDelegate {
     
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        //from background
+        redirectToHomeForNotification(_dataAlert: nil)
         printLog(content: "RESPONSE : \(response.notification)")
     }
     
@@ -98,12 +108,17 @@ UNUserNotificationCenterDelegate, MessagingDelegate {
         //print("Message ID: \(userInfo["gcm.message_id"]!)")
         
         // Print full message.
-        print("%@", userInfo)
+        //print("User INFO : %@", userInfo["alert"])
+        if let alertData = userInfo["alert"] as! String?{
+            printLog(content: "ALERT DATA : \(alertData)")
+            let dataAlert = JSON.init(parseString:alertData)
+            redirectToHomeForNotification(_dataAlert: dataAlert)
+        }
+        //let aps = userInfo["aps"] as! [String: Any]
+        //printLog(content: "APS \(aps)\n\n")
+        //let notificationDict = aps["alert"] as! [String:Any] // processed content from notificaton
+        //printLog(content: "NOTIFICATION MESSAGFWE : \(notificationDict["body"])")
         
-        let aps = userInfo["aps"] as! [String: Any]
-        let notificationMessage = aps["alert"] as! String // processed content from notificaton
-        printLog(content: "NOTIFICATION MESSAGFWE : \(notificationMessage)")
-        redirectToHomeForNotification()
     }
     
     func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
@@ -115,7 +130,7 @@ UNUserNotificationCenterDelegate, MessagingDelegate {
         printLog(content: "FCM TOKEN : \(fcmToken)")
     }
     
-    func redirectToHomeForNotification(){
+    func redirectToHomeForNotification(_dataAlert:JSON?){
         if let rootVC = UIApplication.shared.keyWindow?.rootViewController{
             for rvc in rootVC.childViewControllers{
                 if !rvc.isKind(of: ContainerViewController.self){
@@ -124,9 +139,13 @@ UNUserNotificationCenterDelegate, MessagingDelegate {
                     }else if rvc.isKind(of: DetailContentViewController.self){
                         rvc.navigationController?.popToRootViewController(animated: false)
                     }else{
-                        rvc.willMove(toParentViewController: nil)
-                        rvc.view.removeFromSuperview()
-                        rvc.removeFromParentViewController()
+                        if rvc.navigationController != nil{
+                            rvc.navigationController?.popToRootViewController(animated: true)
+                        }else{
+                            rvc.willMove(toParentViewController: nil)
+                            rvc.view.removeFromSuperview()
+                            rvc.removeFromParentViewController()
+                        }
                         
                     }
                 }else{
@@ -138,6 +157,17 @@ UNUserNotificationCenterDelegate, MessagingDelegate {
                     let homeSB = UIStoryboard(name: "Content", bundle: nil)
                     let homeVC = homeSB.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
                     homeVC.isFromNotification = true
+                    if let dataAlert = _dataAlert{
+                        var tempImageArr = [String]()
+                        let imageSingle = dataAlert["slider"]["image"].stringValue
+                        if let imageArrTemp = dataAlert["slider"]["image"].arrayValue as [JSON]?{
+                            for iat  in imageArrTemp{
+                                tempImageArr.append(iat.stringValue)
+                            }
+                        }
+                        let alertModel = AlertModel(_imageSliderURLArr: tempImageArr, _imageSliderSingle: imageSingle, _id: dataAlert["id"].stringValue, _title: dataAlert["title"].stringValue, _date: dataAlert["date"].stringValue, _address: dataAlert["address"].stringValue, _longlat: dataAlert["longlat"].stringValue, _scale: dataAlert["scale"].stringValue, _description: dataAlert["description"].stringValue, _shortURL: dataAlert["short_url"].stringValue,_type:dataAlert["type"].stringValue,_googleMaps:dataAlert["googlemaps"].stringValue)
+                        homeVC.alertModel = alertModel
+                    }
                     rvc.addChildViewController(homeVC)
                     homeVC.view.frame = CGRect(x:0, y:0, width:rvc.view.frame.size.width, height:rvc.view.frame.size.height);
                     rvc.view.addSubview(homeVC.view)
