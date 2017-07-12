@@ -29,7 +29,8 @@ struct AlertItemsModel:ResponseObjectSerializable {
                             tempImageArr.append(iat.stringValue)
                         }
                     }
-                    tempAlert.append(AlertModel(_imageSliderURLArr: tempImageArr, _imageSliderSingle: imageSingle, _id: value["id"].stringValue, _title: value["title"].stringValue, _date: value["date"].stringValue, _address: value["address"].stringValue, _longlat: value["longlat"].stringValue, _scale: value["scale"].stringValue, _description: value["description"].stringValue, _shortURL: value["short_url"].stringValue,_type:value["type"].stringValue,_googleMaps:value["googlemaps"].stringValue))
+                    tempAlert.append(AlertModel(_imageSliderURLArr: tempImageArr, _imageSliderSingle: imageSingle, _id: value["id"].stringValue, _title: value["title"].stringValue, _date: value["date"].stringValue, _address: value["address"].stringValue, _longlat: value["longlat"].stringValue, _scale: value["scale"].stringValue, _description: value["description"].stringValue, _shortURL: value["short_url"].stringValue,_type:value["type"].stringValue,_googleMaps:value["googlemaps"].stringValue,_fatalities:value["fatalities"].stringValue,
+                                                _wound:value["wound"].stringValue))
                 }
                 alertModel = tempAlert
             }
@@ -53,6 +54,9 @@ struct AlertModel:ResponseObjectSerializable{
     let description:String!
     let shortURL:String!
     let googleMaps:String!
+    let fatalities:String!
+    let wound:String!
+    
     init?(response: HTTPURLResponse, representation: Any) {
         if(response.statusCode != 200){ return nil}
         guard let rep = representation as? [String:Any]
@@ -69,6 +73,8 @@ struct AlertModel:ResponseObjectSerializable{
         self.imageSliderURLArr = rep["image"] as? [String]
         self.type = rep["type"] as? String
         self.googleMaps = rep["googlemaps"] as? String
+        self.fatalities = rep["fatalities"] as? String
+        self.wound = rep["wound"] as? String
     }
     init(_imageSliderURLArr:[String] = [String](),
          _imageSliderSingle:String = "",
@@ -80,7 +86,8 @@ struct AlertModel:ResponseObjectSerializable{
          _scale:String = "",
          _description:String = "",
          _shortURL:String = "",
-         _type:String = "",_googleMaps:String="") {
+         _type:String = "",_googleMaps:String="",
+         _fatalities:String = "",_wound:String="") {
         self.imageSliderURLArr = _imageSliderURLArr
         self.imageSliderSingle = _imageSliderSingle
         self.id = _id
@@ -93,5 +100,7 @@ struct AlertModel:ResponseObjectSerializable{
         self.shortURL = _shortURL
         self.type = _type
         self.googleMaps = _googleMaps
+        self.fatalities = _fatalities
+        self.wound = _wound
     }
 }

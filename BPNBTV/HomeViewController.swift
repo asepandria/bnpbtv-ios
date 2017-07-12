@@ -27,13 +27,14 @@ class HomeViewController: UIViewController {
     var isFromNotification = false
     var alertModel:AlertModel!{
         didSet{
-            
+            //setNotificationContainer()
+            printLog(content: "ALERT MODEL HOME DIDSET...")
         }
     }
     var notificationContainer:UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        AlertHelper.showCommonAlert(message: "BETA TEST!!!!!")
+        //AlertHelper.showCommonAlert(message: "BETA TEST!!!!!")
         setCollectionView()
         if !isFromNotification{
             requestHeadline()

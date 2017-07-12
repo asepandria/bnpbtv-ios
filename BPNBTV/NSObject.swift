@@ -11,7 +11,7 @@ import UIKit
 
 extension NSObject{
     open func printLog(content:Any){
-        debugPrint("BNPB-LOG :: \(content)")
+        //debugPrint("BNPB-LOG :: \(content)")
     }
     
     open func getScreenWidth()->CGFloat{

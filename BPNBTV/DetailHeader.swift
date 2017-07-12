@@ -15,6 +15,7 @@ class DetailHeader: UICollectionReusableView {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var contentHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var titleHeightConstraint: NSLayoutConstraint!
     var detailHeaderDelegate:DetailHeaderDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()

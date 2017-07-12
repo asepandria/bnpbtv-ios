@@ -22,6 +22,7 @@ class DetailContentViewController: UIViewController {
     @IBOutlet weak var videoContainer: UIView!
     @IBOutlet weak var videoContainerHeightConstraint: NSLayoutConstraint!
     
+    
     @IBOutlet weak var playerView: YTPlayerView!
     @IBOutlet weak var collectionView: UICollectionView!
     var headerView:DetailHeader!
@@ -235,7 +236,10 @@ class DetailContentViewController: UIViewController {
                 //let _ = self?.dismiss(animated: true, completion: nil)
             }
         }
-        let asset = BMPlayerResource(url: videoURL)
+        let res1 = BMPlayerResourceDefinition(url: videoURL,
+                                              definition: "SD")
+        let asset = BMPlayerResource(name: videoName, definitions: [res1], cover: nil, subtitles: nil)
+        //let asset = BMPlayerResource(url: videoURL)
         player.seek(playerBMSeek)
         player.setVideo(resource: asset)
         
@@ -269,7 +273,10 @@ class DetailContentViewController: UIViewController {
                 //let _ = self?.dismiss(animated: true, completion: nil)
             }
         }
-        let asset = BMPlayerResource(url: videoURL,name:videoName)
+        let res1 = BMPlayerResourceDefinition(url: videoURL,
+                                              definition: "SD")
+        let asset = BMPlayerResource(name: videoName, definitions: [res1], cover: nil, subtitles: nil)
+        //let asset = BMPlayerResource(url: videoURL,name:videoName)
         player.seek(playerBMSeek)
         player.setVideo(resource: asset)
         
@@ -429,7 +436,7 @@ extension DetailContentViewController:UICollectionViewDelegate,
         if let _ = headerView{
             return CGSize(width: getScreenWidth(), height: headerView.frame.height)
         }else{
-            return CGSize(width: getScreenWidth(), height: 125)
+            return CGSize(width: getScreenWidth(), height: 150)
         }
         
     }
@@ -454,13 +461,22 @@ extension DetailContentViewController:UICollectionViewDelegate,
     
     func setContentForHeader(){
         let tempLabel = UILabel()
-        tempLabel.font = UIFont(name: "Helvetica", size: 15)
+        tempLabel.font = UIFont(name: "Helvetica", size: 16)
         tempLabel.frame = CGRect(x: 0, y: 0, width: getScreenWidth() - 16, height: CGFloat.greatestFiniteMagnitude)
         tempLabel.numberOfLines = 0
         if let selectedLang = UserDefaults.standard.integer(forKey: Constants.langKey) as Int?{
             videoSelectedLang = selectedLang
             if selectedLang == Constants.langID{
                 headerView.titleLabel.text = video?.judul
+                if (video?.judul.characters.count) ?? 0 > 50{
+                    //headerView.titleHeightConstraint.constant = 60
+                    //headerView.titleLabel?.setNeedsLayout()
+                    //headerView.titleLabel?.setNeedsDisplay()
+                    headerView.titleLabel.snp.makeConstraints({ make in
+                        make.height.equalTo(70)
+                    })
+                }
+                headerView.titleLabel.numberOfLines = 0
                 headerView.contentLabel.text = video?.description
                 tempLabel.text = video?.description
             }else if selectedLang == Constants.langEN{
@@ -475,7 +491,8 @@ extension DetailContentViewController:UICollectionViewDelegate,
         }
         tempLabel.sizeToFit()
         headerView.contentHeightConstraint.constant = tempLabel.frame.height
-        headerView.frame.size.height = tempLabel.frame.height + 105
+        headerView.frame.size.width = getScreenWidth()
+        headerView.frame.size.height = tempLabel.frame.height + 135
         headerView.setNeedsDisplay()
         headerView.setNeedsLayout()
         //collectionView.reloadData()

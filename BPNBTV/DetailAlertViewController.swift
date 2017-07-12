@@ -24,8 +24,12 @@ class DetailAlertViewController: UIViewController {
     var latitude:CLLocationDegrees = 0
     var zoomScale:Float = 15
     
-    @IBOutlet weak var eartQuakeLabelHint: UILabel!
+    
     @IBOutlet weak var earthQuakeLabelScale: UILabel!
+    @IBOutlet weak var fatalitiesLabel: UILabel!
+    @IBOutlet weak var woundLabel: UILabel!
+    
+    
     //@IBOutlet weak var contentLabelHeightConstraint: NSLayoutConstraint!
     //@IBOutlet weak var slideShowHeightConstraint: NSLayoutConstraint!
     //@IBOutlet weak var scrollContainerHeightConstraint: NSLayoutConstraint!
@@ -83,7 +87,7 @@ class DetailAlertViewController: UIViewController {
             tempLabel.text = alertModel.description ?? ""
             tempLabel.sizeToFit()
             //scontentLabel.translatesAutoresizingMaskIntoConstraints = false
-            contentLabel.text = (alertModel.description ?? "") + "asiiiiiiiiuuuuuu"
+            contentLabel.text = (alertModel.description ?? "")
             contentLabel.numberOfLines = 0
             
             typeLabel?.text = alertModel.type ?? ""
@@ -103,12 +107,11 @@ class DetailAlertViewController: UIViewController {
                 getLongLatFromGoogleMapsURL(urlString: alertModel.googleMaps)
                 
             }
-            if alertModel.scale == ""{
-                eartQuakeLabelHint.isHidden = true
-                earthQuakeLabelScale.isHidden = true
-            }else{
-                earthQuakeLabelScale.text = alertModel.scale
-            }
+            
+            
+            earthQuakeLabelScale.text = "Earthquake scale : "+alertModel.scale
+            fatalitiesLabel.text = "Fatalities : "+alertModel.fatalities
+            woundLabel.text = "Wound : "+alertModel.wound
             DispatchQueue.main.async {[weak self] in
                 self?.contentLabel.frame.size.height = tempLabel.frame.height
                 self?.contentLabel.setNeedsLayout()

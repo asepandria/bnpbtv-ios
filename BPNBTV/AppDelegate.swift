@@ -131,7 +131,7 @@ UNUserNotificationCenterDelegate, MessagingDelegate {
     }
     
     func redirectToHomeForNotification(_dataAlert:JSON?){
-        if let rootVC = UIApplication.shared.keyWindow?.rootViewController{
+        /*if let rootVC = UIApplication.shared.keyWindow?.rootViewController{
             for rvc in rootVC.childViewControllers{
                 if !rvc.isKind(of: ContainerViewController.self){
                     if rvc.isKind(of: NewMenuVC.self){
@@ -174,8 +174,7 @@ UNUserNotificationCenterDelegate, MessagingDelegate {
                     homeVC.didMove(toParentViewController: rvc)
                 }
             }
-            
-        }
+        }*/
     }
     
     // MARK: - Core Data stack
