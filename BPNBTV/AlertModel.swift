@@ -29,7 +29,7 @@ struct AlertItemsModel:ResponseObjectSerializable {
                             tempImageArr.append(iat.stringValue)
                         }
                     }
-                    tempAlert.append(AlertModel(_imageSliderURLArr: tempImageArr, _imageSliderSingle: imageSingle, _id: value["id"].stringValue, _title: value["title"].stringValue, _date: value["date"].stringValue, _address: value["address"].stringValue, _longlat: value["longlat"].stringValue, _scale: value["scale"].stringValue, _description: value["description"].stringValue, _shortURL: value["short_url"].stringValue,_type:value["type"].stringValue,_googleMaps:value["googlemaps"].stringValue,_fatalities:value["fatalities"].stringValue,
+                    tempAlert.append(AlertModel(_imageSliderURLArr: tempImageArr, _imageSliderSingle: imageSingle, _id: value["id"].stringValue, _title: value["title"].stringValue, _date: value["date"].stringValue, _address: value["address"].stringValue, _longlat: value["latlong"].stringValue, _scale: value["scale"].stringValue, _description: value["description"].stringValue, _shortURL: value["short_url"].stringValue,_type:value["type"].stringValue,_googleMaps:value["googlemaps"].stringValue,_fatalities:value["fatalities"].stringValue,
                                                 _wound:value["wound"].stringValue))
                 }
                 alertModel = tempAlert
@@ -65,7 +65,7 @@ struct AlertModel:ResponseObjectSerializable{
         self.title = rep["title"] as? String
         self.date = rep["date"] as? String
         self.address = rep["address"] as? String
-        self.longlat = rep["longlat"] as? String
+        self.longlat = rep["latlong"] as? String
         self.scale = rep["scale"] as? String
         self.description = rep["description"] as? String
         self.shortURL = rep["short_url"] as? String

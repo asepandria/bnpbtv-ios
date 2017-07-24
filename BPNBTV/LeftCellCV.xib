@@ -21,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DDi-YG-K13">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="90"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NzB-4v-rqc">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NzB-4v-rqc">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="VFX-bp-h91"/>

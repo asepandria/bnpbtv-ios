@@ -53,7 +53,7 @@ class DetailAlertViewController: UIViewController {
     func setupSlideShow(){
         slideShow.activityIndicator = DefaultActivityIndicator()
         slideShow.backgroundColor = UIColor.black
-        slideShow.contentScaleMode = UIViewContentMode.scaleAspectFill
+        slideShow.contentScaleMode = UIViewContentMode.scaleAspectFit
         if alertModel.imageSliderURLArr.count > 0{
             var kfSource = [KingfisherSource]()
             imageAlert = UIImageView()
@@ -83,7 +83,7 @@ class DetailAlertViewController: UIViewController {
             let tempLabel = UILabel()
             tempLabel.frame = CGRect(x: 0, y: 0, width: getScreenWidth()/2, height: CGFloat.greatestFiniteMagnitude)
             tempLabel.numberOfLines = 0
-            tempLabel.font = UIFont(name: "Helvetica", size: 13)
+            tempLabel.font = UIFont(name: "Helvetica", size: 13.5)
             tempLabel.text = alertModel.description ?? ""
             tempLabel.sizeToFit()
             //scontentLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -97,8 +97,8 @@ class DetailAlertViewController: UIViewController {
                 if _longLat != ""{
                     let splitLongLat = _longLat.components(separatedBy: "/")
                     if splitLongLat.count > 1{
-                        longitude = (splitLongLat[0] as NSString).doubleValue
-                        latitude = (splitLongLat[1] as NSString).doubleValue
+                        longitude = (splitLongLat[1] as NSString).doubleValue
+                        latitude = (splitLongLat[0] as NSString).doubleValue
                     }
                 }
             }
@@ -118,7 +118,7 @@ class DetailAlertViewController: UIViewController {
                 self?.contentLabel.setNeedsDisplay()
                 
                 //self?.innerScrollContainer.translatesAutoresizingMaskIntoConstraints = false
-                self?.scrollContainer.contentSize.height = (self?.slideShow.frame.height)! + (self?.titleLabel.frame.height)! + (self?.contentLabel.frame.height)!
+                self?.scrollContainer.contentSize.height = (self?.slideShow.frame.height)! + (self?.titleLabel.frame.height)! + (self?.contentLabel.frame.height)! + 100
                 self?.scrollContainer.setNeedsLayout()
             }
             

@@ -46,7 +46,7 @@ class RequestHelper{
         }
     }
     
-    class func requestAlertList(params:[String:String] = ["function":"alert"],callback:((Bool,String?,AlertItemsModel?) -> Void)?){
+    class func requestAlertList(params:[String:String] = ["function":"arsip_bencana"],callback:((Bool,String?,AlertItemsModel?) -> Void)?){
         _ = RequestHelper.requestManager.request(BRouter.commonRequest(parameters: params)).responseObject(queue: DispatchQueue.global()){(response:DataResponse<AlertItemsModel>) in
             do{
                 let alertItems = try response.result.unwrap() as AlertItemsModel
