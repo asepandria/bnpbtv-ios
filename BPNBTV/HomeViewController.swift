@@ -25,6 +25,8 @@ class HomeViewController: UIViewController {
     var totalLimitVideos = 0
     var progressIndicator: UIActivityIndicatorView!
     var isFromNotification = false
+    var pushId = ""
+    var pushType = ""
     var alertModel:AlertModel!{
         didSet{
             //setNotificationContainer()
@@ -39,8 +41,9 @@ class HomeViewController: UIViewController {
         if !isFromNotification{
             requestHeadline()
         }else{
-            playerView?.removeFromSuperview()
-            setNotificationContainer()
+            //playerView?.removeFromSuperview()
+            //setNotificationContainer()
+            setViewControllerForNotification()
         }
         requestHomeVideo()
         // Do any additional setup after loading the view.
@@ -73,8 +76,31 @@ class HomeViewController: UIViewController {
         
     }
     
-    func setNotificationContainer(){
-        notificationContainer = UIView()
+    func requestAlertBasedOnPush(){
+        progressIndicator?.startAnimating()
+        RequestHelper.requestAlertList(params:["function":"arsip_bencana","id":pushId],callback: {[weak self] isSuccess,errorReason,alertItems in
+            DispatchQueue.main.async {[weak self] in
+                self?.progressIndicator?.stopAnimating()
+                self?.progressIndicator?.removeFromSuperview()
+                if isSuccess{
+                    let detailAlertVC = self?.storyboard?.instantiateViewController(withIdentifier: "DetailAlertViewController") as! DetailAlertViewController
+                    detailAlertVC.alertModel = alertItems?.alertModel.first
+                    self?.navigationController?.pushViewController(detailAlertVC, animated: true)
+                }else{
+                    AlertHelper.showErrorAlert(message: errorReason ?? "")
+                }
+            }
+        })
+        
+    }
+    
+    func setViewControllerForNotification(){
+        if pushType.lowercased() == Constants.pushHeadline{
+            
+        }else if pushType.lowercased() == Constants.pushAlert{
+            requestAlertBasedOnPush()
+        }
+        /*notificationContainer = UIView()
         notificationContainer.frame = CGRect(x: 0, y: 0, width: getScreenWidth(), height: videoContainer.frame.height)
         /*notificationContainer.snp.makeConstraints({ make in
             make.top.equalTo(videoContainer)
@@ -83,9 +109,11 @@ class HomeViewController: UIViewController {
         })*/
         notificationContainer.backgroundColor = UIColor.bnpbBlueColor()
         videoContainer.addSubview(notificationContainer)
-        setupMap()
+        setupMap()*/
         
     }
+    
+    
     lazy var longitude:CLLocationDegrees = 0
     lazy var latitude:CLLocationDegrees = 0
     lazy var zoomScale:Float = 15

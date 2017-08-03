@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 class Constants{
+    static let pushAlert = "alert"
+    static let pushHeadline = "headline"
     static let screenSize = UIScreen.main.bounds
     static let screenWidth = screenSize.width
     static let screenHeight = screenSize.height

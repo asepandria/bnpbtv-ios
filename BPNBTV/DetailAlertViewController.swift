@@ -40,6 +40,8 @@ class DetailAlertViewController: UIViewController {
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     var imageAlert:UIImageView!
+    var isFromPush = false
+    var pushId = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()

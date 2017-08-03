@@ -63,6 +63,7 @@ class RequestHelper{
     }
     
     
+    
     class func requestProfile(callback:((Bool,String?,ProfileModel?) -> Void)?){
         _ = RequestHelper.requestManager.request(BRouter.commonRequest(parameters: ["function":"profil"])).responseObject(queue: DispatchQueue.global()){(response:DataResponse<ProfileModel>) in
             do{
