@@ -86,13 +86,25 @@ UNUserNotificationCenterDelegate, MessagingDelegate {
         Messaging.messaging().subscribe(toTopic: "alert")
         Messaging.messaging().subscribe(toTopic: "headline")
     }
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        guard
+    
+    /*func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        /*guard
             let dataType = userInfo["type"] as? String,
-            let pushId = userInfo["id"] as? String else {return}
-        redirectToHomeForNotification(pushType:dataType, pushId: pushId)
+            let pushId = userInfo["id"] as? String else {return}*/
+        /*let alert = UIAlertController(title: "ERROR", message:"ASU", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: nil))
+        if let topVC = UIApplication.topViewController(){
+            topVC.present(alert, animated: true, completion: nil)
+        }*/
+        //redirectToHomeForNotification(pushType:dataType, pushId: pushId)
+        if let messageID = userInfo["gcm.message_id"] {
+            print("Message ID: \(messageID)")
+        }
         
-    }
+        //analyse(notification: userInfo)
+        //completionHandler(UIBackgroundFetchResult.newData)
+        
+    }*/
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
         printLog(content: "DEVICE TOKEN : \(token)")
@@ -116,7 +128,9 @@ UNUserNotificationCenterDelegate, MessagingDelegate {
         //from background
         
         printLog(content: "RESPONSE : \(response.notification)")
+        completionHandler()
         let data = response.notification.request.content.userInfo
+        
         guard
             //let aps = data[AnyHashable("aps")] as? NSDictionary,
             //let alert = aps["alert"] as? NSDictionary,
@@ -124,30 +138,21 @@ UNUserNotificationCenterDelegate, MessagingDelegate {
             //let title = alert["title"] as? String,
             let dataType = data["type"] as? String,
             let pushId = data["id"] as? String else {return}
-            redirectToHomeForNotification(pushType:dataType, pushId: pushId)
+        DispatchQueue.main.async {[weak self] in
+            self?.redirectToHomeForNotification(pushType:dataType, pushId: pushId)
+        }
+        
     }
     
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let userInfo = notification.request.content.userInfo
-        // Print message ID.
-        //print("Message ID: \(userInfo["gcm.message_id"]!)")
-        
-        // Print full message.
-        //print("User INFO : %@", userInfo["alert"])
-        /*if let alertData = userInfo["alert"] as! String?{
-            printLog(content: "ALERT DATA : \(alertData)")
-            let dataAlert = JSON.init(parseString:alertData)
-            //redirectToHomeForNotification(_dataAlert: dataAlert)
-        }*/
-        //let aps = userInfo["aps"] as! [String: Any]
-        //printLog(content: "APS \(aps)\n\n")
-        //let notificationDict = aps["alert"] as! [String:Any] // processed content from notificaton
-        //printLog(content: "NOTIFICATION MESSAGFWE : \(notificationDict["body"])")
         guard
             let dataType = userInfo["type"] as? String,
             let pushId = userInfo["id"] as? String else {return}
-        redirectToHomeForNotification(pushType:dataType, pushId: pushId)
+        DispatchQueue.main.async {[weak self] in
+            self?.redirectToHomeForNotification(pushType:dataType, pushId: pushId)
+        }
     }
     
     func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
@@ -178,6 +183,7 @@ UNUserNotificationCenterDelegate, MessagingDelegate {
                         
                     }
                 }else{
+                    //let rvcRoot = rvc
                     for cvc in rvc.childViewControllers{
                         cvc.willMove(toParentViewController: nil)
                         cvc.view.removeFromSuperview()
@@ -189,12 +195,18 @@ UNUserNotificationCenterDelegate, MessagingDelegate {
                     homeVC.pushId = pushId
                     homeVC.pushType = pushType
                     rvc.addChildViewController(homeVC)
-                    homeVC.view.frame = CGRect(x:0, y:0, width:rvc.view.frame.size.width, height:rvc.view.frame.size.height);
+                    rvc.view.frame = CGRect(x:0, y:0, width:rvc.view.frame.size.width, height:rvc.view.frame.size.height);
                     rvc.view.addSubview(homeVC.view)
                     homeVC.didMove(toParentViewController: rvc)
                 }
             }
         }
+        /*let alert = UIAlertController(title: "ERROR", message:"\(UIApplication.shared.keyWindow?.rootViewController?.childViewControllers)", preferredStyle: UIAlertControllerStyle.alert)
+         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: nil))
+         if let topVC = UIApplication.topViewController(){
+         topVC.present(alert, animated: true, completion: nil)
+         }*/
+        
     }
     
     // MARK: - Core Data stack

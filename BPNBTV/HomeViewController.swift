@@ -94,9 +94,22 @@ class HomeViewController: UIViewController {
         
     }
     
+    func requestDetailVideoBasedOnPush(){
+        RequestHelper.requestListBasedOnCategory(params: ["function":"video","id":pushId], callback: { isSuccess, errorReason,listVideo in
+            DispatchQueue.main.async {[weak self] in
+                if isSuccess{
+                    let detailVC = self?.storyboard?.instantiateViewController(withIdentifier: "DetailContentViewController") as! DetailContentViewController
+                    detailVC.video = listVideo?.videos.first
+                    self?.navigationController?.pushViewController(detailVC, animated: true)
+                }
+            }
+        })
+        
+    }
+    
     func setViewControllerForNotification(){
         if pushType.lowercased() == Constants.pushHeadline{
-            
+            requestDetailVideoBasedOnPush()
         }else if pushType.lowercased() == Constants.pushAlert{
             requestAlertBasedOnPush()
         }
