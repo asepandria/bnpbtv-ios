@@ -36,13 +36,10 @@ class HomeViewController: UIViewController {
     var notificationContainer:UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        //AlertHelper.showCommonAlert(message: "BETA TEST!!!!!")
         setCollectionView()
         if !isFromNotification{
             requestHeadline()
         }else{
-            //playerView?.removeFromSuperview()
-            //setNotificationContainer()
             setViewControllerForNotification()
         }
         requestHomeVideo()
@@ -113,17 +110,6 @@ class HomeViewController: UIViewController {
         }else if pushType.lowercased() == Constants.pushAlert{
             requestAlertBasedOnPush()
         }
-        /*notificationContainer = UIView()
-        notificationContainer.frame = CGRect(x: 0, y: 0, width: getScreenWidth(), height: videoContainer.frame.height)
-        /*notificationContainer.snp.makeConstraints({ make in
-            make.top.equalTo(videoContainer)
-            make.left.right.equalTo(videoContainer)
-            make.height.equalTo(videoContainer.snp.height)
-        })*/
-        notificationContainer.backgroundColor = UIColor.bnpbBlueColor()
-        videoContainer.addSubview(notificationContainer)
-        setupMap()*/
-        
     }
     
     
@@ -163,8 +149,6 @@ class HomeViewController: UIViewController {
                 getLongLatFromGoogleMapsURL(urlString: alertModel.googleMaps)
                 
             }
-            
-            
         }
         
         
@@ -194,8 +178,6 @@ class HomeViewController: UIViewController {
         homeCollectionView?.delegate = self
         homeCollectionView?.dataSource = self
         homeCollectionView?.showsVerticalScrollIndicator = false
-        
-        /*homeCollectionView.register(CollectionFooterIndicator.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "FooterIndicator")*/
     }
     
     func requestHeadline(){
@@ -370,16 +352,6 @@ extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource
         let detailVC = storyBoard.instantiateViewController(withIdentifier: "DetailContentViewController") as! DetailContentViewController
         detailVC.video = homeVideoItems.videos[indexPath.row]
         self.navigationController?.pushViewController(detailVC, animated: true)
-        /*if let rootVC = self.navigationController?.viewControllers.first{
-            if rootVC.isKind(of: ContainerViewController.self){
-                (rootVC as! ContainerViewController).removeChildViewControllers()
-                (rootVC as! ContainerViewController).addChildViewController(detailVC)
-                
-                detailVC.view.frame = CGRect(x:0, y:0, width:rootVC.view.frame.size.width, height:rootVC.view.frame.size.height)
-                rootVC.view.addSubview(detailVC.view)
-                detailVC.didMove(toParentViewController: rootVC)
-            }
-        }*/
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {

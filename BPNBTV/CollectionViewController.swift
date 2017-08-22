@@ -248,11 +248,6 @@ extension CollectionViewController:UICollectionViewDelegate,UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        /*if isRequestFinish{
-            return CGSize.zero
-        }else{
-            return CGSize(width: getScreenWidth(), height: 30)
-        }*/
         return CGSize(width: getScreenWidth(), height: 30)
     }
     

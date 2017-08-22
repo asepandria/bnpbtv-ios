@@ -40,21 +40,6 @@ class NewMenuVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         menuTable?.reloadData()
-        /*if(reloadCounterRefreshMenu > 5){
-            reloadCounterRefreshMenu = 0
-            UserDefaults.standard.removeObject(forKey: "MENU")
-            menuItems?.removeAll()
-            menuItemsChild = nil
-            menuItemsChild = OrderedDict<String,[Menu]>()
-            headers.removeAll()
-            sections.removeAll()
-            setMenuData()
-            //setupViews()
-            
-            
-        }else{
-            reloadCounterRefreshMenu += 1
-        }*/
     }
     
     

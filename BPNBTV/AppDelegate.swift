@@ -201,12 +201,6 @@ UNUserNotificationCenterDelegate, MessagingDelegate {
                 }
             }
         }
-        /*let alert = UIAlertController(title: "ERROR", message:"\(UIApplication.shared.keyWindow?.rootViewController?.childViewControllers)", preferredStyle: UIAlertControllerStyle.alert)
-         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive, handler: nil))
-         if let topVC = UIApplication.topViewController(){
-         topVC.present(alert, animated: true, completion: nil)
-         }*/
-        
     }
     
     // MARK: - Core Data stack

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import Alamofire
-class RequestHelper{
+final class RequestHelper{
     static let requestManager = Alamofire.SessionManager.default
     
     class func requestAndUpdateMainMenu(callback:((Bool,String?) -> Void)? ){

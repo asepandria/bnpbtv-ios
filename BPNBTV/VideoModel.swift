@@ -26,7 +26,6 @@ struct VideoItems:ResponseObjectSerializable{
             }else{
                 var _tempVideos = [Video]()
                 for value in _temp {
-                    //items.append(Menu(_parent: value["parent"].stringValue, _menu: value["menu"].stringValue)!)
                     _tempVideos.append(Video(id: value["id"].stringValue, idVideo: value["idvideo"].stringValue,
                                         category: value["category"].stringValue, judul: value["judul"].stringValue,
                                         judulEN: value["judul_EN"].stringValue, tanggal: value["tanggal"].stringValue,

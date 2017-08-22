@@ -39,15 +39,6 @@ class RightCellCV: UICollectionViewCell {
         self.layer.cornerRadius = 1
     }
     override func layoutSubviews() {
-        /*if position % 2 == 0{
-            contentView.backgroundColor = UIColor.bnpbBlueColor()
-            containerView.backgroundColor =
-                UIColor.bnpbBlueColor()
-            //setNeedsDisplay()
-        }else{
-            contentView.backgroundColor = UIColor.bnpbOrangeColor()
-            containerView.backgroundColor = UIColor.bnpbOrangeColor()
-            //setNeedsDisplay()
-        }*/
+        super.layoutSubviews()
     }
 }

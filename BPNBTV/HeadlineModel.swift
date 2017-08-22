@@ -20,7 +20,6 @@ struct HeadlineModels:ResponseObjectSerializable{
             }
             var _tempHeadlines = [HeadlineModel]()
             for value in _temp {
-                //items.append(Menu(_parent: value["parent"].stringValue, _menu: value["menu"].stringValue)!)
                 _tempHeadlines.append(HeadlineModel(id: value["id"].stringValue, video: value["video"].stringValue, youtube: value["youtube"].stringValue))
             }
             self.headlines  = _tempHeadlines

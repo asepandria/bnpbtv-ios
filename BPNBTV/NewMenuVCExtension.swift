@@ -94,12 +94,6 @@ extension NewMenuVC:UITableViewDelegate,UITableViewDataSource{
         }else{
             headerTB?.titleLabel.font = UIFont(name:"HelveticaNeue", size: 17.0)
         }
-        /*if isFirstLoad && section == 0{
-            headerTB?.titleLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 17.0)
-            isFirstLoad = false
-        }else{
-            headerTB?.titleLabel.font = UIFont(name:"HelveticaNeue", size: 17.0)
-        }*/
         headerTB?.setCollapsed(collapsed: sections[section].collapsed)
         headerTB?.section = section
         headerTB?.delegate = self

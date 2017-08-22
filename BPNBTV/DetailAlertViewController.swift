@@ -158,7 +158,7 @@ class DetailAlertViewController: UIViewController {
         mapView.center = mapContainer.center
         //mapContainer = mapView
         
-        // Creates a marker in the center of the map.
+        // Create a marker in the center of the map.
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         

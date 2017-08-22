@@ -42,9 +42,6 @@ class CollapsibleTableViewHeader: UITableViewHeaderFooterView {
             // Fallback on earlier versions
         }
         
-        /*titleLabel.translatesAutoresizingMaskIntoConstraints = false
-         arrowImage.translatesAutoresizingMaskIntoConstraints = false
-         separatorView.translatesAutoresizingMaskIntoConstraints = false*/
         arrowImage.image = UIImage(named: "icon_expand_caret")
         separatorView.frame = CGRect(x: 0, y: 43.5, width: getScreenWidth() - 16, height: 0.4)
         setContentFrame()

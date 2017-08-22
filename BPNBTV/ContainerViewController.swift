@@ -68,15 +68,6 @@ class ContainerViewController:UIViewController{
         newMenuVC.searchTF.becomeFirstResponder()
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }
 extension ContainerViewController{
     func removeChildViewControllers(){
@@ -186,25 +177,6 @@ extension ContainerViewController:SideMenuToContainerDelegate{
             collectionVC.didMove(toParentViewController:self)
         }
         else{
-            //this is collection
-            /*RequestHelper.requestListBasedOnCategory(params: ["function":"video"], callback: {[weak self](isSuccess,reason,videoItems) in
-                DispatchQueue.main.async {
-                    HUD.hide()
-                    if isSuccess{
-                        if let _self = self{
-                            let collectionVC = contentStoryBoard.instantiateViewController(withIdentifier: "CollectionViewController") as! CollectionViewController
-                            _self.addChildViewController(collectionVC)
-                            collectionVC.view.frame = CGRect(x:0, y:0, width:_self.view.frame.size.width, height:_self.view.frame.size.height);
-                            _self.view.addSubview(collectionVC.view)
-                            collectionVC.didMove(toParentViewController: _self)
-                        }
-                    }else{
-                        AlertHelper.showErrorAlert(message: reason ?? "")
-                    }
-                    
-                }
-            })*/
-            
             let collectionVC = contentStoryBoard.instantiateViewController(withIdentifier: "CollectionViewController") as! CollectionViewController
             collectionVC.selectedCategory = menuName.lowercased()
             addChildViewController(collectionVC)
