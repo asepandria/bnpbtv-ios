@@ -23,8 +23,11 @@ UNUserNotificationCenterDelegate, MessagingDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         UserDefaults.standard.removeObject(forKey: "MENU")
-        FirebaseApp.configure()
-        Messaging.messaging().delegate = self
+        DispatchQueue.main.async {
+            FirebaseApp.configure()
+            Messaging.messaging().delegate = self
+        }
+        
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
             UNUserNotificationCenter.current().delegate = self
@@ -32,23 +35,31 @@ UNUserNotificationCenterDelegate, MessagingDelegate {
             UNUserNotificationCenter.current().requestAuthorization(
                 options: authOptions,
                 completionHandler: {gra, _ in
-            
+                    if gra{
+                        DispatchQueue.main.async {
+                            application.registerForRemoteNotifications()
+                        }
+                    }
             })
+            
             // For iOS 10 data message (sent via FCM
             
         } else {
             let settings: UIUserNotificationSettings =
                 UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
+            application.registerForRemoteNotifications()
         }
 
         
-        application.registerForRemoteNotifications()
         
         
-        //setup google maps
-        GMSPlacesClient.provideAPIKey(Constants.GMAP_API_KEY)
-        GMSServices.provideAPIKey(Constants.GMAP_API_KEY)
+        DispatchQueue.main.async {
+            //setup google maps
+            GMSPlacesClient.provideAPIKey(Constants.GMAP_API_KEY)
+            GMSServices.provideAPIKey(Constants.GMAP_API_KEY)
+        }
+        
         return true
     }
 
